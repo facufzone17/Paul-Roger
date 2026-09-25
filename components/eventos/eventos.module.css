@@ -1,0 +1,311 @@
+.cabecera {
+  max-width: 760px;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* ================================================= 02 · selector de escalones */
+
+.escalones {
+  display: grid;
+  gap: 12px;
+}
+
+.escalon {
+  position: relative;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.6rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-media);
+  background: var(--superficie);
+  transition: border-color 250ms ease;
+}
+
+.escalonElegido {
+  border-color: var(--pr-crudo);
+}
+
+.escalonNumero {
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+/* La capacidad es lo primero que se lee: es el criterio de decisión */
+.escalonCapacidad {
+  margin-top: 0.5rem;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.9rem, 1.4rem + 1.5vw, 2.6rem);
+  line-height: 1.05;
+  color: var(--pr-crudo);
+}
+
+.escalonNombre {
+  margin-top: 0.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--linea);
+  width: 100%;
+  font-family: var(--fuente-texto);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.escalonResumen {
+  color: var(--texto-2);
+}
+
+.escalonLink {
+  margin-top: auto;
+}
+
+.escalonMarca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--texto-2);
+}
+
+.escalonCheck {
+  width: 16px;
+  height: 16px;
+  color: var(--accion);
+}
+
+@media (min-width: 900px) {
+  .escalones {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* ================================================= 03 · detalle alternado */
+
+.detalles {
+  padding-bottom: var(--seccion);
+}
+
+.detalle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 4.5rem);
+  align-items: center;
+  scroll-margin-top: calc(var(--arriba) + 24px);
+}
+
+.detalle + .detalle {
+  margin-top: clamp(4rem, 9vw, 7.5rem);
+}
+
+.detalleFoto {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radio-media);
+  max-height: 78svh;
+}
+
+.detalleTexto {
+  display: grid;
+  justify-items: start;
+  gap: 0.25rem;
+}
+
+.puntos {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1.75rem 0 0;
+}
+
+.puntos > div {
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--linea);
+}
+
+.puntos dt {
+  font-weight: 600;
+  color: var(--pr-crudo);
+}
+
+.puntos dd {
+  margin: 0.3rem 0 0;
+  max-width: 52ch;
+  color: var(--texto-2);
+}
+
+.faltan {
+  margin-top: 1.25rem;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .detalle {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+
+  .detalleInvertido {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+
+  .detalleInvertido .detalleFoto {
+    order: 2;
+  }
+}
+
+/* ================================================= 04 · menús de evento (se leen de un vistazo, sin acordeones) */
+
+.menus {
+  display: grid;
+  gap: 12px;
+}
+
+.menu {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  border-top: 1px solid var(--accion);
+  background: var(--superficie);
+  color: var(--texto-2);
+}
+
+.menuNumero {
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--texto-3);
+}
+
+.menuNombre {
+  font-size: 1.45rem;
+  line-height: 1.15;
+  color: var(--pr-crudo);
+}
+
+@media (min-width: 700px) {
+  .menus {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .menus {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ================================================= 05 · adicionales */
+
+.bandaOscura {
+  background: var(--bg-hondo);
+  border-block: 1px solid var(--linea);
+}
+
+.adicionales {
+  display: grid;
+  gap: 2.25rem 2rem;
+}
+
+.adicional {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.6rem;
+  color: var(--texto-2);
+}
+
+.adicionalNumero {
+  display: block;
+  width: 100%;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--linea-fuerte);
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--texto-3);
+}
+
+.adicionalNombre {
+  margin-top: 0.4rem;
+  font-size: 1.35rem;
+  color: var(--pr-crudo);
+}
+
+@media (min-width: 700px) {
+  .adicionales {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .adicionales {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ================================================= 06 · productos */
+
+.productos {
+  display: grid;
+  gap: 2.5rem 14px;
+}
+
+.producto {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.5rem;
+  color: var(--texto-2);
+}
+
+.productoFoto,
+.productoVacio {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 0.9rem;
+  border-radius: var(--radio-media);
+}
+
+.productoVacio {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  color: color-mix(in srgb, var(--pr-crudo) 30%, transparent);
+  background-color: var(--pr-negro);
+  background-image:
+    var(--grano),
+    radial-gradient(90% 90% at 50% 0%, color-mix(in srgb, var(--pr-tierra) 90%, transparent) 0%, transparent 75%);
+}
+
+.productoNombre {
+  font-size: 1.35rem;
+  color: var(--pr-crudo);
+}
+
+@media (min-width: 800px) {
+  .productos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ================================================= 07 · consulta */
+
+.consulta {
+  border-top: 1px solid var(--linea);
+  background:
+    radial-gradient(70% 50% at 100% 0%, color-mix(in srgb, var(--pr-tinto) 45%, transparent) 0%, transparent 70%),
+    var(--bg);
+  scroll-margin-top: var(--arriba);
+}

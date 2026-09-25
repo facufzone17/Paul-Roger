@@ -1,0 +1,459 @@
+.carta {
+  --barra-movil: 108px;
+}
+
+/* ================================================= celular: pestañas fijas */
+
+.barraMovil {
+  position: sticky;
+  top: var(--arriba);
+  z-index: 20;
+  background: color-mix(in srgb, var(--pr-negro) 96%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--linea);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-inline: var(--gutter);
+  border-bottom: 1px solid var(--linea);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--texto-2);
+}
+
+.tabActiva {
+  color: var(--pr-crudo);
+}
+
+.tabActiva::after {
+  content: '';
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accion);
+}
+
+.subchips {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.55rem var(--gutter);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.subchips::-webkit-scrollbar {
+  display: none;
+}
+
+.subchip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.95rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--texto-2);
+}
+
+.subchipActivo {
+  border-color: var(--pr-crudo);
+  color: var(--pr-crudo);
+  background: color-mix(in srgb, var(--pr-crudo) 8%, transparent);
+}
+
+/* ================================================= grilla */
+
+.grilla {
+  display: grid;
+  max-width: calc(var(--ancho) + 120px);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.lateral,
+.panel {
+  display: none;
+}
+
+.contenido {
+  min-width: 0;
+  padding-bottom: var(--seccion);
+}
+
+/* ================================================= secciones */
+
+.seccion {
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  scroll-margin-top: calc(var(--arriba) + var(--barra-movil));
+}
+
+.seccion + .seccion {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--linea-fuerte);
+}
+
+/* Franja angosta con la foto de la categoría (celular y tablet) */
+.franja {
+  position: relative;
+  height: clamp(96px, 26vw, 170px);
+  margin-bottom: 1.75rem;
+  border-radius: var(--radio-media);
+  overflow: hidden;
+}
+
+.franja::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--pr-rojo) 22%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 55%, transparent) 100%);
+}
+
+.franjaImg {
+  object-fit: cover;
+}
+
+.seccionCabecera {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.seccionTitulo {
+  font-size: var(--t-2);
+}
+
+.seccionBajada {
+  max-width: 56ch;
+  color: var(--texto-2);
+}
+
+/* ================================================= subcategorías e ítems */
+
+.sub {
+  padding-top: 2rem;
+  scroll-margin-top: calc(var(--arriba) + var(--barra-movil) + 8px);
+  /* Lo que está lejos de la pantalla no se calcula hasta que el usuario llega (la carta es muy larga). */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+.subCabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--linea-fuerte);
+}
+
+.subTitulo {
+  font-size: var(--t-3);
+}
+
+.subNota {
+  font-size: 0.9375rem;
+  color: var(--texto-2);
+}
+
+.subFalta {
+  margin-top: 1rem;
+}
+
+.items {
+  display: grid;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.3rem 1.25rem;
+  padding-block: 0.95rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+.itemTexto {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.itemNombre {
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--pr-crudo);
+}
+
+.itemDetalle {
+  font-weight: 400;
+  color: var(--texto-2);
+}
+
+.itemDescripcion {
+  max-width: 62ch;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--texto-2);
+}
+
+.itemPrecio {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--pr-crudo);
+}
+
+.itemVino {
+  padding-block: 0.8rem;
+}
+
+.bodega {
+  font-weight: 600;
+}
+
+.etiqueta {
+  font-weight: 400;
+  color: var(--texto-2);
+}
+
+.etiqueta::before {
+  content: '— ';
+  color: var(--texto-3);
+}
+
+.origen {
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--texto-3);
+}
+
+.grupoTitulo {
+  margin-top: 1.75rem;
+  padding-bottom: 0.5rem;
+  font-family: var(--fuente-texto);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+  border-bottom: 1px solid var(--linea);
+}
+
+/* ================================================= filtros tipo chip */
+
+.filtro {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0.5rem;
+  padding: 1rem 0;
+}
+
+.filtroTitulo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.filtroChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.chip:hover {
+  border-color: var(--pr-crudo);
+  color: var(--pr-crudo);
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--accion);
+  background: var(--accion);
+  color: var(--sobre-accion);
+}
+
+.filtroTotal {
+  font-size: 0.875rem;
+  color: var(--texto-3);
+}
+
+/* ================================================= escritorio */
+
+@media (min-width: 1024px) {
+  .barraMovil {
+    display: none;
+  }
+
+  .grilla {
+    grid-template-columns: 210px minmax(0, 1fr);
+    column-gap: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .seccion,
+  .sub {
+    scroll-margin-top: calc(var(--arriba) + 24px);
+  }
+
+  .franja {
+    display: none;
+  }
+
+  .lateral {
+    display: block;
+    position: sticky;
+    top: calc(var(--arriba) + 24px);
+    align-self: start;
+    max-height: calc(100vh - var(--arriba) - 48px);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .lateralSeccion + .lateralSeccion {
+    border-top: 1px solid var(--linea);
+  }
+
+  .lateralTitulo {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--texto-2);
+  }
+
+  .lateralAbierta .lateralTitulo {
+    color: var(--pr-crudo);
+  }
+
+  .lateralAbierta .lateralTitulo::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    margin-right: 0.7rem;
+    background: var(--accion);
+  }
+
+  .lateralSubs {
+    display: grid;
+    padding: 0 0 0.9rem;
+  }
+
+  .lateralSub {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    padding-left: 1rem;
+    border-left: 1px solid var(--linea);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    color: var(--texto-2);
+  }
+
+  .lateralSub:hover {
+    color: var(--pr-crudo);
+  }
+
+  .lateralSubActiva {
+    border-left: 2px solid var(--accion);
+    padding-left: calc(1rem - 1px);
+    color: var(--pr-crudo);
+    font-weight: 500;
+  }
+}
+
+/* Panel con una foto por categoría (hipótesis del prototipo: validar con fotos reales) */
+@media (min-width: 1240px) {
+  .grilla {
+    grid-template-columns: 210px minmax(0, 1fr) 280px;
+  }
+
+  .panel {
+    display: block;
+  }
+
+  .panelFijo {
+    position: sticky;
+    top: calc(var(--arriba) + 24px);
+    height: calc(100vh - var(--arriba) - 48px);
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    border-radius: var(--radio-media);
+    overflow: hidden;
+  }
+
+  .panelFoto {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 600ms var(--ease);
+  }
+
+  .panelFotoActiva {
+    opacity: 1;
+  }
+
+  .panelFoto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--pr-rojo) 26%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 88%, transparent) 100%);
+  }
+
+  .panelImg {
+    object-fit: cover;
+  }
+
+  .panelEtiqueta {
+    position: absolute;
+    left: 22px;
+    bottom: 20px;
+    z-index: 1;
+    font-family: var(--fuente-titulos);
+    font-size: 1.6rem;
+    color: var(--pr-crudo);
+  }
+}

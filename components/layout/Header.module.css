@@ -1,0 +1,310 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--pr-negro) 70%, transparent) 0%, transparent 100%);
+  transition:
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.solido {
+  background: color-mix(in srgb, var(--pr-negro) 92%, transparent);
+  box-shadow: inset 0 -1px 0 var(--linea);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+}
+
+.barra {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  height: var(--header-h);
+  padding-inline: var(--gutter);
+}
+
+/* ------------------------------------------------ navegación de escritorio */
+
+.navEscritorio {
+  display: none;
+}
+
+.lista {
+  display: flex;
+  align-items: center;
+  gap: clamp(22px, 2.5vw, 44px);
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--texto);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0.18em;
+  bottom: 9px;
+  height: 1px;
+  background: var(--accion);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease);
+}
+
+.link:hover::after,
+.link[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------ logo al centro */
+
+.logo {
+  display: block;
+  justify-self: center;
+  padding: 6px 4px;
+}
+
+.logoImg {
+  width: 100px;
+  height: auto;
+}
+
+.derecha {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(22px, 2.5vw, 44px);
+}
+
+.reservar {
+  min-height: 44px;
+  padding: 0.6rem 1.05rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------ botón de menú (celular) */
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  margin-left: -10px;
+  padding: 0 10px;
+  border: 0;
+  background: none;
+  color: var(--texto);
+  cursor: pointer;
+}
+
+.toggleIcono {
+  width: 24px;
+  height: 24px;
+}
+
+.toggleTexto {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 380px) {
+  .toggleTexto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+}
+
+@media (min-width: 1100px) {
+  .navEscritorio {
+    display: block;
+  }
+
+  .barra > .navEscritorio {
+    justify-self: end;
+    padding-right: 40px;
+  }
+
+  .derecha {
+    justify-content: space-between;
+  }
+
+  .derecha > .navEscritorio {
+    padding-left: 40px;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .logoImg {
+    width: 134px;
+  }
+
+  .reservar {
+    min-height: 46px;
+    padding: 0.7rem 1.6rem;
+  }
+}
+
+/* ------------------------------------------------ menú a pantalla completa (manual, pág. 36) */
+
+.abierto {
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.abierto .toggle,
+.abierto .logo {
+  color: var(--pr-blanco);
+}
+
+/* Sobre el rojo, RESERVAR pasa a negro para seguir visible */
+.abierto .reservar {
+  --btn-bg: var(--pr-negro);
+  --btn-borde: var(--pr-negro);
+  --btn-fg: var(--pr-blanco);
+}
+
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--arriba) + 16px) var(--gutter) calc(128px + env(safe-area-inset-bottom));
+  overflow: hidden auto;
+  background: var(--pr-rojo);
+  color: var(--pr-blanco);
+  opacity: 1;
+  transition: opacity 350ms var(--ease);
+}
+
+@starting-style {
+  .panel {
+    opacity: 0;
+  }
+}
+
+.panelFuego {
+  position: absolute;
+  right: -14%;
+  bottom: -4%;
+  width: auto;
+  height: min(78vh, 620px);
+  color: color-mix(in srgb, var(--pr-rojo) 72%, var(--pr-negro));
+  pointer-events: none;
+}
+
+.panelNav {
+  position: relative;
+}
+
+.panelNav ul {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.panelNav li {
+  transition:
+    opacity 420ms var(--ease),
+    transform 420ms var(--ease);
+  transition-delay: calc(var(--i) * 45ms + 80ms);
+}
+
+@starting-style {
+  .panelNav li {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.panelLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 60px;
+  padding-inline: 8px;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(2rem, 1.3rem + 3.6vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--pr-blanco);
+}
+
+.panelLink[aria-current='page'] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.panelLink:focus-visible,
+.panelRedes a:focus-visible {
+  outline-color: var(--pr-blanco);
+}
+
+.panelPie {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(22px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--pr-blanco) 40%, transparent);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.panelRedes {
+  display: flex;
+  gap: 4px;
+}
+
+.panelRedes a {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--pr-blanco);
+}
+
+@media (min-width: 1100px) {
+  .panel {
+    display: none !important;
+  }
+}

@@ -1,0 +1,436 @@
+/* ================================================= pestañas */
+
+.motor {
+  display: grid;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  overflow: hidden;
+}
+
+.tab {
+  position: relative;
+  min-height: 58px;
+  padding: 0.75rem 0.5rem;
+  border: 0;
+  border-top: 1px solid var(--linea);
+  border-left: 1px solid var(--linea);
+  background: transparent;
+  color: var(--texto-2);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.tab:nth-child(-n + 2) {
+  border-top: 0;
+}
+
+.tab:nth-child(odd) {
+  border-left: 0;
+}
+
+.tab:hover {
+  color: var(--texto);
+}
+
+.tabActiva {
+  background: var(--superficie-2);
+  color: var(--pr-crudo);
+}
+
+.tabActiva::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accion);
+}
+
+.tab:focus-visible {
+  outline-offset: -3px;
+}
+
+@media (min-width: 720px) {
+  .tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tab {
+    border-top: 0;
+  }
+
+  .tab:nth-child(odd) {
+    border-left: 1px solid var(--linea);
+  }
+
+  .tab:first-child {
+    border-left: 0;
+  }
+}
+
+.panel {
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* ================================================= formulario */
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.formUnaColumna {
+  max-width: 880px;
+}
+
+.campos {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.fila {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .fila {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+}
+
+.formTitulo {
+  font-size: var(--t-3);
+}
+
+.intro {
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.sugerencia {
+  display: grid;
+  justify-items: start;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.enviar {
+  width: 100%;
+  padding-inline: 1rem;
+  letter-spacing: 0.12em;
+}
+
+@media (min-width: 1024px) {
+  .form:not(.formUnaColumna) {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+    column-gap: clamp(2.5rem, 4vw, 4.5rem);
+  }
+
+  .formUnaColumna .enviar {
+    width: auto;
+    justify-self: start;
+    min-width: 280px;
+  }
+}
+
+/* ================================================= complementos (según la ocasión) */
+
+.complementos {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: clamp(1.1rem, 2.5vw, 1.6rem);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--pr-tinto) 45%, transparent) 0%, transparent 65%), var(--bg);
+  animation: entrar 450ms var(--ease) both;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.complementosTitulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  padding: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.complementosNota {
+  font-family: var(--fuente-texto);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.complementosLista {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Dos columnas solo cuando la columna del formulario es ancha (celular grande sin resumen al costado, o escritorio amplio) */
+@media (min-width: 700px) and (max-width: 1023px), (min-width: 1300px) {
+  .complementosLista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.complemento {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: 1rem;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background: var(--superficie);
+  transition: border-color 200ms ease;
+}
+
+.complementoActivo {
+  border-color: var(--pr-crudo);
+}
+
+.complementoCabecera {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.8rem;
+  row-gap: 0.1rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.complementoCabecera .complementoPrecio {
+  grid-column: 2;
+}
+
+.complementoCheck {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.complementoCaja {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 2px;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.complementoTilde {
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+}
+
+.complementoCheck:checked + .complementoCaja {
+  border-color: var(--accion);
+  background: var(--accion);
+  color: var(--sobre-accion);
+}
+
+.complementoCheck:checked + .complementoCaja .complementoTilde {
+  opacity: 1;
+}
+
+.complementoCheck:focus-visible + .complementoCaja {
+  outline: 2px solid var(--pr-crudo);
+  outline-offset: 3px;
+}
+
+.complementoNombre {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.complementoPrecio {
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  color: var(--texto-2);
+}
+
+.complementoTexto {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--texto-2);
+}
+
+/* ================================================= resumen */
+
+.resumen {
+  display: grid;
+  gap: 1.1rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background: var(--superficie);
+}
+
+@media (min-width: 1024px) {
+  .resumen {
+    position: sticky;
+    top: calc(var(--arriba) + 24px);
+  }
+}
+
+.resumenTitulo {
+  font-size: 1.6rem;
+}
+
+.resumenLista {
+  display: grid;
+  margin: 0;
+}
+
+.resumenLista > div {
+  display: grid;
+  gap: 0.2rem;
+  padding-block: 0.8rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+.resumenLista > div:first-child {
+  padding-top: 0;
+}
+
+.resumenLista dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+.resumenLista dd {
+  margin: 0;
+}
+
+.resumenComplementos {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.resumenComplementos li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9375rem;
+}
+
+.resumenComplementos li span:last-child {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.resumenTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.resumenTotal strong {
+  font-family: var(--fuente-titulos);
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.resumenNota {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--texto-3);
+}
+
+/* ================================================= confirmación */
+
+.confirmacion {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  max-width: 780px;
+  padding: clamp(1.5rem, 5vw, 3.25rem);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radio-control);
+  background:
+    radial-gradient(90% 120% at 0% 0%, color-mix(in srgb, var(--pr-tinto) 55%, transparent) 0%, transparent 60%),
+    var(--superficie);
+  animation: entrar 500ms var(--ease) both;
+}
+
+.confirmacionFirma {
+  color: var(--accion);
+}
+
+.confirmacionTitulo {
+  font-size: var(--t-2);
+}
+
+.confirmacionTitulo:focus {
+  outline: none;
+}
+
+.confirmacionCuerpo {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 60ch;
+  font-size: 1.0625rem;
+}
+
+.confirmacionMaqueta {
+  max-width: 62ch;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea);
+  font-size: 0.9rem;
+  color: var(--texto-2);
+}
+
+.confirmacionMaqueta strong {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.confirmacionAcciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

@@ -1,0 +1,29 @@
+.cabecera {
+  position: relative;
+  isolation: isolate;
+  padding-top: var(--arriba);
+  overflow: hidden;
+}
+
+/* La servilleta con el logo, con el overlay negro al 70% que pide la guía de retoque */
+.fondo {
+  position: absolute !important;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: min(100%, 720px);
+  opacity: 0.3;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+}
+
+.texto {
+  padding-block: clamp(2.5rem, 7vw, 6rem) clamp(2rem, 4vw, 3rem);
+}
+
+.texto h1 {
+  max-width: 12ch;
+}
+
+.cuerpo {
+  padding-bottom: var(--seccion);
+}

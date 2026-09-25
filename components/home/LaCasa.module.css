@@ -1,0 +1,279 @@
+.casa {
+  --r: var(--radio-media);
+  padding: clamp(3rem, 6vw, 6rem) clamp(10px, 1.4vw, 20px) 0;
+}
+
+.grilla {
+  display: grid;
+  gap: 12px;
+}
+
+/* ------------------------------------------------ panel grande */
+
+.principal {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(128vw, 660px);
+  border-radius: var(--r);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fondo {
+  position: absolute !important;
+  inset: 0;
+  z-index: -1;
+}
+
+.principalTexto {
+  padding: clamp(22px, 4.2vw, 60px);
+}
+
+.mega {
+  font-size: var(--t-mega);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--pr-crudo);
+}
+
+.lead {
+  max-width: 40ch;
+  margin: 1.4rem 0 0.75rem;
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  color: var(--pr-crudo);
+}
+
+/* ------------------------------------------------ tarjetas */
+
+.tarjetas {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.tarjeta {
+  position: relative;
+  display: block;
+  height: 100%;
+  min-height: 230px;
+  aspect-ratio: 16 / 11;
+  border-radius: var(--r);
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--pr-crudo);
+  text-decoration: none;
+  background: var(--superficie);
+}
+
+.tarjeta img {
+  transition: transform 900ms var(--ease);
+}
+
+.tarjeta:hover img {
+  transform: scale(1.045);
+}
+
+.detalle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Placeholders marcados, tratados en oscuro (faltan las fotos) */
+.vacia {
+  background-color: var(--pr-negro);
+}
+
+.tinto {
+  background-image:
+    var(--grano),
+    radial-gradient(120% 95% at 18% 0%, color-mix(in srgb, var(--pr-tinto) 95%, transparent) 0%, transparent 72%),
+    linear-gradient(180deg, var(--pr-negro), var(--pr-negro));
+}
+
+.tierra {
+  background-image:
+    var(--grano),
+    radial-gradient(120% 95% at 82% 0%, color-mix(in srgb, var(--pr-tierra) 95%, transparent) 0%, transparent 72%),
+    linear-gradient(180deg, var(--pr-negro), var(--pr-negro));
+}
+
+.marcaAgua {
+  position: absolute;
+  right: 9%;
+  top: 50%;
+  width: auto;
+  height: 46%;
+  max-height: 150px;
+  transform: translateY(-58%);
+  color: color-mix(in srgb, var(--pr-crudo) 12%, transparent);
+}
+
+.aviso {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  z-index: 2;
+}
+
+.vacia .detalle {
+  position: absolute;
+  left: 18px;
+  top: 58px;
+  width: auto;
+  height: auto;
+  max-width: 62%;
+  clip: auto;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--texto-2);
+}
+
+.agenda {
+  position: absolute;
+  left: 18px;
+  top: 58px;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.agendaVolanta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.agendaFecha {
+  margin-top: 0.4rem;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+  line-height: 1.1;
+}
+
+.agendaHora {
+  font-size: 0.9375rem;
+  color: var(--texto-2);
+}
+
+/* ------------------------------------------------ solapa recortada (referencia QITCHEN) */
+
+.etiqueta {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 0 0 18px;
+  background: var(--bg);
+  border-top-left-radius: var(--r);
+}
+
+.etiqueta::before,
+.etiqueta::after {
+  content: '';
+  position: absolute;
+  width: var(--r);
+  height: var(--r);
+  background: radial-gradient(circle at 0 0, transparent calc(var(--r) - 0.5px), var(--bg) var(--r));
+  pointer-events: none;
+}
+
+.etiqueta::before {
+  right: 0;
+  bottom: 100%;
+}
+
+.etiqueta::after {
+  right: 100%;
+  bottom: 0;
+}
+
+.etiquetaTexto {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.etiquetaFlecha {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 50%;
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease;
+}
+
+.etiquetaFlecha svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tarjeta:hover .etiquetaFlecha,
+.tarjeta:focus-visible .etiquetaFlecha {
+  background: var(--accion);
+  border-color: var(--accion);
+  color: var(--sobre-accion);
+}
+
+/* ------------------------------------------------ tablet y escritorio */
+
+@media (min-width: 700px) {
+  .tarjetas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tarjeta {
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+  }
+
+  .principal {
+    min-height: min(78vw, 640px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grilla {
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+    height: clamp(660px, 94svh, 980px);
+    gap: 14px;
+  }
+
+  .principal {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .tarjetas {
+    grid-template-columns: none;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    height: 100%;
+    gap: 14px;
+  }
+
+  .tarjetas li {
+    min-height: 0;
+  }
+
+  .tarjeta {
+    aspect-ratio: auto;
+  }
+}
