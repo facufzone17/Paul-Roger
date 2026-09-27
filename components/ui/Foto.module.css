@@ -1,0 +1,47 @@
+.marco {
+  position: relative;
+  overflow: hidden;
+  background: var(--superficie);
+  isolation: isolate;
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* Degradé negro #1d1d1b (100% → 0%) o rojo #e52521, como pide el manual */
+.marco::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.marco[data-capa='suave']::after {
+  background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--pr-negro) 70%, transparent) 100%);
+}
+
+.marco[data-capa='base']::after {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--pr-negro) 25%, transparent) 0%, transparent 35%),
+    linear-gradient(0deg, color-mix(in srgb, var(--pr-negro) 92%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 35%, transparent) 50%, transparent 78%);
+}
+
+.marco[data-capa='fuerte']::after {
+  background:
+    linear-gradient(0deg, var(--pr-negro) 0%, color-mix(in srgb, var(--pr-negro) 70%, transparent) 45%, color-mix(in srgb, var(--pr-negro) 55%, transparent) 100%);
+}
+
+/* Aperturas: oscuro del lado del texto (abajo a la izquierda), la foto respira del otro lado */
+.marco[data-capa='lateral']::after {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--pr-negro) 78%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 40%, transparent) 55%, transparent 85%),
+    linear-gradient(0deg, color-mix(in srgb, var(--pr-negro) 88%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 20%, transparent) 60%, color-mix(in srgb, var(--pr-negro) 30%, transparent) 100%);
+}
+
+.marco[data-capa='roja']::after {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--pr-rojo) 55%, transparent) 0%, transparent 55%),
+    linear-gradient(0deg, color-mix(in srgb, var(--pr-negro) 90%, transparent) 0%, transparent 60%);
+}

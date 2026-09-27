@@ -1,0 +1,179 @@
+/* ------------------------------------------------ historia */
+
+.historia {
+  padding-block: clamp(1rem, 3vw, 2rem) var(--seccion);
+}
+
+.historiaGrilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.historiaFotos {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: start;
+  gap: 12px;
+}
+
+.fotoA {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radio-media);
+}
+
+.fotoB {
+  aspect-ratio: 1;
+  margin-top: 30%;
+  border-radius: var(--radio-media);
+}
+
+.historiaTexto {
+  display: grid;
+  justify-items: start;
+  gap: 1.4rem;
+}
+
+@media (min-width: 900px) {
+  .historiaGrilla {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* ------------------------------------------------ misión y valores */
+
+.valoresBanda {
+  background: var(--bg-hondo);
+  border-block: 1px solid var(--linea);
+}
+
+.mision {
+  max-width: 24ch;
+  font-size: var(--t-2);
+  line-height: 1.12;
+}
+
+.valores {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid var(--linea-fuerte);
+}
+
+.valores li {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.4rem 1rem 1.4rem 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.valorNumero {
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--texto-3);
+}
+
+.valorNombre {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.9rem);
+  line-height: 1.1;
+  color: var(--pr-crudo);
+}
+
+@media (min-width: 900px) {
+  .valores {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------ cita */
+
+.cita {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cita blockquote {
+  margin: 0;
+}
+
+.cita blockquote p {
+  max-width: 22ch;
+  margin-inline: auto;
+  font-family: var(--fuente-titulos);
+  font-size: var(--t-1);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.cita figcaption {
+  margin-top: 1.75rem;
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+/* ------------------------------------------------ recorrido del cliente */
+
+.recorridoBanda {
+  border-top: 1px solid var(--linea);
+}
+
+.recorridoCabecera {
+  max-width: 720px;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.recorrido {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--linea-fuerte);
+}
+
+.recorrido li {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: 1.2rem 1rem 1.2rem 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.pasoNumero {
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--texto-3);
+}
+
+.pasoNombre {
+  font-family: var(--fuente-titulos);
+  font-size: 1.35rem;
+  color: var(--texto-2);
+}
+
+.pasoPrimero {
+  box-shadow: inset 0 2px 0 var(--accion);
+}
+
+.pasoLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--fuente-titulos);
+  font-size: 1.6rem;
+  color: var(--pr-crudo);
+  text-decoration: underline;
+  text-decoration-color: var(--accion);
+  text-underline-offset: 0.2em;
+}
+
+@media (min-width: 700px) {
+  .recorrido {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,155 @@
+.franjas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.franja {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: calc(112px + var(--peso) * 2.3px);
+  border-radius: var(--radio-media);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--superficie);
+  transition:
+    flex-grow 650ms var(--ease),
+    min-height 650ms var(--ease);
+}
+
+.img {
+  z-index: -2;
+  object-fit: cover;
+  transition:
+    filter 500ms ease,
+    transform 900ms var(--ease);
+}
+
+.franja::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, color-mix(in srgb, var(--pr-negro) 90%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 30%, transparent) 55%, transparent 100%);
+  transition: background 400ms ease;
+}
+
+.abierta::after {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--pr-negro) 90%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 62%, transparent) 55%, color-mix(in srgb, var(--pr-negro) 92%, transparent) 100%);
+}
+
+/* Con una franja abierta, las otras quedan en penumbra */
+[data-abierta]:not([data-abierta='ninguna']) .franja:not(.abierta) .img {
+  filter: grayscale(0.5) brightness(0.55);
+}
+
+.franja:hover .img {
+  transform: scale(1.03);
+}
+
+.cabecera {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 18px 18px 18px 22px;
+  border: 0;
+  background: none;
+  color: var(--pr-crudo);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cabecera:focus-visible {
+  outline-offset: -4px;
+}
+
+.nombre {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.45rem, 1.15rem + 1vw, 2.1rem);
+  line-height: 1;
+}
+
+.signo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 50%;
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease;
+}
+
+.signo svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cabecera:hover .signo,
+.abierta .signo {
+  background: var(--accion);
+  border-color: var(--accion);
+  color: var(--sobre-accion);
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  max-width: 44ch;
+  padding: 22px 22px 96px;
+  animation: desplegar 450ms var(--ease) both;
+}
+
+.texto {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--pr-crudo);
+}
+
+.precios {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--linea-fuerte);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--pr-crudo);
+}
+
+@keyframes desplegar {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (min-width: 900px) {
+  .franjas {
+    flex-direction: row;
+    height: clamp(460px, 66vh, 600px);
+  }
+
+  .franja {
+    flex: var(--peso) 1 0%;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .card {
+    padding: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 40px) 110px;
+  }
+
+  .cabecera {
+    padding: 22px 22px 22px 26px;
+  }
+}

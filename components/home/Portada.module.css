@@ -1,0 +1,103 @@
+.portada {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  min-height: max(100svh, 620px);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--pr-negro);
+}
+
+.foto {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+/* Degradé negro del manual + un resplandor de brasa desde abajo */
+.capa {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 48% at 50% 54%, color-mix(in srgb, var(--pr-negro) 72%, transparent) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 38% at 50% 108%, color-mix(in srgb, var(--pr-rojo) 26%, transparent) 0%, transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--pr-negro) 78%, transparent) 0%, color-mix(in srgb, var(--pr-negro) 42%, transparent) 38%, color-mix(in srgb, var(--pr-negro) 55%, transparent) 70%, var(--pr-negro) 100%);
+}
+
+.contenido {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  padding: calc(var(--arriba) + 2rem) var(--gutter) 6rem;
+  text-align: center;
+}
+
+.titulo {
+  display: grid;
+  justify-items: center;
+  font-size: inherit;
+}
+
+.logo {
+  width: clamp(250px, 21vw + 150px, 580px);
+  height: auto;
+}
+
+.frase {
+  display: block;
+  margin-top: clamp(1.75rem, 3vw, 2.75rem);
+  font-family: var(--fuente-titulos);
+  font-size: var(--t-2);
+  line-height: 1.05;
+  color: var(--pr-crudo);
+}
+
+.que {
+  max-width: 34ch;
+  margin-top: 1rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  color: var(--pr-crudo);
+  text-shadow: 0 1px 18px var(--pr-negro);
+}
+
+.cta {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+  min-width: 220px;
+}
+
+.conocer {
+  position: absolute;
+  left: var(--gutter);
+  bottom: clamp(18px, 3vw, 34px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 44px;
+  padding-right: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--pr-crudo);
+}
+
+.conocerIcono {
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 50%;
+  box-sizing: content-box;
+  transition: transform 300ms var(--ease);
+}
+
+.conocer:hover .conocerIcono {
+  transform: translateY(3px);
+}

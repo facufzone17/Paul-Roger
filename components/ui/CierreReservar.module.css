@@ -1,0 +1,32 @@
+.cierre {
+  padding-block: var(--seccion);
+  border-top: 1px solid var(--linea);
+  background:
+    radial-gradient(60% 90% at 50% 120%, color-mix(in srgb, var(--pr-rojo) 16%, transparent) 0%, transparent 70%),
+    var(--bg);
+}
+
+.interior {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.firma {
+  color: var(--accion);
+  margin-bottom: 0.25rem;
+}
+
+.titulo {
+  font-family: var(--fuente-titulos);
+  font-size: var(--t-1);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.texto {
+  max-width: 44ch;
+  margin-bottom: 1.25rem;
+  color: var(--texto-2);
+}

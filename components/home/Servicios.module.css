@@ -1,0 +1,290 @@
+.servicios {
+  position: relative;
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* ================================================= celular y reduced-motion: apilado */
+
+.escenario {
+  display: none;
+}
+
+.apilado {
+  padding-block: var(--seccion) 0;
+}
+
+.tituloApilado {
+  max-width: 12ch;
+  font-size: var(--t-1);
+}
+
+.lista {
+  display: grid;
+  gap: 3rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.bloque {
+  display: grid;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: var(--texto);
+}
+
+.bloqueFoto {
+  position: relative;
+  display: block;
+  aspect-ratio: 5 / 4;
+  margin-bottom: 1rem;
+  border-radius: var(--radio-media);
+  overflow: hidden;
+  background: var(--superficie);
+}
+
+.bloqueNumero {
+  font-size: var(--t-mini);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--texto-3);
+}
+
+.bloqueNombre {
+  font-family: var(--fuente-titulos);
+  font-size: var(--t-3);
+  line-height: 1.1;
+}
+
+.bloqueTexto {
+  max-width: 44ch;
+  color: var(--texto-2);
+}
+
+.bloqueLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bloqueLink svg {
+  width: 1.05em;
+  height: 1.05em;
+  color: var(--accion);
+}
+
+@media (min-width: 640px) {
+  .lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .bloqueFoto {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* ================================================= escritorio: título fijo + mosaico */
+
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .apilado {
+    display: none;
+  }
+
+  .escenario {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr) minmax(0, 1fr);
+    column-gap: clamp(24px, 3.2vw, 56px);
+    padding-inline: var(--gutter);
+  }
+
+  .centro {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .izquierda {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .derecha {
+    grid-column: 3;
+    grid-row: 1;
+    padding-top: 58vh;
+  }
+
+  .fijo {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    height: 100svh;
+    padding-top: var(--arriba);
+    text-align: center;
+  }
+
+  .fijo :global(.volanta) {
+    margin-bottom: 1.6rem;
+  }
+
+  .titulo {
+    max-width: 10ch;
+    font-size: clamp(2.6rem, 1.2rem + 3vw, 4.6rem);
+    line-height: 1;
+  }
+
+  .activo {
+    display: grid;
+    justify-items: center;
+    gap: 0.45rem;
+    margin-top: clamp(1.75rem, 4vh, 3rem);
+    padding-top: clamp(1.25rem, 3vh, 2rem);
+    border-top: 1px solid var(--linea);
+    min-width: min(100%, 300px);
+  }
+
+  .activoNumero {
+    font-size: var(--t-mini);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--texto-3);
+  }
+
+  .activoNombre {
+    font-family: var(--fuente-titulos);
+    font-size: clamp(1.9rem, 1.2rem + 1.5vw, 2.9rem);
+    line-height: 1.05;
+    color: var(--pr-crudo);
+    animation: aparecer 520ms var(--ease) both;
+  }
+
+  .activoTexto {
+    max-width: 30ch;
+    min-height: 3.2em;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--texto-2);
+  }
+
+  .columna {
+    display: grid;
+    align-content: start;
+    gap: clamp(90px, 16vh, 190px);
+    padding-block: 22vh 42vh;
+  }
+
+  .tesela {
+    width: 100%;
+  }
+
+  .detalle {
+    width: 62%;
+  }
+
+  .izquierda .detalle {
+    justify-self: end;
+  }
+
+  .derecha .detalle {
+    justify-self: start;
+  }
+
+  .teselaLink {
+    display: block;
+    text-decoration: none;
+    color: var(--texto);
+  }
+
+  .foto {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radio-media);
+    overflow: hidden;
+    background: var(--superficie);
+  }
+
+  .foto .img {
+    transition: filter 700ms var(--ease);
+  }
+
+  /* El servicio que se nombra en el centro va a color; el resto queda en penumbra. */
+  .tesela:not(.enFoco) .img {
+    filter: grayscale(0.7) brightness(0.62);
+  }
+
+  .teselaLink:hover .img,
+  .teselaLink:focus-visible .img {
+    filter: none;
+  }
+
+  .pie {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .pieNumero {
+    font-size: var(--t-mini);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--texto-3);
+  }
+
+  .pieNombre {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+    line-height: 1;
+    background-image: linear-gradient(var(--accion), var(--accion));
+    background-size: 0 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 0.3rem;
+    transition: background-size 500ms var(--ease);
+  }
+
+  .enFoco .pieNombre {
+    background-size: 100% 1px;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ================================================= cierre: RESERVAR grande */
+
+.cierre {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding-block: clamp(4.5rem, 9vw, 8rem) var(--seccion);
+  text-align: center;
+}
+
+.cierreTitulo {
+  font-family: var(--fuente-titulos);
+  font-size: var(--t-1);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.cierreTexto {
+  max-width: 40ch;
+  margin-bottom: 1.25rem;
+  color: var(--texto-2);
+}

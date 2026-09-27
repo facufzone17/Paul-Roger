@@ -4,14 +4,13 @@
     {
       "name": "paul-roger-web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "web", "run", "dev"],
-      "port": 3000,
-      "autoPort": true
+      "runtimeArgs": ["run", "dev", "--", "-p", "3001"],
+      "port": 3001
     },
     {
       "name": "paul-roger-produccion",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "web", "run", "start"],
+      "runtimeArgs": ["run", "start"],
       "port": 3000
     }
   ]
