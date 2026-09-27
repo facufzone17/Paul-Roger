@@ -89,7 +89,7 @@ export function Footer() {
         <p>
           {SITIO.nombre} — {SITIO.claim} · {SITIO.url.replace('https://', '')}
         </p>
-        <p>Maqueta navegable · Etapa 1 · Títulos en Prata, provisoria hasta confirmar IvyMode</p>
+        <p>Maqueta navegable · Etapa 1 · Títulos en Cormorant Garamond, provisoria hasta confirmar IvyMode</p>
       </div>
     </footer>
   )
