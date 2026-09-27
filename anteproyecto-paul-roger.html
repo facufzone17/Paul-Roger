@@ -1,0 +1,1009 @@
+<title>Anteproyecto Paul Roger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&family=Prata&family=Montserrat:wght@300;400;500;600&display=swap">
+<style>
+  /* ============================================================
+     PAUL ROGER — ANTEPROYECTO DE SITIO
+     Paleta tomada del Manual de Identidad Visual (p.16)
+     Dirección de una sola pieza: la marca vive de noche.
+     ============================================================ */
+  :root{
+    --ground:      #121211;
+    --ground-2:    #171715;
+    --surface:     #1d1d1b;   /* NEGRO manual */
+    --surface-up:  #232320;
+    --cream:       #f9ecdc;   /* CRUDO manual */
+    --muted:       rgba(249,236,220,.56);
+    --faint:       rgba(249,236,220,.34);
+    --line:        rgba(249,236,220,.13);
+    --line-strong: rgba(249,236,220,.26);
+    --ember:       #e52521;   /* ROJO manual */
+    --ember-soft:  rgba(229,37,33,.14);
+    --gold:        #987d3b;   /* ORO manual */
+    --gold-soft:   rgba(152,125,59,.32);
+    --wine:        #4d160d;   /* TINTO manual */
+    --earth:       #392513;   /* TIERRA manual */
+
+    --display: "Prata", "Times New Roman", serif;
+    --script:  "Parisienne", "Brush Script MT", cursive;
+    --body:    "Montserrat", Arial, Helvetica, sans-serif;
+
+    --wrap: 1180px;
+    --gutter: clamp(20px, 5vw, 64px);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--cream);
+    font-family:var(--body);
+    font-weight:300;
+    font-size:15px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--ember); color:#fff; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  :focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--wrap);
+    margin-inline:auto;
+    padding-inline:var(--gutter);
+  }
+
+  /* ---------- tipografía ---------- */
+  h1,h2,h3{ font-family:var(--display); font-weight:400; text-wrap:balance; margin:0; letter-spacing:.01em; }
+
+  .eyebrow{
+    font-size:10px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--faint);
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .eyebrow::after{
+    content:"";
+    height:1px;
+    flex:1;
+    background:linear-gradient(90deg,var(--gold-soft),transparent);
+  }
+
+  .lede{ color:var(--muted); max-width:62ch; font-size:15px; }
+
+  /* ---------- barra de anteproyecto ---------- */
+  .proof{
+    position:sticky; top:0; z-index:90;
+    background:var(--wine);
+    border-bottom:1px solid rgba(229,37,33,.4);
+    text-align:center;
+    padding:7px 16px;
+    font-size:10px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:rgba(249,236,220,.82);
+    font-weight:500;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    border-bottom:1px solid var(--line);
+    background:rgba(18,18,17,.86);
+    backdrop-filter:blur(12px);
+  }
+  .nav-in{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:24px; padding-block:16px;
+  }
+  .nav-mark{ font-family:var(--script); font-size:27px; line-height:1; padding-bottom:4px; }
+  .nav-links{ display:flex; gap:30px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+  .nav-links a{ padding-bottom:3px; border-bottom:1px solid transparent; transition:color .25s, border-color .25s; }
+  .nav-links a:hover{ color:var(--cream); border-color:var(--gold); }
+  .nav-cta{
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    border:1px solid var(--line-strong); padding:9px 20px;
+    transition:background .3s, border-color .3s, color .3s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--ember); border-color:var(--ember); color:#fff; }
+  @media (max-width:860px){ .nav-links{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; overflow:hidden; background:var(--surface); }
+  #embers{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(120% 76% at 50% 118%, rgba(229,37,33,.30), transparent 62%),
+      linear-gradient(180deg, rgba(18,18,17,.93) 0%, rgba(18,18,17,.35) 42%, rgba(18,18,17,.90) 100%);
+    pointer-events:none;
+  }
+  .hero-in{
+    position:relative; z-index:2;
+    padding-block: clamp(64px, 11vw, 122px);
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    gap:26px;
+  }
+  .hero-mark{
+    font-family:var(--script);
+    font-size:clamp(52px,10vw,104px);
+    line-height:.92;
+  }
+  .hero-claim{
+    font-size:10px; letter-spacing:.46em; text-transform:uppercase;
+    color:var(--gold); font-weight:500;
+  }
+  .rule{
+    width:56px; height:1px; background:var(--gold-soft);
+  }
+  .hero h1{
+    font-size:clamp(32px,5.6vw,60px);
+    line-height:1.1;
+    max-width:15ch;
+  }
+  .hero h1 em{ font-style:normal; color:var(--ember); }
+  .hero p{ color:var(--muted); max-width:46ch; margin:0; }
+
+  .btn{
+    display:inline-block;
+    font-family:var(--body);
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:500;
+    padding:16px 42px;
+    border:1px solid var(--ember);
+    background:var(--ember);
+    color:#fff;
+    cursor:pointer;
+    transition:background .3s, color .3s;
+  }
+  .btn:hover{ background:transparent; color:var(--ember); }
+  .btn-ghost{
+    background:transparent; border-color:var(--line-strong); color:var(--cream);
+  }
+  .btn-ghost:hover{ background:var(--cream); color:var(--surface); border-color:var(--cream); }
+
+  .hero-meta{
+    position:relative; z-index:2;
+    border-top:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(4,1fr);
+    font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);
+  }
+  .hero-meta div{ padding:15px 10px; text-align:center; border-left:1px solid var(--line); }
+  .hero-meta div:first-child{ border-left:0; }
+  @media (max-width:720px){
+    .hero-meta{ grid-template-columns:repeat(2,1fr); }
+    .hero-meta div:nth-child(3){ border-left:0; }
+    .hero-meta div:nth-child(n+3){ border-top:1px solid var(--line); }
+  }
+
+  /* ---------- secciones ---------- */
+  section{ padding-block: clamp(58px, 8vw, 104px); }
+  .sec-head{ display:flex; flex-direction:column; gap:18px; margin-bottom:46px; }
+  .sec-head h2{ font-size:clamp(26px,4vw,40px); line-height:1.16; max-width:20ch; }
+
+  /* ---------- experiencias ---------- */
+  #experiencias{ background:var(--ground-2); }
+  .exp-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(196px,1fr));
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .exp{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:30px 26px 34px;
+    display:flex; flex-direction:column; gap:11px;
+    min-height:212px;
+    position:relative;
+    transition:background .4s;
+  }
+  .exp:hover{ background:var(--surface-up); }
+  .exp::before{
+    content:"";
+    position:absolute; left:0; top:0; width:2px; height:100%;
+    background:var(--ember);
+    transform:scaleY(0);
+    transform-origin:top;
+    transition:transform .4s ease;
+  }
+  .exp:hover::before{ transform:scaleY(1); }
+  .exp h3{ font-size:21px; }
+  .exp p{ margin:0; color:var(--muted); font-size:13px; flex:1; }
+  .exp span{
+    font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold);
+  }
+
+  /* ---------- motor de reservas ---------- */
+  #reservar{ background:var(--surface); }
+  .engine{
+    border:1px solid var(--line);
+    background:var(--ground);
+  }
+  .tabs{ display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--line); }
+  .tab{
+    font-family:var(--body); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    background:transparent; border:0; border-left:1px solid var(--line);
+    color:var(--muted); padding:19px 8px; cursor:pointer;
+    transition:color .25s, background .25s;
+    position:relative; font-weight:500;
+  }
+  .tab:first-child{ border-left:0; }
+  .tab:hover{ color:var(--cream); }
+  .tab[aria-selected="true"]{ color:var(--cream); background:var(--surface-up); }
+  .tab[aria-selected="true"]::after{
+    content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--ember);
+  }
+  @media (max-width:680px){
+    .tabs{ grid-template-columns:repeat(2,1fr); }
+    .tab:nth-child(3){ border-left:0; }
+    .tab:nth-child(n+3){ border-top:1px solid var(--line); }
+  }
+
+  .panel{ padding:clamp(24px,4vw,42px); }
+  .panel[hidden]{ display:none; }
+  .field-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:20px;
+  }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{
+    font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); font-weight:500;
+  }
+  .field input, .field select, .field textarea{
+    font-family:var(--body); font-size:14px; font-weight:300;
+    background:var(--surface-up);
+    border:1px solid var(--line);
+    color:var(--cream);
+    padding:12px 13px;
+    width:100%;
+    transition:border-color .25s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--gold); }
+  .field textarea{ resize:vertical; min-height:82px; }
+
+  .upsell-head{
+    margin:34px 0 16px;
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    border-top:1px solid var(--line); padding-top:26px;
+  }
+  .upsell-head h3{ font-size:20px; }
+  .upsell-head span{ font-size:11px; color:var(--muted); }
+  .upsells{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }
+  .up{
+    border:1px solid var(--line);
+    background:var(--surface-up);
+    padding:16px 17px;
+    cursor:pointer;
+    display:flex; flex-direction:column; gap:5px;
+    text-align:left;
+    font-family:var(--body);
+    color:var(--cream);
+    transition:border-color .25s, background .25s;
+  }
+  .up:hover{ border-color:var(--line-strong); }
+  .up[aria-pressed="true"]{ border-color:var(--ember); background:var(--ember-soft); }
+  .up strong{ font-size:13px; font-weight:500; letter-spacing:.02em; }
+  .up small{ font-size:11px; color:var(--muted); line-height:1.5; }
+  .up b{ font-family:var(--display); font-size:15px; font-weight:400; color:var(--gold); font-variant-numeric:tabular-nums; }
+
+  .summary{
+    margin-top:30px; border-top:1px solid var(--line); padding-top:24px;
+    display:flex; align-items:center; justify-content:space-between; gap:22px; flex-wrap:wrap;
+  }
+  .summary-txt{ font-size:13px; color:var(--muted); max-width:52ch; }
+  .summary-txt b{ color:var(--cream); font-weight:500; }
+  .demo-note{
+    margin-top:14px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
+  }
+
+  .confirm{
+    border:1px solid var(--gold-soft);
+    background:linear-gradient(160deg, rgba(152,125,59,.10), transparent 62%), var(--surface-up);
+    padding:30px 28px;
+    margin-top:24px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .confirm[hidden]{ display:none; }
+  .confirm .mark{ font-family:var(--script); font-size:30px; line-height:1; }
+  .confirm h4{ font-family:var(--display); font-weight:400; font-size:19px; margin:0; }
+  .confirm p{ margin:0; font-size:13px; color:var(--muted); }
+
+  /* ---------- carta ---------- */
+  #carta{ background:var(--ground-2); }
+  .carta-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:clamp(26px,4vw,52px); }
+  .carta-col h3{
+    font-size:12px; letter-spacing:.28em; text-transform:uppercase; font-family:var(--body);
+    font-weight:600; color:var(--gold); padding-bottom:14px; border-bottom:1px solid var(--gold-soft);
+    margin-bottom:6px;
+  }
+  .dish{ display:flex; flex-direction:column; gap:3px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .dish-top{ display:flex; justify-content:space-between; align-items:baseline; gap:14px; }
+  .dish-top strong{ font-size:13px; font-weight:500; letter-spacing:.03em; }
+  .dish-top span{ font-family:var(--display); font-size:15px; color:var(--cream); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .dish small{ font-size:12px; color:var(--muted); }
+  .carta-foot{
+    margin-top:40px; padding-top:22px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    font-size:12px; color:var(--muted);
+  }
+
+  /* ---------- espacios ---------- */
+  #espacios{ background:var(--surface); }
+  .space-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:24px; }
+  .space{
+    border:1px solid var(--line);
+    padding:32px 30px 34px;
+    display:flex; flex-direction:column; gap:13px;
+    background:linear-gradient(165deg, rgba(77,22,13,.30), transparent 58%);
+  }
+  .space.limo{ background:linear-gradient(165deg, rgba(57,37,19,.44), transparent 58%); }
+  .space h3{ font-size:25px; }
+  .space p{ margin:0; color:var(--muted); font-size:13.5px; }
+  .space ul{ margin:4px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .space li{ font-size:12.5px; color:var(--muted); padding-left:16px; position:relative; }
+  .space li::before{ content:""; position:absolute; left:0; top:9px; width:6px; height:1px; background:var(--gold); }
+  .space a{
+    margin-top:8px; align-self:flex-start;
+    font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--cream);
+    border-bottom:1px solid var(--ember); padding-bottom:5px;
+  }
+
+  /* ---------- agenda ---------- */
+  #agenda{ background:var(--ground-2); }
+  .agenda-list{ border-top:1px solid var(--line); }
+  .gig{
+    display:grid; grid-template-columns:100px 1fr auto; gap:20px; align-items:center;
+    padding:20px 4px; border-bottom:1px solid var(--line);
+    transition:transform .3s ease, background .3s;
+  }
+  .gig:hover{ transform:translateX(14px); background:rgba(249,236,220,.03); }
+  .gig time{ font-family:var(--display); font-size:14px; color:var(--gold); font-variant-numeric:tabular-nums; }
+  .gig strong{ font-weight:500; font-size:14px; letter-spacing:.03em; }
+  .gig small{ display:block; color:var(--muted); font-size:12px; margin-top:2px; }
+  .gig span{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint); white-space:nowrap; }
+  @media (max-width:620px){
+    .gig{ grid-template-columns:1fr; gap:6px; }
+    .gig span{ justify-self:start; }
+  }
+  .example-tag{
+    display:inline-block; margin-top:18px;
+    font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
+    border:1px solid var(--line); padding:6px 12px;
+  }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--ground); border-top:1px solid var(--line); padding-block:58px 34px; }
+  .foot-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:34px; }
+  .foot-mark{ font-family:var(--script); font-size:38px; line-height:1; }
+  .foot-claim{ font-size:9px; letter-spacing:.36em; text-transform:uppercase; color:var(--gold); margin-top:8px; }
+  .foot-col h4{
+    font-family:var(--body); font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--faint); font-weight:600; margin:0 0 14px;
+  }
+  .foot-col p{ margin:0 0 7px; font-size:13px; color:var(--muted); }
+  .foot-col a:hover{ color:var(--cream); }
+  .foot-bottom{
+    margin-top:46px; padding-top:20px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint);
+  }
+
+  /* ---------- notas de anteproyecto ---------- */
+  #notas{ background:var(--wine); }
+  #notas .sec-head h2{ font-size:clamp(22px,3.4vw,32px); }
+  .notes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(235px,1fr)); gap:1px; background:rgba(249,236,220,.16); border:1px solid rgba(249,236,220,.16); }
+  .note{ background:var(--wine); padding:26px 24px; display:flex; flex-direction:column; gap:9px; }
+  .note h3{ font-size:17px; }
+  .note p{ margin:0; font-size:12.5px; color:rgba(249,236,220,.72); }
+  .swatches{ display:flex; gap:0; margin-top:26px; border:1px solid rgba(249,236,220,.16); }
+  .sw{ flex:1; height:64px; display:flex; align-items:flex-end; padding:7px 8px; font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; }
+
+  /* ---------- reveal ---------- */
+  .js .reveal{ opacity:0; transform:translateY(16px); }
+  .js .reveal.in{ opacity:1; transform:none; transition:opacity .9s ease, transform .9s cubic-bezier(.16,.72,.3,1); }
+  @media (prefers-reduced-motion: reduce){
+    .js .reveal{ opacity:1; transform:none; transition:none; }
+    *{ animation:none !important; }
+  }
+</style>
+
+<div class="proof">Anteproyecto · Vista conceptual preparada para Paul Roger · No es un sitio publicado</div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="nav-mark">Paul Roger</a>
+    <div class="nav-links">
+      <a href="#experiencias">Experiencias</a>
+      <a href="#carta">Carta</a>
+      <a href="#espacios">Espacios</a>
+      <a href="#agenda">Agenda</a>
+    </div>
+    <a href="#reservar" class="nav-cta">Reservar</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <div class="hero-mark">Paul Roger</div>
+    <div class="hero-claim">Brasas &amp; Cocktail</div>
+    <div class="rule"></div>
+    <h1>Bienvenidos <em>a casa</em></h1>
+    <p>Brasas, sushi y coctelería de autor en el corazón de Polo Hudson. Una mesa donde las cosas importantes suceden.</p>
+    <a href="#reservar" class="btn">Reservar una mesa</a>
+  </div>
+  <div class="wrap hero-meta">
+    <div>Polo Design · Hudson</div>
+    <div>Martes a domingo</div>
+    <div>Salón · Barra · Vip</div>
+    <div>Música en vivo</div>
+  </div>
+</header>
+
+<section id="experiencias">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Conocé nuestras experiencias</div>
+      <h2>Una casa, cinco maneras de vivirla</h2>
+      <p class="lede">No es un restaurante con varias cartas. Es un lugar pensado para que cada ocasión encuentre su propio espacio: una cena larga, una barra de jueves, un cumpleaños puertas adentro.</p>
+    </div>
+    <div class="exp-grid reveal">
+      <article class="exp">
+        <span>01 · Fuego</span>
+        <h3>Brasas</h3>
+        <p>Ojo de bife, entraña y asado banderita sobre brasa viva. El cochinillo entero se encarga con reserva anticipada.</p>
+      </article>
+      <article class="exp">
+        <span>02 · Barra fría</span>
+        <h3>Sushi</h3>
+        <p>Rolls de autor, tiraditos nikkei y lajas de 15, 30 o 45 piezas a elección del sushiman.</p>
+      </article>
+      <article class="exp">
+        <span>03 · Coctelería</span>
+        <h3>Barra</h3>
+        <p>Clásicos bien hechos y tragos de autor. Más de noventa etiquetas de vino, del Malbec de todos los días al Cristal.</p>
+      </article>
+      <article class="exp">
+        <span>04 · Puertas adentro</span>
+        <h3>Salón privado</h3>
+        <p>Un salón aparte para cumpleaños, cenas de empresa y celebraciones que piden intimidad.</p>
+      </article>
+      <article class="exp">
+        <span>05 · Llegada</span>
+        <h3>Limousine</h3>
+        <p>Nuestro servicio de traslado para que la noche empiece antes de cruzar la puerta.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="reservar">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Reservas</div>
+      <h2>Todo se reserva desde acá</h2>
+      <p class="lede">Mesa, evento privado, limousine o menú ejecutivo. Un solo lugar, sin ida y vuelta por mensajes, con confirmación por correo en el momento.</p>
+    </div>
+
+    <div class="engine reveal">
+      <div class="tabs" role="tablist" aria-label="Tipo de reserva">
+        <button class="tab" role="tab" id="t-mesa"  aria-controls="p-mesa"  aria-selected="true">Mesa</button>
+        <button class="tab" role="tab" id="t-event" aria-controls="p-event" aria-selected="false">Evento privado</button>
+        <button class="tab" role="tab" id="t-limo"  aria-controls="p-limo"  aria-selected="false">Limousine</button>
+        <button class="tab" role="tab" id="t-exec"  aria-controls="p-exec"  aria-selected="false">Ejecutivo</button>
+      </div>
+
+      <!-- MESA -->
+      <div class="panel" role="tabpanel" id="p-mesa" aria-labelledby="t-mesa">
+        <div class="field-grid">
+          <div class="field">
+            <label for="f-fecha">Fecha</label>
+            <input id="f-fecha" type="text" value="Sábado 26 de septiembre">
+          </div>
+          <div class="field">
+            <label for="f-hora">Horario</label>
+            <select id="f-hora">
+              <option>20:30</option>
+              <option selected>21:30</option>
+              <option>22:30</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-pax">Comensales</label>
+            <select id="f-pax">
+              <option>2 personas</option>
+              <option>4 personas</option>
+              <option selected>6 personas</option>
+              <option>8 personas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-sector">Sector</label>
+            <select id="f-sector">
+              <option selected>Salón principal</option>
+              <option>Barra</option>
+              <option>Vip</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-ocasion">Ocasión</label>
+            <select id="f-ocasion">
+              <option>Cena</option>
+              <option selected>Aniversario</option>
+              <option>Cumpleaños</option>
+              <option>Reunión de trabajo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-nombre">A nombre de</label>
+            <input id="f-nombre" type="text" value="Familia Ortiz">
+          </div>
+        </div>
+
+        <div class="upsell-head">
+          <h3>Sumá algo a la mesa</h3>
+          <span>Lo dejamos listo antes de que llegues.</span>
+        </div>
+        <div class="upsells" id="upsells">
+          <button class="up" type="button" aria-pressed="true"  data-price="30000">
+            <strong>Ramo floral grande</strong>
+            <small>En la mesa, al momento de sentarse.</small>
+            <b>$30.000</b>
+          </button>
+          <button class="up" type="button" aria-pressed="false" data-price="36900">
+            <strong>Bombones belgas · 12 u.</strong>
+            <small>Para cerrar la noche o regalar.</small>
+            <b>$36.900</b>
+          </button>
+          <button class="up" type="button" aria-pressed="false" data-price="29000">
+            <strong>Pistachos premium</strong>
+            <small>De altura, para la espera.</small>
+            <b>$29.000</b>
+          </button>
+          <button class="up" type="button" aria-pressed="false" data-price="0">
+            <strong>Traslado en limousine</strong>
+            <small>Coordinamos horario y dirección.</small>
+            <b>A consultar</b>
+          </button>
+        </div>
+
+        <div class="summary">
+          <div class="summary-txt" id="summary">
+            <b>6 personas</b> · Salón principal · Sábado 26, 21:30 — con <b>ramo floral grande</b> en la mesa.
+            Adicionales: <b>$30.000</b>. Servicio de mesa $3.500 por persona.
+          </div>
+          <button class="btn" type="button" id="send">Confirmar reserva</button>
+        </div>
+        <div class="demo-note">Demostración visual · No se envía ni se guarda ningún dato</div>
+
+        <div class="confirm" id="confirm" hidden>
+          <div class="mark">Paul Roger</div>
+          <h4>Los esperamos, familia Ortiz.</h4>
+          <p>Mesa para 6 en el salón principal, sábado 26 de septiembre a las 21:30. El ramo va a estar en la mesa cuando lleguen. Así se vería el correo de confirmación que recibe el cliente, con la identidad de la casa.</p>
+        </div>
+      </div>
+
+      <!-- EVENTO -->
+      <div class="panel" role="tabpanel" id="p-event" aria-labelledby="t-event" hidden>
+        <div class="field-grid">
+          <div class="field">
+            <label for="e-tipo">Tipo de evento</label>
+            <select id="e-tipo">
+              <option selected>Cumpleaños</option>
+              <option>Cena de empresa</option>
+              <option>Aniversario</option>
+              <option>Despedida</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="e-pax">Invitados</label>
+            <select id="e-pax">
+              <option>Hasta 20</option>
+              <option selected>20 a 40</option>
+              <option>40 a 60</option>
+              <option>Más de 60</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="e-fecha">Fecha tentativa</label>
+            <input id="e-fecha" type="text" value="Segunda quincena de noviembre">
+          </div>
+          <div class="field">
+            <label for="e-menu">Propuesta</label>
+            <select id="e-menu">
+              <option>Brasas</option>
+              <option selected>Brasas y sushi</option>
+              <option>Solo barra y picoteo</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" style="margin-top:20px">
+          <label for="e-msg">Contanos qué tenés en mente</label>
+          <textarea id="e-msg">Queremos el salón privado, con barra abierta las primeras dos horas y música en vivo.</textarea>
+        </div>
+        <div class="summary">
+          <div class="summary-txt">La consulta llega al equipo con todos los datos ya cargados: fecha, cantidad, propuesta y presupuesto estimado. Se responde con una cotización, no con veinte mensajes.</div>
+          <button class="btn btn-ghost" type="button">Enviar consulta</button>
+        </div>
+        <div class="demo-note">Demostración visual · No se envía ni se guarda ningún dato</div>
+      </div>
+
+      <!-- LIMO -->
+      <div class="panel" role="tabpanel" id="p-limo" aria-labelledby="t-limo" hidden>
+        <div class="field-grid">
+          <div class="field">
+            <label for="l-origen">Dirección de retiro</label>
+            <input id="l-origen" type="text" value="Hudson centro">
+          </div>
+          <div class="field">
+            <label for="l-hora">Horario de retiro</label>
+            <select id="l-hora"><option>20:00</option><option selected>20:45</option><option>21:30</option></select>
+          </div>
+          <div class="field">
+            <label for="l-pax">Pasajeros</label>
+            <select id="l-pax"><option>2</option><option selected>6</option><option>8</option></select>
+          </div>
+          <div class="field">
+            <label for="l-vuelta">Regreso</label>
+            <select id="l-vuelta"><option selected>Ida y vuelta</option><option>Solo ida</option></select>
+          </div>
+        </div>
+        <div class="summary">
+          <div class="summary-txt">El traslado se reserva junto con la mesa, no por separado. Es el primer momento de la experiencia y hoy no tiene ninguna vidriera.</div>
+          <button class="btn btn-ghost" type="button">Consultar disponibilidad</button>
+        </div>
+        <div class="demo-note">Demostración visual · No se envía ni se guarda ningún dato</div>
+      </div>
+
+      <!-- EJECUTIVO -->
+      <div class="panel" role="tabpanel" id="p-exec" aria-labelledby="t-exec" hidden>
+        <div class="field-grid">
+          <div class="field">
+            <label for="x-dia">Día</label>
+            <input id="x-dia" type="text" value="Miércoles 23 de septiembre">
+          </div>
+          <div class="field">
+            <label for="x-hora">Horario</label>
+            <select id="x-hora"><option>12:30</option><option selected>13:00</option><option>13:45</option></select>
+          </div>
+          <div class="field">
+            <label for="x-pax">Comensales</label>
+            <select id="x-pax"><option selected>2 personas</option><option>3 personas</option><option>4 personas</option></select>
+          </div>
+        </div>
+        <div class="summary">
+          <div class="summary-txt">Flujo corto, pensado para que alguien lo resuelva desde el celular en dos minutos, camino al mediodía.</div>
+          <button class="btn btn-ghost" type="button">Reservar mediodía</button>
+        </div>
+        <div class="demo-note">Demostración visual · No se envía ni se guarda ningún dato</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="carta">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">La carta</div>
+      <h2>Navegable, siempre al día</h2>
+      <p class="lede">La carta vive en la web y en el código QR de la mesa. Cuando cambia un precio, se cambia una vez y se actualiza en los dos lados. Sin reimprimir.</p>
+    </div>
+
+    <div class="carta-grid reveal">
+      <div class="carta-col">
+        <h3>Brasas</h3>
+        <div class="dish"><div class="dish-top"><strong>Ojo de bife 450 gr</strong><span>$39.000</span></div></div>
+        <div class="dish"><div class="dish-top"><strong>Entraña</strong><span>$38.000</span></div></div>
+        <div class="dish"><div class="dish-top"><strong>Bife de chorizo 450 gr</strong><span>$34.000</span></div></div>
+        <div class="dish"><div class="dish-top"><strong>Tabla de achuras</strong><span>$59.000</span></div><small>Una porción de cada una de nuestras achuras.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Cochinillo entero</strong><span>$290.000</span></div><small>Para 6 personas. Se encarga con reserva.</small></div>
+      </div>
+
+      <div class="carta-col">
+        <h3>Sushi</h3>
+        <div class="dish"><div class="dish-top"><strong>Roll Paul · 5 piezas</strong><span>$17.900</span></div><small>Salmón, queso phila, palta, sésamo tostado.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Pistachio Roll · 5 piezas</strong><span>$20.500</span></div><small>Langostinos crocantes, girgolas grilladas, salsa nikkei, pistachos caramelizados.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Tiradito nikkei</strong><span>$21.500</span></div><small>Pesca blanca, rabanito, maíz frito, aceite de cilantro.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Laja · 30 piezas</strong><span>$95.000</span></div><small>A elección del sushiman.</small></div>
+      </div>
+
+      <div class="carta-col">
+        <h3>Barra</h3>
+        <div class="dish"><div class="dish-top"><strong>Paul Roger</strong><span>$18.000</span></div><small>Whisky, ron añejo, frutos secos, chocolate blanco, óleo de banana casero.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Wasabi Roger</strong><span>$16.000</span></div><small>Whisky, miel de jengibre, wasabi, limón.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Negroni</strong><span>$14.000</span></div><small>Beefeater gin, Campari, vermouth rosso.</small></div>
+        <div class="dish"><div class="dish-top"><strong>Old Fashioned</strong><span>$14.000</span></div><small>Texas bourbon, almíbar, amaro Angostura.</small></div>
+      </div>
+    </div>
+
+    <div class="carta-foot reveal">
+      <span>Más de 90 etiquetas en la carta de vinos, desde $19.800.</span>
+      <span>Servicio de mesa $3.500 por persona.</span>
+    </div>
+  </div>
+</section>
+
+<section id="espacios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Espacios</div>
+      <h2>Lo que hoy solo se entera quien ya está sentado</h2>
+      <p class="lede">El salón privado y la limousine figuran en una línea al pie de la carta impresa. Merecen una página propia: son los servicios de mayor valor de la casa.</p>
+    </div>
+    <div class="space-grid reveal">
+      <article class="space">
+        <h3>Salón privado</h3>
+        <p>Puertas adentro, con su propio servicio y su propio ritmo.</p>
+        <ul>
+          <li>Cumpleaños, cenas de empresa y celebraciones</li>
+          <li>Propuestas de menú cerrado por persona</li>
+          <li>Barra y música en vivo a coordinar</li>
+        </ul>
+        <a href="#reservar">Consultar por el salón</a>
+      </article>
+      <article class="space limo">
+        <h3>Limousine</h3>
+        <p>La noche empieza cuando se abre la puerta del auto, no la del restaurante.</p>
+        <ul>
+          <li>Traslado de ida y vuelta</li>
+          <li>Se reserva junto con la mesa</li>
+          <li>Disponible para eventos y ocasiones especiales</li>
+        </ul>
+        <a href="#reservar">Consultar por el traslado</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="agenda">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Agenda</div>
+      <h2>Música en vivo</h2>
+      <p class="lede">Una sección que se renueva sola todas las semanas y le da a las redes algo concreto que publicar.</p>
+    </div>
+    <div class="agenda-list reveal">
+      <div class="gig"><time>Vie 25 · 22:00</time><div><strong>Trío de jazz en la barra</strong><small>Standards y bossa, sin reserva previa.</small></div><span>Barra</span></div>
+      <div class="gig"><time>Sáb 26 · 22:30</time><div><strong>Noche de soul y funk</strong><small>Banda en vivo en el salón principal.</small></div><span>Salón</span></div>
+      <div class="gig"><time>Dom 27 · 21:00</time><div><strong>Guitarra y voz</strong><small>Formato íntimo para cerrar el fin de semana.</small></div><span>Salón</span></div>
+    </div>
+    <div class="example-tag">Contenido de ejemplo — la grilla real la carga el equipo</div>
+  </div>
+</section>
+
+<section id="notas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="color:rgba(249,236,220,.5)">Anteproyecto</div>
+      <h2>Por qué se ve así</h2>
+    </div>
+    <div class="notes reveal">
+      <article class="note">
+        <h3>La paleta es la de ustedes</h3>
+        <p>Negro, rojo, crudo, tinto y oro salen del Manual de Identidad Visual. El rojo se usa con avaricia: solo en el logo y en la acción principal. Ahí está el lujo.</p>
+      </article>
+      <article class="note">
+        <h3>La web vive de noche</h3>
+        <p>Paul Roger es un local nocturno. Un fondo blanco lo contradice. El manual ya pide alto contraste y degradés sobre las imágenes: acá se aplica al sitio entero.</p>
+      </article>
+      <article class="note">
+        <h3>Primero la reserva</h3>
+        <p>El recorrido del cliente que ya definieron arranca en la reserva. Es el único de los diez pasos que todavía no está diseñado, y es el que esta web resuelve.</p>
+      </article>
+      <article class="note">
+        <h3>Las flores y los bombones venden</h3>
+        <p>Hoy se ofrecen al pie de la carta impresa. En la web se ofrecen en el momento de reservar, cuando el cliente todavía está armando la ocasión.</p>
+      </article>
+    </div>
+    <div class="swatches reveal" aria-label="Paleta del manual">
+      <div class="sw" style="background:#1d1d1b;color:#f9ecdc">Negro</div>
+      <div class="sw" style="background:#e52521;color:#fff">Rojo</div>
+      <div class="sw" style="background:#4d160d;color:#f9ecdc">Tinto</div>
+      <div class="sw" style="background:#392513;color:#f9ecdc">Tierra</div>
+      <div class="sw" style="background:#987d3b;color:#1d1d1b">Oro</div>
+      <div class="sw" style="background:#f9ecdc;color:#1d1d1b">Crudo</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-mark">Paul Roger</div>
+        <div class="foot-claim">Brasas &amp; Cocktail</div>
+      </div>
+      <div class="foot-col">
+        <h4>Dónde</h4>
+        <p>Calle 47 6750</p>
+        <p>Polo Design · Polo Hudson</p>
+        <p>Guillermo E. Hudson, Buenos Aires</p>
+      </div>
+      <div class="foot-col">
+        <h4>Reservas</h4>
+        <p>WhatsApp 11 2300 5015</p>
+        <p>reservas@paulroger.com.ar</p>
+        <p>www.paulroger.com.ar</p>
+      </div>
+      <div class="foot-col">
+        <h4>Seguinos</h4>
+        <p>@paulroger.hudson</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Anteproyecto de sitio · Vista conceptual</span>
+      <span>Tipografías de muestra: Prata y Montserrat</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.body.classList.add('js');
+
+/* ---------- brasas ---------- */
+(function(){
+  var c = document.getElementById('embers');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var parts = [], W = 0, H = 0, raf = null;
+
+  function size(){
+    var r = c.getBoundingClientRect();
+    W = c.width  = Math.max(1, Math.floor(r.width));
+    H = c.height = Math.max(1, Math.floor(r.height));
+  }
+
+  function seed(){
+    parts = [];
+    var n = Math.min(64, Math.round(W / 22));
+    for(var i = 0; i < n; i++){
+      parts.push({
+        x: Math.random() * W,
+        y: H * (0.55 + Math.random() * 0.6),
+        r: 0.6 + Math.random() * 1.9,
+        v: 0.12 + Math.random() * 0.42,
+        d: (Math.random() - 0.5) * 0.22,
+        a: 0.10 + Math.random() * 0.42,
+        h: Math.random() < 0.32 ? '229,37,33' : '190,120,45'
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    for(var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      var fade = Math.max(0, Math.min(1, p.y / H));
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(' + p.h + ',' + (p.a * fade).toFixed(3) + ')';
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function step(){
+    for(var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      p.y -= p.v;
+      p.x += p.d;
+      if(p.y < -8 || p.x < -8 || p.x > W + 8){
+        p.y = H + Math.random() * 30;
+        p.x = Math.random() * W;
+      }
+    }
+    draw();
+    raf = requestAnimationFrame(step);
+  }
+
+  function start(){
+    size(); seed(); draw();
+    if(!reduce){ if(raf) cancelAnimationFrame(raf); raf = requestAnimationFrame(step); }
+  }
+
+  start();
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(start, 180);
+  });
+})();
+
+/* ---------- reveals ---------- */
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
+  items.forEach(function(el, i){
+    el.style.transitionDelay = (Math.min(i, 3) * 70) + 'ms';
+    io.observe(el);
+  });
+})();
+
+/* ---------- tabs ---------- */
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function select(tab){
+    tabs.forEach(function(t){
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ select(t); });
+    t.addEventListener('keydown', function(e){
+      var i = tabs.indexOf(t);
+      if(e.key === 'ArrowRight'){ e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
+    });
+  });
+})();
+
+/* ---------- upsells + resumen ---------- */
+(function(){
+  var ups     = Array.prototype.slice.call(document.querySelectorAll('#upsells .up'));
+  var summary = document.getElementById('summary');
+  var pax     = document.getElementById('f-pax');
+  var sector  = document.getElementById('f-sector');
+  var hora    = document.getElementById('f-hora');
+  var confirm = document.getElementById('confirm');
+
+  function money(n){ return '$' + n.toLocaleString('es-AR'); }
+
+  function render(){
+    var names = [], total = 0;
+    ups.forEach(function(u){
+      if(u.getAttribute('aria-pressed') === 'true'){
+        names.push(u.querySelector('strong').textContent.toLowerCase());
+        total += parseInt(u.dataset.price, 10) || 0;
+      }
+    });
+    var extras = names.length
+      ? ' — con <b>' + names.join('</b>, <b>') + '</b>.'
+      : ' — sin adicionales.';
+    var costo = total > 0
+      ? ' Adicionales: <b>' + money(total) + '</b>.'
+      : (names.length ? ' Adicionales a confirmar.' : '');
+    summary.innerHTML =
+      '<b>' + pax.value + '</b> · ' + sector.value + ' · Sábado 26, ' + hora.value +
+      extras + costo + ' Servicio de mesa $3.500 por persona.';
+  }
+
+  ups.forEach(function(u){
+    u.addEventListener('click', function(){
+      u.setAttribute('aria-pressed', u.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      render();
+    });
+  });
+  [pax, sector, hora].forEach(function(el){ el.addEventListener('change', render); });
+
+  document.getElementById('send').addEventListener('click', function(){
+    confirm.hidden = false;
+    confirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+})();
+</script>

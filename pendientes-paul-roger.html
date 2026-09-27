@@ -1,0 +1,465 @@
+<title>Pendientes de Paul Roger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #fbf6ef;
+    --surface: #ffffff;
+    --ink: #1d1d1b;
+    --ink-soft: #5a4f47;
+    --line: #e7d9c6;
+    --accent: #c81f1b;
+    --wine: #4d160d;
+    --tag-urg-bg: #fbe3e1; --tag-urg: #9e1612;
+    --tag-nec-bg: #f3e6d2; --tag-nec: #5e3b12;
+    --tag-sum-bg: #ecebe6; --tag-sum: #45443f;
+    --done: #8a7f75;
+    --display: 'Prata', 'Bodoni Moda', Georgia, serif;
+    --body: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #1d1d1b; --surface: #262523; --ink: #f9ecdc; --ink-soft: #c9b9a6; --line: #3c3c3b;
+      --accent: #ff5a52; --wine: #f3c7b8;
+      --tag-urg-bg: #4d160d; --tag-urg: #ffc9c2;
+      --tag-nec-bg: #392513; --tag-nec: #f1d6ae;
+      --tag-sum-bg: #33322f; --tag-sum: #d8d4cb;
+      --done: #8d8479;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #1d1d1b; --surface: #262523; --ink: #f9ecdc; --ink-soft: #c9b9a6; --line: #3c3c3b;
+    --accent: #ff5a52; --wine: #f3c7b8;
+    --tag-urg-bg: #4d160d; --tag-urg: #ffc9c2;
+    --tag-nec-bg: #392513; --tag-nec: #f1d6ae;
+    --tag-sum-bg: #33322f; --tag-sum: #d8d4cb;
+    --done: #8d8479;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 15.5px; line-height: 1.6;
+    padding: 0 20px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding-block: 56px 96px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; color: var(--wine); }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.12; margin: 8px 0 18px; }
+  h2 { font-size: clamp(1.45rem, 3.4vw, 1.85rem); line-height: 1.2; margin: 0; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .lead { font-size: 1.08rem; max-width: 64ch; color: var(--ink); }
+  .lead + .lead { margin-top: 12px; }
+  .meta { margin-top: 22px; font-size: 13px; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 6px 20px; }
+
+  /* Cómo usar */
+  .how { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .how div { border-top: 2px solid var(--wine); padding-top: 12px; }
+  .how b { display: block; font-size: 14px; margin-bottom: 4px; }
+  .how p { font-size: 14px; color: var(--ink-soft); }
+  @media (max-width: 680px) { .how { grid-template-columns: 1fr; } }
+
+  /* Prioridades */
+  .legend { margin-top: 36px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px 22px; display: grid; gap: 12px; }
+  .legend-row { display: grid; grid-template-columns: 118px 1fr; gap: 14px; align-items: baseline; font-size: 14px; }
+  .legend-row p { color: var(--ink-soft); }
+  @media (max-width: 520px) { .legend-row { grid-template-columns: 1fr; gap: 4px; } }
+
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; justify-self: start; }
+  .tag.urg { background: var(--tag-urg-bg); color: var(--tag-urg); }
+  .tag.nec { background: var(--tag-nec-bg); color: var(--tag-nec); }
+  .tag.sum { background: var(--tag-sum-bg); color: var(--tag-sum); }
+
+  /* Barra de progreso */
+  .bar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    margin: 40px -20px 0; padding: 12px 20px;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+  }
+  .progress { flex: 1 1 220px; display: flex; align-items: center; gap: 12px; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .track { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .fill { height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+  .bar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button {
+    font: 600 13px var(--body); color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 4px; padding: 9px 14px; cursor: pointer; min-height: 40px;
+  }
+  button:hover { border-color: var(--ink-soft); }
+  button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .copied { font-size: 13px; color: var(--accent); font-weight: 600; }
+
+  /* Secciones */
+  section.block { margin-top: 64px; scroll-margin-top: 80px; }
+  .block-head { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .letter { font-family: var(--display); font-size: 2.2rem; line-height: 1; color: var(--accent); grid-row: span 2; }
+  .block-intro { grid-column: 2; font-size: 14.5px; color: var(--ink-soft); max-width: 66ch; margin-top: 4px; }
+
+  ol.items { list-style: none; margin: 0; padding: 0; }
+  li.item { border-bottom: 1px solid var(--line); }
+  li.item label { display: grid; grid-template-columns: 26px 44px 1fr; gap: 0 12px; padding: 18px 0; cursor: pointer; }
+  li.item input { width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer; }
+  .code { font-weight: 700; font-size: 13px; color: var(--ink-soft); padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .body { display: grid; gap: 7px; min-width: 0; }
+  .q-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+  .q { font-weight: 600; font-size: 1rem; line-height: 1.45; flex: 1 1 320px; }
+  .detail { color: var(--ink); font-size: 14.5px; }
+  .detail ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
+  .why, .send { font-size: 13.5px; color: var(--ink-soft); }
+  .why b, .send b { color: var(--ink); font-weight: 600; }
+  li.item.done .q, li.item.done .detail { color: var(--done); text-decoration: line-through; text-decoration-thickness: 1px; }
+  li.item.done .why, li.item.done .send { display: none; }
+  body.only-urg li.item:not([data-p="urg"]) { display: none; }
+  body.only-urg section.block:not(.has-urg) { display: none; }
+
+  /* Fotos */
+  .shots-wrap { overflow-x: auto; margin-top: 18px; }
+  table.shots { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px; }
+  .shots th { text-align: left; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+  .shots td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .shots td:first-child { font-weight: 600; }
+  .shots td:nth-child(2) { color: var(--ink-soft); }
+  .rules { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 22px; }
+  .rules h3 { font-size: 1.1rem; margin: 0 0 8px; }
+  .rules ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 14px; }
+
+  .closing { margin-top: 72px; padding-top: 28px; border-top: 2px solid var(--wine); display: grid; gap: 12px; max-width: 64ch; }
+  .closing h2 { font-size: 1.5rem; }
+  .closing p { color: var(--ink-soft); }
+  .foot { margin-top: 40px; font-size: 12px; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+  @media (max-width: 520px) {
+    li.item label { grid-template-columns: 24px 1fr; }
+    .code { grid-column: 2; padding-top: 2px; }
+    .body { grid-column: 2; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Paul Roger · Brasas &amp; Cocktail · Sitio web</p>
+    <h1>Lo que necesitamos de ustedes para terminar la web</h1>
+    <p class="lead">La maqueta ya está armada con todo lo que tenemos: la carta impresa, el manual de identidad, la propuesta de eventos y las fotos de Instagram. Lo que falta son datos que solo ustedes conocen, y son los que hacen la diferencia entre una web correcta y una que transmita lo que es Paul Roger.</p>
+    <p class="lead">Hoy, en la maqueta, cada dato que falta aparece marcado como <strong>[FALTA]</strong>. Esta lista es exactamente eso, ordenado por sección de la web y por prioridad.</p>
+    <div class="meta">
+      <span>Actualizado el 27 de septiembre de 2026</span>
+      <span id="total-count"></span>
+    </div>
+  </header>
+
+  <div class="how" aria-label="Cómo usar esta lista">
+    <div><b>1 · Respondé con el código</b><p>Cada punto tiene un código (A1, B3…). Mandanos las respuestas por WhatsApp o mail citándolo: «B3: el chef es…». No hace falta seguir el orden.</p></div>
+    <div><b>2 · Archivos por carpeta</b><p>Fotos, logos y documentos, por Google Drive o WeTransfer. Por WhatsApp no: comprime las fotos y pierden calidad.</p></div>
+    <div><b>3 · Tildá lo que ya mandaste</b><p>Las casillas quedan guardadas en este navegador, así sabés qué te queda. Si algo no aplica o no lo saben, también sirve que nos lo digan.</p></div>
+  </div>
+
+  <div class="legend" aria-label="Qué significa cada prioridad">
+    <div class="legend-row"><span class="tag urg">Urgente</span><p>Sin esto no podemos publicar la web o hay una parte que no funciona. Si tenés 15 minutos, empezá por acá.</p></div>
+    <div class="legend-row"><span class="tag nec">Necesario</span><p>Hoy aparece como [FALTA] en la maqueta. Hay que tenerlo antes de salir al aire.</p></div>
+    <div class="legend-row"><span class="tag sum">Suma mucho</span><p>No bloquea nada, pero es lo que nos deja diseñar secciones con más contenido y más personalidad, sobre todo «Nosotros».</p></div>
+  </div>
+
+  <div class="bar" role="region" aria-label="Progreso">
+    <div class="progress"><span id="progress-text">0 de 0 listos</span><div class="track" aria-hidden="true"><div class="fill" id="fill"></div></div></div>
+    <div class="bar-actions">
+      <button type="button" id="btn-urg" aria-pressed="false">Ver solo urgentes</button>
+      <button type="button" id="btn-copy">Copiar preguntas</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>
+  </div>
+
+  <main id="sections"></main>
+
+  <section class="block" id="fotos-lista" aria-labelledby="fotos-lista-titulo">
+    <div class="block-head">
+      <span class="letter">I+</span>
+      <h2 id="fotos-lista-titulo">Lista de tomas para fotografiar</h2>
+      <p class="block-intro">Complementa el punto I2. Pueden sacarlas el fotógrafo o la persona que lleva las redes: a ella le sirven las mismas tomas para el Instagram, así que conviene coordinarlo una sola vez.</p>
+    </div>
+    <div class="shots-wrap">
+      <table class="shots">
+        <thead><tr><th>Toma</th><th>Dónde se usa en la web</th><th>Prioridad</th></tr></thead>
+        <tbody>
+          <tr><td>Salón privado (VIP), vacío y puesto para una cena</td><td>Página Private Dining y portada. Hoy no tenemos ninguna foto.</td><td><span class="tag urg">Urgente</span></td></tr>
+          <tr><td>Salón de noche, con luces encendidas y sin gente</td><td>Portada y La Casa</td><td><span class="tag urg">Urgente</span></td></tr>
+          <tr><td>Fachada de noche (con el neón) y de día</td><td>Contacto y «cómo llegar»</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>La barra con el bartender preparando un trago</td><td>La Casa · Barra</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>El cocktail «Paul Roger» y 2 o 3 tragos de autor, de cerca</td><td>Carta · Barra y portada</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>Parrilla encendida: fotos y un video corto de 10 a 15 segundos de las brasas</td><td>Fondo animado de la portada</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>Música en vivo: la banda tocando, con el salón de fondo</td><td>La Casa · Música en vivo</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>Stand de flores, un ramo armado, bombones y pistachos</td><td>Complementos de la reserva</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>Limusina por fuera y por dentro</td><td>Limousine</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>Platos vistos desde arriba: ojo de bife, laja de sushi, cochinillo, guarniciones, flan</td><td>Servicios de la portada y Carta</td><td><span class="tag nec">Necesario</span></td></tr>
+          <tr><td>Pared de vinos y cava</td><td>Carta · Vinos</td><td><span class="tag sum">Suma mucho</span></td></tr>
+          <tr><td>Retratos de los dueños y del equipo (cocina, parrilla, barra, salón)</td><td>Nosotros</td><td><span class="tag sum">Suma mucho</span></td></tr>
+          <tr><td>Un evento armado (mesa larga decorada, salón privatizado)</td><td>Eventos</td><td><span class="tag sum">Suma mucho</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rules">
+      <h3>Cómo tienen que llegar las fotos</h3>
+      <ul>
+        <li>El archivo original, tal cual sale de la cámara o del celular. Sin filtros ni recortes.</li>
+        <li>Si se puede, cada toma en horizontal y en vertical: una va para computadora y la otra para celular.</li>
+        <li>Sin clientes que se puedan reconocer, salvo que tengan su permiso por escrito. Sin patentes de autos a la vista.</li>
+        <li>Con el cartel y el logo derechos y bien enfocados: son lo primero que se nota si sale mal.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="closing">
+    <h2>¿Y si algo no lo saben o no lo tienen?</h2>
+    <p>Está perfecto: avísennos y lo resolvemos con lo que haya. Ningún dato se inventa: si un precio o un horario no está confirmado, en la web no aparece. Por eso cada respuesta suma, aunque sea «no aplica» o «todavía no lo decidimos».</p>
+    <p>Con las marcadas como <strong>Urgente</strong> ya podemos avanzar. El resto puede ir llegando de a poco.</p>
+  </div>
+  <p class="foot">Paul Roger · Brasas &amp; Cocktail · Calle 47 6750, Polo Design, Guillermo E. Hudson</p>
+</div>
+
+<script>
+const S = [
+  { id: 'A', title: 'Para poder arrancar', intro: 'Lo técnico y lo básico del día a día. Casi todo es urgente porque sin esto la web no se puede publicar o las reservas no le llegan a nadie.', items: [
+    { p: 'urg', q: 'Dominio paulroger.com.ar: ¿quién figura como titular en NIC Argentina y quién puede darnos acceso?',
+      d: 'Necesitamos el nombre o la empresa titular. Por favor no nos manden contraseñas por WhatsApp: lo resolvemos en una llamada corta o nos delegan el dominio desde NIC.ar.',
+      w: 'Es la dirección de la web. Figura en toda la papelería pero nunca se publicó.' },
+    { p: 'urg', q: 'Correo reservas@paulroger.com.ar: ¿existe hoy? ¿Quién lo lee y dónde está (Gmail, Google Workspace, otro)?',
+      w: 'Es el correo que aparece en la web y adonde van a llegar las reservas.' },
+    { p: 'urg', q: '¿Quién recibe y responde las reservas?',
+      d: 'Nombre, celular y mail de la persona o las personas encargadas, y en qué horario las atienden.',
+      w: 'Define a quién le avisa la web cada vez que entra una reserva o una consulta de evento.' },
+    { p: 'urg', q: 'Horarios reales de cada servicio',
+      d: '<ul><li>Cafetería / turno mañana</li><li>Mediodía</li><li>Noche, y hasta qué hora se toman pedidos en la cocina</li><li>Qué días cierran y qué pasa los feriados</li></ul>',
+      w: 'Van en el pie de todas las páginas, en Google y en el formulario de reservas, que hoy muestra turnos de ejemplo.' },
+    { p: 'urg', q: 'Logos en archivo vectorial, en sus 4 versiones',
+      d: 'Horizontal, vertical completa, vertical simplificada y circular, en .ai, .svg o .pdf. Se los puede pedir al diseñador que hizo el manual de identidad.',
+      w: 'Hoy usamos los logos recortados del manual. En pantallas grandes se van a ver pixelados.', s: 'Por Drive o mail, nunca como captura de pantalla.' },
+    { p: 'nec', q: 'Tipografía IvyMode: ¿el diseñador del manual tiene Adobe Creative Cloud?',
+      d: 'Solo necesitamos un sí o un no. Si la tiene, puede habilitar la fuente para la web sin costo extra. Si no, usamos una alternativa gratuita muy parecida y no pasa nada.',
+      w: 'Es la letra de los títulos que pide el manual. Tiene licencia paga.' },
+  ]},
+  { id: 'B', title: 'Nosotros', intro: 'Hoy es la sección más pobre de la maqueta: solo tenemos la misión y los valores de la capacitación interna. Con historia, caras, números y reconocimientos podemos armar una página con una línea de tiempo, retratos, cifras grandes y citas. Mandanos todo lo que tengan, aunque sea poco: elegimos juntos qué se publica.', items: [
+    { p: 'nec', q: '¿Cómo empezó Paul Roger?',
+      d: 'Año de apertura, quiénes lo fundaron, una anécdota del arranque y de dónde viene el nombre «Paul Roger».',
+      w: 'Es la base de la historia. Hoy tenemos una frase general («un grupo de amigos y empresarios…») y queremos que suene a ustedes.' },
+    { p: 'nec', q: 'El producto y su origen: ¿de dónde sale lo que sirven?',
+      d: '<ul><li>La carne: proveedor o campo propio, raza, maduración, tipo de corte</li><li>Leña o carbón de la parrilla</li><li>Pescados del sushi: de dónde y cada cuánto llegan</li><li>Chocolate belga y pistachos de Mendoza: productor o marca</li></ul>',
+      w: 'La idea de la historia es «dos amigos, el campo y la buena comida». Si hay un campo o un proveedor de confianza, es el mejor contenido de la sección.' },
+    { p: 'sum', q: 'Años de experiencia y cifras de la casa',
+      d: 'Solo las que quieran hacer públicas. Por ejemplo: años desde la apertura, años de oficio del equipo, cuántas personas trabajan, cuántos eventos hicieron, cubiertos por mes, kilos de carne por semana. De vinos ya sabemos que son más de 90 etiquetas.',
+      w: 'Con 3 o 4 números grandes armamos una franja de cifras que da confianza de un vistazo.' },
+    { p: 'sum', q: 'Premios, certificaciones y reconocimientos',
+      d: '<ul><li>Notas en medios: diarios, revistas, radio, TV, blogs o cuentas gastronómicas</li><li>Menciones en guías o sitios (Guía Oleo, TripAdvisor, etc.)</li><li>Certificaciones: manipulación de alimentos, cocina sin TACC habilitada, cursos del equipo</li><li>Concursos de coctelería o de parrilla</li><li>La capacitación con Consultoría Mentor, si quieren mencionarla</li></ul>',
+      w: 'Lo que otros dicen de Paul Roger pesa más que lo que dice la marca de sí misma.', s: 'Un link o una captura de cada uno.' },
+    { p: 'sum', q: 'Reseñas públicas: ¿dónde los califican y cuáles son sus favoritas?',
+      d: 'El link a su ficha de Google (puntaje y cantidad de reseñas) y de cualquier otro sitio, y 3 a 5 reseñas que los representen.',
+      w: 'No vamos a poner un carrusel de reseñas. Usamos una o dos frases destacadas, con el nombre de pila y la fuente, y el puntaje de Google.' },
+    { p: 'sum', q: 'Los dueños: ¿quieren aparecer?',
+      d: 'Si es que sí: nombre, rol, dos o tres líneas sobre cada uno y una foto. Si prefieren no aparecer, podemos firmar la historia como «los fundadores».',
+      w: 'Una cara y un nombre hacen que la historia se crea.' },
+    { p: 'sum', q: 'El equipo clave',
+      d: 'Jefe de cocina, parrillero, sushiman, bartender y encargado de vinos: nombre, dónde trabajaron antes, años de oficio y una foto trabajando.',
+      w: 'Nos permite presentar «las manos detrás de cada servicio» y reforzar la carta.' },
+    { p: 'sum', q: 'Una frase de los dueños que resuma la casa',
+      d: 'Puede ser algo que digan siempre. Si no se les ocurre, la redactamos nosotros y ustedes la aprueban.',
+      w: 'Cierra la página con una cita firmada.' },
+  ]},
+  { id: 'C', title: 'La Casa: salón, barra y música', intro: 'La página que muestra el lugar por dentro. La música en vivo hoy no aparece en ningún lado y es de lo más atractivo que tienen.', items: [
+    { p: 'nec', q: 'Capacidad del salón',
+      d: 'Cuántas personas sentadas entran en el salón, en la barra y en el salón privado. ¿Hay vereda o terraza?',
+      w: 'Aparece en La Casa y ordena el formulario de reservas.' },
+    { p: 'nec', q: 'Música en vivo: ¿cómo funciona?',
+      d: '<ul><li>Qué días y en qué horario</li><li>Qué géneros o formatos (banda, solista, DJ del local)</li><li>Músicos que tocan seguido, con su Instagram</li><li>Si se cobra entrada o un adicional</li><li>Las fechas del próximo mes</li><li>Quién se va a encargar de mantener la agenda al día</li></ul>',
+      w: 'Arma la agenda de próximas fechas. Hoy la maqueta muestra fechas de ejemplo.' },
+    { p: 'nec', q: 'Stand Flowers: ¿es de Paul Roger o de un socio? ¿Le venden a alguien que no viene a comer?',
+      w: 'Si las flores se venden sueltas, eso es una tienda online y se cotiza aparte. Si son para quien reserva, entran en el plan actual.' },
+    { p: 'sum', q: 'La barra y el cocktail de la casa',
+      d: 'Nombre del bartender, la historia del cocktail «Paul Roger» y cualquier detalle propio de la barra (el hielo grabado con el logo, por ejemplo).',
+      w: 'Es el «& Cocktail» de la marca: merece un texto propio.' },
+    { p: 'sum', q: 'Turno mañana y cafetería: ¿desde qué hora y se reserva?',
+      w: 'La carta tiene croissants, bagels y cafetería, pero no sabemos si es un servicio que quieran destacar.' },
+  ]},
+  { id: 'D', title: 'Carta', intro: 'La carta la pasamos a mano desde las fotos de la carta impresa, con los precios de septiembre. Hay datos cortados en las fotos que no pudimos leer.', items: [
+    { p: 'nec', q: 'La carta en archivo editable',
+      d: 'El Word, Excel o el archivo que usa la imprenta. Si lo tienen, nos ahorra el punto D2 y evita errores de tipeo.',
+      s: 'Por mail o Drive.' },
+    { p: 'nec', q: 'Si no hay archivo: confirmar estos datos que salieron cortados en las fotos',
+      d: '<ul><li>Whiskies: la foto está cortada al pie. ¿Hay más etiquetas? Y el bourbon de Fort Worth, Texas: nombre exacto y precio (se lee «$12…»)</li><li>Negroni de la casa: ¿$16.000? y la descripción completa</li><li>Vermouth: la carta de barra dice $10.000 y la de cocina dice «Martini Rosso» $12.000. ¿Son dos tragos distintos?</li><li>Demencial Pinot Noir: ¿$35.000?</li><li>Gran Mascota y La Mascota Cabernet Sauvignon: nombre exacto y precio</li><li>Salentein Rosé: ¿$36.000? · Trumpeter Brut Nature: ¿$30.000?</li><li>Tintos y espumosos: las fotos están cortadas al pie. ¿Faltan etiquetas?</li></ul>',
+      w: 'Un precio mal puesto en la web es un problema en la mesa.' },
+    { p: 'nec', q: 'Menú ejecutivo: días, horario, precio y qué incluye',
+      d: '¿Entrada, principal, postre, bebida? ¿Cambia todos los días? Si cambia, ¿quién lo actualizaría?',
+      w: 'Tiene una franja propia arriba de la carta y un formulario de reserva propio. Hoy está todo como [FALTA].' },
+    { p: 'nec', q: 'Opciones sin TACC, vegetarianas y veganas. ¿Hay menú para chicos?',
+      w: 'Es de las preguntas que más se hacen antes de reservar. Si la carta lo marca, se ahorran mensajes.' },
+    { p: 'nec', q: 'Platos que se encargan con anticipación',
+      d: 'El cochinillo dice «con reserva»: ¿con cuántos días u horas? ¿Hay otros platos así?',
+      w: 'Lo sumamos a la reserva para que el cliente lo encargue al reservar.' },
+    { p: 'nec', q: 'Servicio de mesa y medios de pago',
+      d: '¿Sigue en $3.500 por persona? ¿Qué medios de pago aceptan (efectivo, tarjetas, transferencia, QR)?',
+      w: 'Se aclara en la carta y en la confirmación de la reserva.' },
+    { p: 'sum', q: 'Los platos insignia: de 3 a 5 que los definan',
+      d: 'Los más pedidos o los que ustedes más recomiendan.',
+      w: 'Los destacamos en la portada y en la carta.' },
+    { p: 'sum', q: '¿Cada cuánto cambian los precios y quién los actualizaría?',
+      w: 'Nos ayuda a definir cómo va a ser el panel para editar la carta.' },
+  ]},
+  { id: 'E', title: 'Eventos', intro: 'La propuesta de servicios y eventos que nos pasaron ya está volcada en la web. Faltan los números y las condiciones, que son lo que la gente pregunta primero.', items: [
+    { p: 'nec', q: 'Capacidad del espacio completo para un evento privado',
+      d: 'Cuántas personas sentadas y cuántas de pie (formato cocktail).',
+      w: 'Va en el selector de espacios de la página de Eventos, junto al salón privado para 16.' },
+    { p: 'nec', q: 'Precio por persona de cada menú de evento (aunque sea «desde»)',
+      d: 'Menú establecido de cumpleaños, menú personalizado, formal / cocktail e islas gastronómicas. ¿Incluyen bebida?',
+      w: 'Sin un precio orientativo, las consultas llegan sin filtro. Con un «desde», llegan las que van en serio.' },
+    { p: 'nec', q: 'DJ e islas gastronómicas: ¿propios o tercerizados? ¿Cuánto cuestan?',
+      w: 'Figuran como adicionales en la página de Eventos.' },
+    { p: 'nec', q: 'Condiciones para reservar un evento',
+      d: 'Mínimo de invitados, con cuánta anticipación hay que reservar, si piden seña (qué porcentaje), política de cancelación y duración máxima.',
+      w: 'Van en la página y en el formulario de consulta.' },
+    { p: 'sum', q: 'Preguntas frecuentes: torta propia, descorche y decoración',
+      d: '¿Se puede traer torta? ¿Cobran descorche si traen vino? ¿Se puede traer decoración propia?',
+      w: 'Con estas respuestas armamos un bloque de preguntas frecuentes y les llegan menos mensajes.' },
+    { p: 'sum', q: 'Eventos que ya hicieron',
+      d: 'Fotos (sin invitados reconocibles o con su permiso), qué tipo de eventos fueron, y empresas que hayan hecho eventos y acepten aparecer.',
+      w: 'Mostrar eventos reales convence más que describirlos.' },
+  ]},
+  { id: 'F', title: 'Private Dining: el salón privado (VIP)', intro: 'Ya sabemos que el VIP y el salón privado son el mismo espacio, para 16 personas, con TV y aire acondicionado. Falta saber cómo se contrata.', items: [
+    { p: 'nec', q: '¿Cómo se cobra el salón privado?',
+      d: '¿Se alquila por hora, por evento o solo se paga lo que se consume? ¿Hay un mínimo de consumo?',
+      w: 'Es la primera pregunta de cualquiera que lo quiere reservar.' },
+    { p: 'nec', q: 'Reuniones de trabajo: días, horarios y equipamiento',
+      d: '¿Qué días y horarios está disponible para reuniones o coworking? ¿Tiene wifi, cable para conectar una notebook a la TV, proyector o pizarra?',
+      w: 'Es un uso que puede llenar el salón al mediodía, combinado con el menú ejecutivo.' },
+    { p: 'urg', q: 'Fotos del salón privado',
+      d: 'Vacío y puesto para una cena. Ver la lista de tomas al final.',
+      w: 'La página no tiene ninguna foto propia. Es el hueco más visible de la maqueta.', s: 'Archivos originales por Drive.' },
+  ]},
+  { id: 'G', title: 'Limousine', intro: 'Es un diferencial que casi nadie tiene y hoy no aparece en ningún lado. Como hay un solo vehículo, en la web siempre funciona como consulta, nunca como compra directa.', items: [
+    { p: 'nec', q: '¿La limusina es propia o de un tercero? ¿Qué modelo es y cuántos pasajeros lleva?' },
+    { p: 'nec', q: '¿Qué incluye el servicio?',
+      d: 'Ida, vuelta, recorrido, tiempo de espera, bebida a bordo. ¿Hasta qué zonas llega?' },
+    { p: 'nec', q: 'Precio orientativo o «desde»',
+      d: '¿O se bonifica a partir de cierto consumo?',
+      w: 'Aunque siga siendo «a consultar», un rango orienta al cliente y filtra consultas.' },
+    { p: 'nec', q: '¿Se puede contratar sola (para un casamiento, por ejemplo) o solo junto con una reserva? ¿Con cuánta anticipación?',
+      w: 'Define si va solo dentro de la reserva o también como servicio aparte.' },
+  ]},
+  { id: 'H', title: 'Flores, bombones y pistachos', intro: 'En la web se ofrecen al reservar, cuando la ocasión es un aniversario o un cumpleaños, y se pagan en la mesa. No hay pagos online.', items: [
+    { p: 'nec', q: 'Confirmar los precios vigentes',
+      d: 'Bombones belgas 6 / 12 / 20 unidades: $19.900 / $36.900 / $59.000 · Ramo pequeño / grande: $18.900 / $30.000 · Pistachos premium de altura: $29.000.',
+      w: 'Aparecen en el resumen de la reserva con el total.' },
+    { p: 'nec', q: '¿Con cuánta anticipación hay que pedirlos para que estén en la mesa?',
+      d: '¿Se puede elegir tipo o color de flor? ¿Incluyen una tarjeta con mensaje?',
+      w: 'Si hay tarjeta, sumamos un campo para el mensaje en el formulario: es un detalle que se agradece.' },
+    { p: 'sum', q: 'Sabores de los bombones y presentación de los pistachos',
+      w: 'Para describirlos bien en la card de cada producto.' },
+  ]},
+  { id: 'I', title: 'Fotos y videos', intro: 'Hoy la maqueta usa fotos de Instagram y WhatsApp mejoradas por nosotros. Sirven para mostrar la idea, pero en pantallas grandes pierden calidad.', items: [
+    { p: 'urg', q: 'El contacto del fotógrafo, o los archivos originales de las sesiones que ya hicieron',
+      w: 'Es la forma más rápida de subir la calidad de toda la web sin sacar fotos nuevas.', s: 'Drive o WeTransfer, con los archivos originales.' },
+    { p: 'nec', q: 'Las tomas que faltan (ver la lista al final de este documento)',
+      w: 'Se pueden producir junto con la persona que lleva las redes: las mismas fotos le sirven para Instagram.' },
+    { p: 'sum', q: 'Videos cortos del local: brasas, barra, música en vivo',
+      d: 'Aunque sean del celular, de 10 a 15 segundos, sin música editada encima.',
+      w: 'Un video corto de las brasas puede ser el fondo de la portada.' },
+  ]},
+  { id: 'J', title: 'Presencia en internet', intro: 'La web tiene que conectarse con lo que ya existe, para que Google la muestre cuando alguien busca dónde comer en Hudson.', items: [
+    { p: 'nec', q: 'Ficha de Google (Google Maps / Google Business): ¿existe? ¿Quién la administra?',
+      w: 'La vinculamos con la web. Es de donde más gente llega cuando busca un restaurante en la zona.' },
+    { p: 'nec', q: 'El WhatsApp 11 2300 5015: ¿sigue siendo el número oficial? ¿Quién lo atiende?',
+      w: 'La idea es que las reservas entren por la web, pero el número sigue siendo el de contacto.' },
+    { p: 'sum', q: 'Otras redes o sitios donde figuran',
+      d: 'Facebook, TikTok, TripAdvisor, Guía Oleo, apps de reservas, etc. El link de cada una.' },
+    { p: 'sum', q: 'Contacto de la persona que lleva las redes',
+      w: 'Para coordinar las fotos y que la web y el Instagram hablen igual.' },
+  ]},
+  { id: 'K', title: 'Números del día a día', intro: 'Esto no se publica. Nos sirve para armar bien el sistema de reservas y para medir después si la web está funcionando.', items: [
+    { p: 'sum', q: '¿Cuántas reservas reciben por día y por semana? ¿Cómo las anotan hoy (cuaderno, planilla, sistema)?' },
+    { p: 'sum', q: '¿Cuántas mesas reservadas no se presentan sin avisar, más o menos?' },
+    { p: 'sum', q: 'El mes pasado: ¿cuántas consultas de eventos recibieron y cuántas se concretaron?',
+      w: 'La diferencia entre esos dos números es lo que la web tiene que ayudar a recuperar.' },
+  ]},
+];
+
+const LABEL = { urg: 'Urgente', nec: 'Necesario', sum: 'Suma mucho' };
+const KEY = 'pr-pendientes-v1';
+let done = {};
+try { done = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { done = {}; }
+
+const root = document.getElementById('sections');
+let total = 0, urgent = 0;
+S.forEach(sec => {
+  const el = document.createElement('section');
+  el.className = 'block' + (sec.items.some(i => i.p === 'urg') ? ' has-urg' : '');
+  el.id = 'seccion-' + sec.id;
+  el.setAttribute('aria-labelledby', 'titulo-' + sec.id);
+  let html = `<div class="block-head"><span class="letter">${sec.id}</span><h2 id="titulo-${sec.id}">${sec.title}</h2><p class="block-intro">${sec.intro}</p></div><ol class="items" role="list">`;
+  sec.items.forEach((it, n) => {
+    const code = sec.id + (n + 1);
+    it.code = code; total++; if (it.p === 'urg') urgent++;
+    html += `<li class="item${done[code] ? ' done' : ''}" data-p="${it.p}" data-code="${code}"><label for="cb-${code}">
+      <input type="checkbox" id="cb-${code}" ${done[code] ? 'checked' : ''}>
+      <span class="code">${code}</span>
+      <span class="body">
+        <span class="q-row"><span class="q">${it.q}</span><span class="tag ${it.p}">${LABEL[it.p]}</span></span>
+        ${it.d ? `<span class="detail">${it.d}</span>` : ''}
+        ${it.w ? `<span class="why"><b>Para qué:</b> ${it.w}</span>` : ''}
+        ${it.s ? `<span class="send"><b>Cómo mandarlo:</b> ${it.s}</span>` : ''}
+      </span></label></li>`;
+  });
+  el.innerHTML = html + '</ol>';
+  root.appendChild(el);
+});
+document.getElementById('total-count').textContent = `${total} puntos · ${urgent} urgentes`;
+
+function update() {
+  const n = Object.values(done).filter(Boolean).length;
+  document.getElementById('progress-text').textContent = `${n} de ${total} listos`;
+  document.getElementById('fill').style.width = (total ? n / total * 100 : 0) + '%';
+}
+root.addEventListener('change', e => {
+  if (e.target.type !== 'checkbox') return;
+  const li = e.target.closest('li.item');
+  const code = li.dataset.code;
+  done[code] = e.target.checked;
+  li.classList.toggle('done', e.target.checked);
+  try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (err) {}
+  update();
+});
+update();
+
+const btnUrg = document.getElementById('btn-urg');
+btnUrg.addEventListener('click', () => {
+  const on = btnUrg.getAttribute('aria-pressed') !== 'true';
+  btnUrg.setAttribute('aria-pressed', String(on));
+  btnUrg.textContent = on ? 'Ver todos' : 'Ver solo urgentes';
+  document.body.classList.toggle('only-urg', on);
+});
+
+function plain(html) { const t = document.createElement('div'); t.innerHTML = html.replace(/<li>/g, '\n   - '); return t.textContent; }
+document.getElementById('btn-copy').addEventListener('click', () => {
+  const onlyUrg = document.body.classList.contains('only-urg');
+  let out = 'PAUL ROGER · PENDIENTES PARA LA WEB\n(Respuesta debajo de cada punto)\n';
+  S.forEach(sec => {
+    const items = sec.items.filter(i => (!onlyUrg || i.p === 'urg') && !done[i.code]);
+    if (!items.length) return;
+    out += `\n${sec.id} · ${sec.title.toUpperCase()}\n`;
+    items.forEach(i => { out += `\n${i.code}. ${i.q}${i.d ? '\n   ' + plain(i.d).trim() : ''}\n   → \n`; });
+  });
+  const msg = document.getElementById('copied');
+  const ok = () => { msg.textContent = 'Copiado. Pegalo en un mail o en WhatsApp y respondé debajo de cada punto.'; setTimeout(() => msg.textContent = '', 5000); };
+  try {
+    navigator.clipboard.writeText(out).then(ok, () => fallback(out));
+  } catch (e) { fallback(out); }
+  function fallback(text) {
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); ok(); } catch (err) { msg.textContent = 'No se pudo copiar automáticamente.'; }
+    ta.remove();
+  }
+});
+</script>

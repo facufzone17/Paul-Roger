@@ -1,0 +1,801 @@
+<title>Briefing Paul Roger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:      #faf6f0;
+    --paper-2:    #f2ece3;
+    --card:       #ffffff;
+    --ink:        #1d1d1b;
+    --ink-2:      #4a453e;
+    --muted:      #6f685e;
+    --line:       #ddd3c6;
+    --line-soft:  #e9e1d6;
+    --ember:      #c0201c;
+    --ember-bg:   #fbeceb;
+    --gold:       #8a7134;
+    --gold-bg:    #f6efdf;
+    --wine:       #4d160d;
+
+    --display: "Prata", "Times New Roman", serif;
+    --body:    "Lora", Georgia, serif;
+    --util:    "Montserrat", Arial, Helvetica, sans-serif;
+
+    --measure: 68ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:     #141312;
+      --paper-2:   #1b1a17;
+      --card:      #1f1e1b;
+      --ink:       #f2e9dd;
+      --ink-2:     #d3c8b9;
+      --muted:     #9b9286;
+      --line:      #35322c;
+      --line-soft: #2a2723;
+      --ember:     #f0564f;
+      --ember-bg:  #2a1614;
+      --gold:      #c2a463;
+      --gold-bg:   #262115;
+      --wine:      #e0b6ae;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:     #141312;
+    --paper-2:   #1b1a17;
+    --card:      #1f1e1b;
+    --ink:       #f2e9dd;
+    --ink-2:     #d3c8b9;
+    --muted:     #9b9286;
+    --line:      #35322c;
+    --line-soft: #2a2723;
+    --ember:     #f0564f;
+    --ember-bg:  #2a1614;
+    --gold:      #c2a463;
+    --gold-bg:   #262115;
+    --wine:      #e0b6ae;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.72;
+  }
+  ::selection{ background:var(--ember); color:#fff; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  .shell{ max-width:1220px; margin-inline:auto; padding:0 clamp(18px,4vw,44px) 90px; }
+
+  /* ---------- portada ---------- */
+  .cover{ padding:clamp(40px,7vw,78px) 0 clamp(34px,5vw,52px); border-bottom:3px double var(--line); }
+  .kicker{
+    font-family:var(--util); font-size:10.5px; font-weight:600;
+    letter-spacing:.3em; text-transform:uppercase; color:var(--ember);
+    margin-bottom:20px;
+  }
+  .cover h1{
+    font-family:var(--display); font-weight:400;
+    font-size:clamp(33px,5.6vw,58px); line-height:1.08; margin:0 0 18px;
+    max-width:17ch; text-wrap:balance; letter-spacing:.005em;
+  }
+  .cover .sub{ font-size:17px; color:var(--muted); max-width:60ch; margin:0 0 30px; }
+  .cover-meta{
+    display:flex; flex-wrap:wrap; gap:0;
+    border-top:1px solid var(--line); border-left:1px solid var(--line);
+    font-family:var(--util);
+  }
+  .cover-meta div{
+    flex:1 1 170px; padding:13px 16px;
+    border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .cover-meta dt{ font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  .cover-meta dd{ margin:4px 0 0; font-size:13.5px; font-weight:500; }
+
+  /* ---------- layout ---------- */
+  .cols{ display:grid; grid-template-columns:1fr; gap:0; }
+  @media (min-width:1080px){
+    .cols{ grid-template-columns:210px minmax(0,1fr); gap:56px; align-items:start; }
+    .toc{ position:sticky; top:26px; }
+  }
+  .toc{ padding-top:40px; }
+  .toc h2{
+    font-family:var(--util); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .toc ol{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px; }
+  .toc a{
+    display:flex; gap:9px; font-family:var(--util); font-size:12px; line-height:1.45;
+    color:var(--muted); text-decoration:none; padding:5px 0;
+    border-bottom:1px solid transparent;
+  }
+  .toc a:hover{ color:var(--ember); }
+  .toc a b{ color:var(--gold); font-weight:600; font-variant-numeric:tabular-nums; min-width:15px; }
+  @media (max-width:1079px){
+    .toc{ padding:26px 0 0; }
+    .toc ol{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:0 22px; }
+  }
+
+  /* ---------- secciones ---------- */
+  .sec{ padding-top:54px; }
+  .sec > * { max-width:var(--measure); }
+  .sec > .wide, .sec > figure, .sec > .tablewrap{ max-width:none; }
+
+  .sec-num{
+    font-family:var(--util); font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; display:flex; align-items:center; gap:12px; margin-bottom:12px;
+  }
+  .sec-num::after{ content:""; height:1px; width:52px; background:var(--gold); opacity:.45; }
+
+  .sec h2{
+    font-family:var(--display); font-weight:400; font-size:clamp(24px,3.4vw,33px);
+    line-height:1.2; margin:0 0 18px; text-wrap:balance;
+  }
+  .sec h3{
+    font-family:var(--util); font-weight:600; font-size:13px; letter-spacing:.1em; text-transform:uppercase;
+    margin:34px 0 12px; color:var(--ink);
+  }
+  .sec h4{
+    font-family:var(--body); font-weight:600; font-size:16.5px; margin:24px 0 8px; color:var(--ink);
+  }
+  p{ margin:0 0 15px; }
+  .sec p, .sec li{ color:var(--ink-2); }
+  strong{ color:var(--ink); font-weight:600; }
+  em.q{ font-style:italic; color:var(--ink); }
+
+  ul,ol.list{ margin:0 0 16px; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:9px; }
+  ul li{ position:relative; padding-left:20px; }
+  ul li::before{ content:""; position:absolute; left:2px; top:12px; width:8px; height:1px; background:var(--gold); }
+  ol.list{ counter-reset:n; }
+  ol.list li{ position:relative; padding-left:30px; counter-increment:n; }
+  ol.list li::before{
+    content:counter(n,decimal-leading-zero);
+    position:absolute; left:0; top:1px;
+    font-family:var(--util); font-size:10.5px; font-weight:600; color:var(--gold);
+    letter-spacing:.06em;
+  }
+
+  /* ---------- tablas ---------- */
+  .tablewrap{ overflow-x:auto; margin:20px 0 22px; border:1px solid var(--line); background:var(--card); }
+  table{ border-collapse:collapse; width:100%; font-family:var(--util); font-size:13px; }
+  th,td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  thead th{
+    font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+    font-weight:600; background:var(--paper-2); border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  tbody tr:last-child td{ border-bottom:0; }
+  td.num, th.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td.name{ color:var(--ink); font-weight:500; }
+  .rec td{ background:var(--gold-bg); }
+  .price{ font-family:var(--display); font-size:16px; color:var(--ink); }
+
+  /* ---------- bloques ---------- */
+  .call{
+    border-left:2px solid var(--ember);
+    background:var(--ember-bg);
+    padding:18px 22px; margin:22px 0;
+  }
+  .call.gold{ border-left-color:var(--gold); background:var(--gold-bg); }
+  .call .tag{
+    font-family:var(--util); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase;
+    font-weight:600; color:var(--ember); display:block; margin-bottom:7px;
+  }
+  .call.gold .tag{ color:var(--gold); }
+  .call p:last-child{ margin-bottom:0; }
+
+  .pull{
+    font-family:var(--display); font-size:clamp(18px,2.4vw,23px); line-height:1.42;
+    color:var(--ink); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:24px 0; margin:28px 0;
+  }
+
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin:20px 0; max-width:none; }
+  .box{ border:1px solid var(--line); background:var(--card); padding:20px 21px; }
+  .box h4{ margin:0 0 7px; font-family:var(--util); font-size:12px; letter-spacing:.08em; text-transform:uppercase; font-weight:600; }
+  .box p{ margin:0; font-size:14px; }
+  .box .lbl{ font-family:var(--util); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:600; display:block; margin-bottom:9px; }
+
+  .ask{ border:1px solid var(--line); background:var(--card); padding:4px 22px; margin:20px 0; }
+  .ask dl{ margin:0; }
+  .ask dt{
+    font-family:var(--util); font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; padding-top:17px;
+  }
+  .ask dd{ margin:5px 0 17px; font-size:14.5px; color:var(--ink-2); }
+
+  .swatches{ display:flex; flex-wrap:wrap; gap:0; border:1px solid var(--line); margin:20px 0; max-width:none; }
+  .sw{ flex:1 1 96px; height:74px; display:flex; flex-direction:column; justify-content:flex-end; padding:8px 9px; font-family:var(--util); font-size:9px; letter-spacing:.08em; }
+  .sw b{ font-weight:600; text-transform:uppercase; font-size:8.5px; letter-spacing:.14em; }
+  .sw span{ opacity:.82; font-variant-numeric:tabular-nums; }
+
+  a.link{ color:var(--ember); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px; }
+  a.link:hover{ text-decoration-thickness:2px; }
+
+  .yes::before{ content:"Sí"; }
+  .chk{ color:var(--gold); font-weight:600; }
+  .no{ color:var(--muted); }
+
+  footer.doc{
+    margin-top:62px; padding-top:22px; border-top:3px double var(--line);
+    font-family:var(--util); font-size:11px; letter-spacing:.08em; color:var(--muted);
+    display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;
+  }
+</style>
+
+<div class="shell">
+
+  <header class="cover">
+    <div class="kicker">Documento interno de traspaso · Actualizado 13 de septiembre de 2026</div>
+    <h1>Paul Roger: todo el contexto del proyecto</h1>
+    <p class="sub">Análisis del negocio, identidad visual, propuesta de sitio, presupuesto y preguntas pendientes. Reunido para que cualquiera del equipo pueda entrar al proyecto sin leer el historial de conversación.</p>
+    <dl class="cover-meta">
+      <div><dt>Cliente</dt><dd>Paul Roger · Brasas &amp; Cocktail</dd></div>
+      <div><dt>Ubicación</dt><dd>Polo Design, Hudson</dd></div>
+      <div><dt>Estado</dt><dd>Anteproyecto listo · Sin cotizar formalmente</dd></div>
+      <div><dt>Próximo hito</dt><dd>Reunión con gerencia</dd></div>
+    </dl>
+  </header>
+
+  <div class="cols">
+
+    <nav class="toc">
+      <h2>Contenido</h2>
+      <ol>
+        <li><a href="#s1"><b>01</b> El cliente</a></li>
+        <li><a href="#s2"><b>02</b> Análisis del negocio</a></li>
+        <li><a href="#s3"><b>03</b> Datos de la carta</a></li>
+        <li><a href="#s4"><b>04</b> Identidad visual</a></li>
+        <li><a href="#s5"><b>05</b> Tipografía</a></li>
+        <li><a href="#s6"><b>06</b> Material fotográfico</a></li>
+        <li><a href="#s7"><b>07</b> Propuesta de sitio</a></li>
+        <li><a href="#s8"><b>08</b> Presupuesto</a></li>
+        <li><a href="#s9"><b>09</b> Qué justifica el plan 3</a></li>
+        <li><a href="#s10"><b>10</b> Complementos</a></li>
+        <li><a href="#s11"><b>11</b> Referencias visuales</a></li>
+        <li><a href="#s12"><b>12</b> El anteproyecto</a></li>
+        <li><a href="#s13"><b>13</b> Preguntas pendientes</a></li>
+        <li><a href="#s14"><b>14</b> Próximos pasos</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <!-- 01 -->
+      <section class="sec" id="s1">
+        <div class="sec-num">01 · Punto de partida</div>
+        <h2>El cliente</h2>
+        <p>Paul Roger es un restaurante premium en zona sur de Buenos Aires, dentro del paseo gastronómico de Polo Design, en Polo Hudson. Se define como <strong>"Brasas &amp; Cocktail"</strong>: parrilla contemporánea combinada con barra de autor.</p>
+
+        <div class="tablewrap">
+          <table>
+            <tbody>
+              <tr><td class="name">Dirección</td><td>Calle 47 6750, Polo Design, Polo Hudson · Guillermo E. Hudson, Buenos Aires</td></tr>
+              <tr><td class="name">Instagram</td><td>@paulroger.hudson · 6.353 seguidores · 34 publicaciones</td></tr>
+              <tr><td class="name">Reservas hoy</td><td>WhatsApp 11 2300 5015 (canal único para todo)</td></tr>
+              <tr><td class="name">Correo institucional</td><td>reservas@paulroger.com.ar</td></tr>
+              <tr><td class="name">Dominio</td><td>www.paulroger.com.ar — figura en la papelería del manual, <strong>sin sitio publicado</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Las ocho verticales del negocio</h3>
+        <p>No es un restaurante con una carta. Son ocho líneas de servicio conviviendo, confirmadas entre el Instagram, el manual de identidad y la carta impresa:</p>
+        <ul>
+          <li><strong>Brasas</strong> — parrilla, eje del claim de marca</li>
+          <li><strong>Sushi</strong> — barra fría con rolls de autor y lajas para grupos</li>
+          <li><strong>Coctelería</strong> — clásicos, tragos de autor y más de 90 etiquetas de vino</li>
+          <li><strong>Salón y VIP</strong> — highlights propios en Instagram</li>
+          <li><strong>Eventos y cumpleaños</strong> — highlights propios</li>
+          <li><strong>Menú ejecutivo</strong> — mediodía, con pieza gráfica propia en el manual</li>
+          <li><strong>Limousine</strong> — vehículo branded, aparece en publicaciones</li>
+          <li><strong>Stand Flowers</strong> — exhibidor de flores en el local, highlight propio</li>
+        </ul>
+        <p>Súmese <strong>música en vivo</strong> (batería, luces, escenario en varias publicaciones) y <strong>turno mañana</strong> (croissants, bagels y cafetería completa en la carta).</p>
+
+        <h3>Documentación recibida del cliente</h3>
+        <ul>
+          <li><strong>Manual de Identidad Visual</strong> (42 páginas) — logos, paleta, tipografías, fotografía, papelería, merchandising, vestimenta</li>
+          <li><strong>Capacitación Nº 1: Cultura y ADN</strong>, de Consultoría Mentor — misión, visión, valores y el recorrido del cliente</li>
+          <li><strong>Fotos de la carta completa</strong> con precios actualizados a septiembre de 2026</li>
+        </ul>
+      </section>
+
+      <!-- 02 -->
+      <section class="sec" id="s2">
+        <div class="sec-num">02 · Lectura estratégica</div>
+        <h2>Qué vende Paul Roger en realidad</h2>
+
+        <p>La portada de la carta impresa no arranca con platos. Arranca con esto:</p>
+
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th colspan="2">"Bienvenidos a casa — Conocé nuestras experiencias"</th></tr></thead>
+            <tbody>
+              <tr><td class="name">Bombones belgas · 6 / 12 / 20 unidades</td><td class="num price">$19.900 · $36.900 · $59.000</td></tr>
+              <tr><td class="name">Ramo floral pequeño / grande</td><td class="num price">$18.900 · $30.000</td></tr>
+              <tr><td class="name">Pistachos premium de altura</td><td class="num price">$29.000</td></tr>
+              <tr><td class="name">Salón privado y servicio de limousine</td><td class="num price">A consultar</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Flores, bombones, un salón privado y una limusina, antes que una sola entrada. <strong>Paul Roger no vende comida: vende ocasiones.</strong> Aniversarios, cumpleaños, pedidas de mano, celebraciones de empresa.</p>
+
+        <div class="call">
+          <span class="tag">El problema central</span>
+          <p>Todo eso está impreso en una carta. Una carta se lee <strong>sentado en la mesa</strong>. Es decir: el cliente se entera de los productos de mayor margen <em>después</em> de haber decidido todo. El que reserva desde afuera nunca supo que existían.</p>
+        </div>
+
+        <h3>El dolor operativo</h3>
+        <p>Un único número de WhatsApp recibe todo: una mesa para dos, un cumpleaños de cuarenta personas, un pedido de limusina y una consulta por el ejecutivo. Sin filtro, sin datos estructurados, sin registro, y ocupando a una persona del equipo.</p>
+
+        <h3>El activo narrativo que ya tienen</h3>
+        <p>En su capacitación interna de cultura, Paul Roger ya definió el <strong>"Recorrido del Cliente"</strong> en diez pasos:</p>
+        <p style="font-family:var(--util);font-size:12.5px;letter-spacing:.04em;color:var(--ink)">Reserva → Llegada → Recepción → Mesa → Pedido → Comida → Servicio → Pago → Despedida → Recuerdo</p>
+        <p>Y una frase que define su idea de lujo: <em class="q">"El verdadero lujo es cuando el cliente siente que todo fue pensado para él."</em></p>
+
+        <div class="pull">
+          Este es el eje de toda la venta. El discurso ante la gerencia es: <strong>ustedes ya diseñaron la experiencia desde el paso 2. El paso 1 —la Reserva— es el único que no está diseñado, y hoy sucede en un WhatsApp.</strong> La web no es un folleto: es el primer paso del recorrido del cliente.
+        </div>
+
+        <h3>Misión y visión declaradas</h3>
+        <p>Sirven para calibrar el tono de todos los textos del sitio. Misión: <em class="q">"Crear experiencias gastronómicas únicas y memorables, integrando excelencia, hospitalidad y calidez humana."</em> Visión: <em class="q">"Convertir a Paul Roger en un referente gastronómico reconocido por la calidad de su propuesta."</em> Valores: hospitalidad, excelencia, respeto, compromiso, trabajo en equipo y pasión. El tono de marca definido en el manual es <strong>"cordial, pero amigable y cercano"</strong>.</p>
+      </section>
+
+      <!-- 03 -->
+      <section class="sec" id="s3">
+        <div class="sec-num">03 · Datos duros</div>
+        <h2>Lo que dice la carta</h2>
+        <p>Precios de septiembre de 2026, en pesos. Sirven para dimensionar el ticket, argumentar el retorno de la inversión y cargar contenido real en las demos.</p>
+
+        <h3>Brasas y achuras</h3>
+        <div class="tablewrap">
+          <table>
+            <tbody>
+              <tr><td class="name">Ojo de bife 450 gr</td><td class="num">$39.000</td><td class="name">Entraña</td><td class="num">$38.000</td></tr>
+              <tr><td class="name">Bife de chorizo 450 gr</td><td class="num">$34.000</td><td class="name">Vacío</td><td class="num">$29.000</td></tr>
+              <tr><td class="name">Asado banderita</td><td class="num">$28.000</td><td class="name">Pollo de campo deshuesado</td><td class="num">$29.000</td></tr>
+              <tr><td class="name">Tabla de achuras</td><td class="num">$59.000</td><td class="name">Mollejas</td><td class="num">$29.000</td></tr>
+              <tr><td class="name">Cochinillo entero · 6 personas, con reserva</td><td class="num">$290.000</td><td class="name">Ribs americana</td><td class="num">$39.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Sushi</h3>
+        <div class="tablewrap">
+          <table>
+            <tbody>
+              <tr><td class="name">Roll Paul / Roger / Gusgus · 5 piezas</td><td class="num">$17.900</td><td class="name">Pistachio Roll · 5 piezas</td><td class="num">$20.500</td></tr>
+              <tr><td class="name">Geishas de salmón · 5 piezas</td><td class="num">$19.500</td><td class="name">Tiradito nikkei</td><td class="num">$21.500</td></tr>
+              <tr><td class="name">Poke Bowl Nella</td><td class="num">$30.000</td><td class="name">Sashimi de salmón · 6 piezas</td><td class="num">$24.500</td></tr>
+              <tr><td class="name">Laja 15 piezas</td><td class="num">$48.000</td><td class="name">Laja 30 / 45 piezas</td><td class="num">$95.000 · $139.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Barra</h3>
+        <div class="tablewrap">
+          <table>
+            <tbody>
+              <tr><td class="name">Cocktail de autor "Paul Roger"</td><td class="num">$18.000</td><td class="name">Wasabi Roger</td><td class="num">$16.000</td></tr>
+              <tr><td class="name">Negroni · Old Fashioned · Manhattan</td><td class="num">$14.000</td><td class="name">Clásicos (Gimlet, Margarita, Mojito)</td><td class="num">$12.000 – $13.000</td></tr>
+              <tr><td class="name">Aperitivos</td><td class="num">$10.000 – $12.000</td><td class="name">Cervezas</td><td class="num">$9.000 – $10.900</td></tr>
+              <tr><td class="name">Copa de vino tinto · gama media / alta</td><td class="num">$8.000 · $12.000</td><td class="name">Cafetería</td><td class="num">$5.000 – $6.900</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Vinos: el argumento de la carta digital</h3>
+        <p>Unas <strong>90 etiquetas</strong>, desde Nicasia Red Blend a <strong>$19.800</strong> hasta un Louis Roederer Cristal a <strong>$2.000.000</strong>. Todo impreso. En un contexto de precios que se mueven, cada ajuste implica reimprimir. Una carta digital administrable convierte eso en un gasto recurrente que desaparece: es el ahorro más fácil de demostrar.</p>
+
+        <h3>Ticket estimado</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Escenario</th><th>Composición</th><th class="num">Estimado</th></tr></thead>
+            <tbody>
+              <tr><td class="name">Pareja</td><td>Entrada compartida, dos fuertes, guarnición, dos tragos, dos postres, cubiertos</td><td class="num price">$160.000 – $190.000</td></tr>
+              <tr><td class="name">Mesa de 6 con cochinillo</td><td>Cochinillo entero, entradas, guarniciones, tragos, vinos, postres, cubiertos</td><td class="num price">$650.000 – $700.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>El <strong>servicio de mesa es de $3.500 por persona</strong>. El escenario de mesa grande es el que sostiene todo el argumento comercial del presupuesto.</p>
+
+        <div class="call gold">
+          <span class="tag">Dato aprovechable</span>
+          <p>El cochinillo se vende explícitamente <strong>"con reserva"</strong>. Ya tienen productos que exigen anticipación y hoy se coordinan a mano. Es el caso de uso perfecto para justificar un sistema de reservas con encargos anticipados.</p>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section class="sec" id="s4">
+        <div class="sec-num">04 · Marca</div>
+        <h2>Identidad visual</h2>
+        <p>El manual está bien hecho y hay que respetarlo: es el mejor argumento de profesionalismo frente a la gerencia. No hay que inventar paleta ni tipografías, ya están definidas.</p>
+
+        <h3>Paleta</h3>
+        <div class="swatches">
+          <div class="sw" style="background:#e52521;color:#fff"><b>Rojo</b><span>#e52521</span></div>
+          <div class="sw" style="background:#1d1d1b;color:#f9ecdc"><b>Negro</b><span>#1d1d1b</span></div>
+          <div class="sw" style="background:#3c3c3b;color:#f9ecdc"><b>Gris</b><span>#3c3c3b</span></div>
+          <div class="sw" style="background:#f9ecdc;color:#1d1d1b"><b>Crudo</b><span>#f9ecdc</span></div>
+          <div class="sw" style="background:#392513;color:#f9ecdc"><b>Tierra</b><span>#392513</span></div>
+          <div class="sw" style="background:#4d160d;color:#f9ecdc"><b>Tinto</b><span>#4d160d</span></div>
+          <div class="sw" style="background:#987d3b;color:#1d1d1b"><b>Oro</b><span>#987d3b</span></div>
+          <div class="sw" style="background:#c4c4c4;color:#1d1d1b"><b>Plata</b><span>#c4c4c4</span></div>
+        </div>
+        <p>Principal: rojo, negro, gris y blanco. Secundaria: crudo, tierra, tinto y dos grises. Especiales: oro y plata, con una restricción explícita del manual — <strong>no aplicar dorado ni plateado al logo</strong>, y usarlos solo como detalle puntual.</p>
+
+        <h3>Tratamiento fotográfico, según el manual</h3>
+        <p>El manual ya define exactamente cómo tratar las imágenes: <strong>alto contraste</strong>, con posibilidad de aplicar una transparencia o degradé en rojo <code>#e52521</code> o negro <code>#1d1d1b</code> por encima para ganar contraste con el logo. También admite escala de grises. Esto se traduce directo a overlays CSS y es una ventaja: el propio manual autoriza la estética oscura que necesitamos.</p>
+
+        <h3>Reglas de logo a respetar</h3>
+        <ul>
+          <li>Cuatro versiones: horizontal, vertical completa, vertical simplificada y circular</li>
+          <li>Versión negativa cuando el fondo supera el 60% de negro — es nuestro caso en toda la web</li>
+          <li>Prohibido expandir, condensar, inclinar, alterar proporciones, modificar el claim o aplicar degradados y efectos de línea</li>
+          <li>El claim correcto es <strong>"Brasas &amp; Cocktail"</strong>, no "Brasas y Tragos" ni "Vinos y Cocktail"</li>
+        </ul>
+      </section>
+
+      <!-- 05 -->
+      <section class="sec" id="s5">
+        <div class="sec-num">05 · Averiguado</div>
+        <h2>Tipografía: qué se puede usar</h2>
+        <p>El manual define <strong>IvyMode</strong> para titulares y <strong>Montserrat</strong> para textos. Montserrat es de Google Fonts, gratuita, sin problema. IvyMode sí tiene costo.</p>
+
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Camino</th><th>Costo</th><th>Riesgo</th></tr></thead>
+            <tbody>
+              <tr><td class="name">Adobe Fonts con una suscripción de Creative Cloud</td><td>Sin costo adicional si ya la tienen</td><td>Si dan de baja el Creative Cloud, la fuente <strong>deja de cargar</strong>. No se puede auto-hostear.</td></tr>
+              <tr><td class="name">Licencia web directa a Ivy Foundry</td><td>Pago anual según visitas mensuales</td><td>Ninguno técnico, pero es un gasto que la gerencia no quiere asumir.</td></tr>
+              <tr class="rec"><td class="name">Alternativa libre equivalente</td><td>Sin costo</td><td>Ninguno. Prata, Bodoni Moda o Marcellus: serif de alto contraste, mismo carácter.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>IvyMode está disponible en <a class="link" href="https://fonts.adobe.com/fonts/ivymode">Adobe Fonts</a>, y esa licencia <strong>sí habilita uso web</strong> mediante un Web Project. Como el manual lo hizo un diseñador profesional, es probable que tenga Creative Cloud activo. Hay que preguntarlo.</p>
+
+        <div class="call">
+          <span class="tag">Hallazgo a levantar en la reunión</span>
+          <p>El logotipo real de Paul Roger que aparece en la carta <strong>no es IvyMode</strong>: es una tipografía script manuscrita. Y los textos de la carta son un sans geométrico. En la práctica ya se apartaron del manual. Ofrecer unificar el sistema tipográfico en la web y dejarlo documentado suma percepción de profesionalismo sin costarnos trabajo extra.</p>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section class="sec" id="s6">
+        <div class="sec-num">06 · Restricción</div>
+        <h2>No hay material fotográfico en alta</h2>
+        <p>Es una limitación real, pero no bloquea el proyecto. Tres salidas, que conviene combinar:</p>
+        <ol class="list">
+          <li><strong>Diseñar para que la foto no sea protagonista.</strong> Fondo negro, tipografía grande, texturas y degradés rojo y negro. Una foto mediocre tratada en oscuro con grano se lee como intencional; una foto mediocre a pantalla completa se lee como pobre.</li>
+          <li><strong>Reutilizar el material de Instagram.</strong> Hay piezas buenas: el fuego, el cartel de neón, el cubo de hielo grabado con el logo, el flan con sello de lacre, la limusina. Baja resolución, pero usables en bloques chicos o como video de fondo desenfocado.</li>
+          <li><strong>Coordinar con quien lleva las redes.</strong> Una amiga del equipo se ocupa de redes por separado y va a producir contenido igual. Pasarle una lista de tomas que necesitamos —fachada de noche, barra, VIP vacío, plato cenital, limusina— sirve a ambos y nos cuesta cero.</li>
+        </ol>
+        <div class="call gold">
+          <span class="tag">Dejar por escrito en la propuesta</span>
+          <p>"El sitio se entrega con el material disponible. Una producción fotográfica profesional se cotiza aparte." Nos cubre y deja abierta una venta futura.</p>
+        </div>
+      </section>
+
+      <!-- 07 -->
+      <section class="sec" id="s7">
+        <div class="sec-num">07 · Alcance</div>
+        <h2>Qué tipo de sitio corresponde</h2>
+        <p>No una web de restaurante genérica. Corresponde un <strong>sitio-experiencia con motor de reservas multi-servicio</strong>: cinemático, oscuro y editorial en la parte narrativa; rápido y quirúrgico en el flujo de reserva.</p>
+
+        <h3>Arquitectura</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Sección</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td class="name">Portada</td><td>Video de brasas en loop, logo, claim y un único llamado a la acción</td></tr>
+              <tr><td class="name">Experiencias</td><td>Brasas · Sushi · Barra · Salón privado · Limousine</td></tr>
+              <tr><td class="name">Carta</td><td>Navegable por categorías, nunca un PDF descargable</td></tr>
+              <tr><td class="name">Espacios</td><td>Salón, barra, VIP y salón privado, cada uno con su carácter</td></tr>
+              <tr><td class="name">Eventos</td><td>Cumpleaños, corporativos, privatización</td></tr>
+              <tr><td class="name">Limousine</td><td>Página propia: es un diferencial y hoy no tiene vidriera</td></tr>
+              <tr><td class="name">Agenda</td><td>Música en vivo — contenido que se renueva solo y alimenta las redes</td></tr>
+              <tr><td class="name">Reservar</td><td>El corazón del sitio</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>El motor de reservas: cuatro caminos, un solo embudo</h3>
+        <ol class="list">
+          <li><strong>Mesa</strong> — fecha, hora, comensales, sector (salón, barra o VIP) y ocasión</li>
+          <li><strong>Evento privado</strong> — tipo, cantidad, fecha tentativa y propuesta. Genera un <em>lead calificado</em>, no una conversación</li>
+          <li><strong>Limousine</strong> — origen, horario y pasajeros. Complemento de la reserva de mesa</li>
+          <li><strong>Menú ejecutivo</strong> — flujo corto, pensado para resolverse desde el celular al mediodía</li>
+        </ol>
+        <p>Cada camino termina en: correo de confirmación con la identidad de la marca, notificación al equipo con los datos estructurados y, opcionalmente, derivación a WhatsApp con el mensaje ya pre-armado. El cliente siente que todo fue pensado para él; el salón recibe información ordenada.</p>
+      </section>
+
+      <!-- 08 -->
+      <section class="sec" id="s8">
+        <div class="sec-num">08 · Comercial</div>
+        <h2>Presupuesto</h2>
+        <div class="call">
+          <span class="tag">Contexto del cliente</span>
+          <p>La gerencia manifestó tener <strong>gastos complicados</strong> y es probable que espere un número cercano a los <strong>USD 500</strong>. Nuestro servicio vale más que eso. La estrategia no es competir contra ese número: es presentar tres opciones para que la decisión sea <em>qué alcance</em>, no <em>sí o no</em>.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Presencia</th>
+                <th>Experiencia · recomendado</th>
+                <th>Ecosistema</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="rec">
+                <td class="name">Precio</td>
+                <td class="price">USD 420</td>
+                <td class="price">USD 750</td>
+                <td class="price">USD 1.350</td>
+              </tr>
+              <tr><td class="name">Plazo de entrega</td><td>2 semanas</td><td>3 a 4 semanas</td><td>6 a 7 semanas</td></tr>
+              <tr><td class="name">Formato</td><td>One-page premium</td><td>Sitio multi-sección</td><td>Sitio + panel de gestión</td></tr>
+              <tr><td class="name">Animaciones</td><td>Básicas: fades y scroll reveal</td><td><span class="chk">Cinemáticas completas</span></td><td><span class="chk">Cinemáticas completas</span></td></tr>
+              <tr><td class="name">Carta digital</td><td>Estática, una categoría</td><td><span class="chk">Completa por categorías + QR</span></td><td><span class="chk">Completa + autoadministrable</span></td></tr>
+              <tr><td class="name">Reservas</td><td>Formulario a WhatsApp pre-armado</td><td><span class="chk">Multi-servicio + correo automático</span></td><td><span class="chk">Multi-servicio + gestión con estados</span></td></tr>
+              <tr><td class="name">Eventos y limousine</td><td>Mención</td><td><span class="chk">Sección propia + formulario</span></td><td><span class="chk">Sección + cotizador</span></td></tr>
+              <tr><td class="name">Adaptación a celular</td><td><span class="chk">Sí</span></td><td><span class="chk">Sí</span></td><td><span class="chk">Sí</span></td></tr>
+              <tr><td class="name">Posicionamiento</td><td>Básico</td><td><span class="chk">SEO local + Google Business</span></td><td><span class="chk">Completo</span></td></tr>
+              <tr><td class="name">Soporte incluido</td><td>1 mes</td><td>3 meses</td><td>6 meses</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Costos recurrentes, aparte</h3>
+        <p>Hosting, dominio y mantenimiento: <strong>USD 15 a 25 por mes</strong>. Conviene ser transparente: el hosting real cuesta prácticamente nada; lo que se cobra es el mantenimiento y el soporte. Ofrecer descuento por pago anual adelantado.</p>
+
+        <h3>Condiciones</h3>
+        <ul>
+          <li><strong>Forma de pago:</strong> 50% al iniciar, 50% al publicar</li>
+          <li><strong>Moneda:</strong> precio en dólares, pago en pesos al cambio del día</li>
+          <li><strong>Validez de la cotización:</strong> 15 días — es normal en este contexto y nos protege</li>
+        </ul>
+
+        <h3>Qué NO se incluye — venderlo después</h3>
+        <p>Listarlo en la propuesta como "Fase 2" muestra visión y abre la puerta a ingresos recurrentes, sin inflar el precio de entrada:</p>
+        <ul>
+          <li>Producción fotográfica y de video</li>
+          <li>Redacción completa de la carta</li>
+          <li>Gestión de redes sociales — <strong>ya la cubre otra persona, no pisar ese terreno</strong></li>
+          <li>Campañas de publicidad paga</li>
+          <li>Sistema de delivery o tienda de gift cards</li>
+        </ul>
+
+        <h3>El argumento de venta</h3>
+        <div class="pull">
+          "Presencia es tener presencia. Experiencia es que la web trabaje: que capte el evento, que ofrezca el ramo antes de que llegue, que le saque las reservas del WhatsApp. La diferencia entre los dos planes son <strong>USD 330</strong> — menos de lo que factura una sola mesa de seis un sábado."
+        </div>
+        <p>Y es verificable con su propia carta: una mesa de seis con cochinillo ronda los $650.000. Ese argumento vale más que cualquier descuento.</p>
+
+        <div class="call">
+          <span class="tag">Si presiona por precio</span>
+          <p><strong>Nunca bajar el precio del plan completo.</strong> Cambiar el alcance o los plazos. Alternativa concreta: ofrecer el plan Experiencia <strong>en dos etapas</strong> — Etapa 1 ahora por USD 450 con el sitio y el formulario simple, Etapa 2 a los 60 días por USD 350 con el motor multi-servicio. Se cobra lo mismo, entra en su flujo de caja y garantiza una segunda venta.</p>
+        </div>
+      </section>
+
+      <!-- 09 -->
+      <section class="sec" id="s9">
+        <div class="sec-num">09 · Diferenciación</div>
+        <h2>Qué justifica el plan más alto</h2>
+        <p>Lo que sostiene casi el doble de precio no puede ser "más páginas". Tiene que ser funcionalidad que <strong>ahorre dinero o genere dinero</strong>. Ordenadas por poder de venta:</p>
+
+        <div class="grid2">
+          <div class="box"><span class="lbl">01 · Genera ingresos</span><h4>Complementos en la reserva</h4><p>Al reservar se ofrece ramo, bombones, torta o limusina. El cliente compra la ocasión completa antes de llegar. Convierte la lista de "experiencias" de la carta en un canal de venta real.</p></div>
+          <div class="box"><span class="lbl">02 · Ahorra dinero</span><h4>Carta y precios autoadministrables</h4><p>Cambian un precio y se actualiza en la web y en el QR. Con 90 etiquetas de vino y precios en movimiento, dejan de reimprimir cartas.</p></div>
+          <div class="box"><span class="lbl">03 · Recupera ingresos</span><h4>Recordatorio automático 24 hs antes</h4><p>Baja las ausencias sin aviso. Una mesa que no se presenta un sábado es pérdida directa.</p></div>
+          <div class="box"><span class="lbl">04 · Ahorra tiempo</span><h4>Gestión de reservas con estados</h4><p>Pendiente, confirmada, cancelada. Cupos por turno y por sector. Saca la agenda del WhatsApp.</p></div>
+          <div class="box"><span class="lbl">05 · Alianza interna</span><h4>Base de clientes con cumpleaños</h4><p>Exportable. <strong>Le sirve directamente a quien lleva las redes</strong>: nosotros generamos la base, ella la usa. Los sumamos como aliados en vez de competir por el mismo presupuesto.</p></div>
+          <div class="box"><span class="lbl">06 · Califica</span><h4>Cotizador de eventos</h4><p>El cliente elige cantidad y tipo de menú y ve un estimado. Filtra curiosos: llegan consultas serias.</p></div>
+          <div class="box"><span class="lbl">07 · Convence</span><h4>Métricas para gerencia</h4><p>Reservas por semana, servicio más pedido, origen del tráfico. Una gerencia con problemas de gastos valora ver números.</p></div>
+        </div>
+
+        <div class="call">
+          <span class="tag">Descartado a propósito</span>
+          <p>Tienda de gift cards y delivery. Suenan bien pero agregan pasarela de pago, costos de transacción y discusiones que pueden trabar el cierre.</p>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section class="sec" id="s10">
+        <div class="sec-num">10 · Sin resolver</div>
+        <h2>Flores, bombones y limousine</h2>
+        <p>Define dónde van en el sitio, y no está confirmado. <strong>Hay que preguntarlo.</strong></p>
+
+        <h4>Lo que indica la evidencia</h4>
+        <p>Están impresos en la <strong>portada de la carta</strong>, que se lee sentado en la mesa. Y la línea de cierre —"consulta por nuestro salón privado y servicio de limousine"— está redactada para alguien que ya está adentro. Todo apunta a <strong>complemento de una ocasión</strong>, no a retail.</p>
+        <p>Pero hay una contradicción: "Stand Flowers" tiene <strong>highlight propio en Instagram</strong>, al mismo nivel que Vip o Eventos, y se ve un exhibidor refrigerado de flores cerca de la recepción. Un stand físico a la entrada, en un polo comercial con tráfico peatonal, puede vender al que pasa. Y el nombre suena a marca propia o de un socio.</p>
+        <p>Estimación: <strong>70% complemento puro, 30% híbrido</strong>. Es una apuesta, no un dato.</p>
+
+        <h4>Los tres no son la misma cosa</h4>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Producto</th><th>Naturaleza</th><th>Dónde va</th></tr></thead>
+            <tbody>
+              <tr><td class="name">Flores y bombones</td><td>Producto físico, precio fijo, con stock, regalable</td><td>Complemento de reserva y posible venta suelta</td></tr>
+              <tr><td class="name">Limousine</td><td>Servicio, precio a consultar, <strong>capacidad uno</strong>, atado a un horario</td><td>Nunca "agregar al carrito". Siempre consulta</td></tr>
+              <tr><td class="name">Pistachos premium</td><td>Es comida, no es un regalo</td><td>Carta, no complemento</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>La limusina es estructuralmente distinta: hay un solo vehículo. No puede venderse como un ítem más porque dos personas podrían reservarlo el mismo sábado. Por eso en el anteproyecto figura como <strong>solapa de consulta</strong> y no como complemento con precio.</p>
+
+        <div class="call">
+          <span class="tag">Impacto directo en el presupuesto</span>
+          <p>Si es <strong>complemento</strong>, se agrega a la reserva y <strong>se paga en la mesa con el resto de la cuenta</strong>: cero pasarela de pago, cero stock online, cero logística. Entra cómodo en el plan 2 o 3.</p>
+          <p>Si es <strong>venta suelta</strong>, hace falta cobro online, control de stock, política de entrega y facturación: <strong>eso ya no es una web, es un e-commerce</strong>, y es otro proyecto con otro precio. Si en la reunión dicen que también venden sueltas, la respuesta correcta es <em class="q">"buenísimo, eso es una segunda etapa"</em>, no "lo incluimos".</p>
+        </div>
+
+        <h4>Arquitectura que aguanta cualquier respuesta</h4>
+        <ol class="list">
+          <li><strong>El lugar principal es siempre la reserva.</strong> Nadie compra un ramo de $30.000 navegando sin rumbo; lo compra cuando acaba de escribir "Aniversario" en el formulario.</li>
+          <li><strong>Con disparador contextual.</strong> Los complementos deberían aparecer según la ocasión elegida: en "Cena" no aparecen, en "Aniversario" o "Cumpleaños" sí. Es la diferencia entre una web que vende y una que molesta, y en una demo se nota muchísimo.</li>
+          <li><strong>Sección propia solo si confirman venta suelta.</strong> Y nunca antes: una tienda con tres productos y sin logística resuelta baja la percepción premium de todo el sitio.</li>
+        </ol>
+      </section>
+
+      <!-- 11 -->
+      <section class="sec" id="s11">
+        <div class="sec-num">11 · Dirección</div>
+        <h2>Referencias visuales</h2>
+
+        <h3>Las gemelas de concepto</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Referencia</th><th>Por qué sirve</th><th>Qué tomar</th></tr></thead>
+            <tbody>
+              <tr><td class="name"><a class="link" href="https://www.amazonicorestaurant.com/madrid/">Amazónico</a><br><span class="no">Madrid</span></td><td>Mismo modelo de negocio: restaurante, barra de autor, música en vivo, club VIP y espacios privados</td><td>Su sección "Spaces": cada ambiente presentado como experiencia con carácter propio. Y menús separados por propuesta</td></tr>
+              <tr><td class="name"><a class="link" href="https://sexyfish.com/">Sexy Fish</a><br><span class="no">Londres</span></td><td>Sushi, robata, coctelería y noche, en negro y oro. Paleta casi idéntica a la del manual</td><td>Que "Entertainment" y "What's On" sean secciones propias. Paul Roger tiene música en vivo y no la muestra en ningún lado</td></tr>
+              <tr><td class="name"><a class="link" href="https://www.cotekoreansteakhouse.com/">COTE</a><br><span class="no">Nueva York</span></td><td>Steakhouse oscuro, fuego, carne y carta de vinos enorme</td><td>Cómo se ve la brasa en una web premium sin caer en lo rústico. Tono exacto para la sección Brasas</td></tr>
+              <tr class="rec"><td class="name"><a class="link" href="https://www.zumarestaurant.com/en/new-york">Zuma</a><br><span class="no">Internacional</span></td><td>Vive de tipografía, negro y silencio visual, casi sin fotos grandes</td><td><strong>La referencia clave dado que no tenemos material en alta.</strong> Demuestra que se puede ver carísimo sin una sola foto espectacular</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Las argentinas, para mostrar en la reunión</h3>
+        <div class="tablewrap">
+          <table>
+            <tbody>
+              <tr><td class="name"><a class="link" href="https://www.parrilladonjulio.com/">Don Julio</a></td><td>Una parrilla posicionada como marca de lujo global. Lo que hay que tomar es la sobriedad: no grita. <strong>Dato de cierre:</strong> sus reservas corren sobre Meitre, plataforma con abono mensual. Argumento: "Don Julio paga una plataforma todos los meses para hacer esto; nosotros te lo dejamos en tu propia web, sin abono".</td></tr>
+              <tr><td class="name"><a class="link" href="https://fogonasado.com/">Fogón Asado</a></td><td>Vende una experiencia con reserva obligatoria, no un menú. Directamente aplicable al cochinillo "con reserva" y al salón privado.</td></tr>
+              <tr><td class="name"><a class="link" href="https://www.fourseasons.com/buenosaires/dining/restaurants/elena/">Elena · Four Seasons</a></td><td>Parrilla dentro de un hotel cinco estrellas. Estándar de hotelería de lujo y una navegación ordenada entre reservas, privados y eventos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Anti-referencias</h3>
+        <p>Conviene llevar esto por escrito: si la gerencia busca "webs de restaurantes" va a encontrar justo esto y lo va a pedir.</p>
+        <ul>
+          <li><strong>Carta en PDF</strong> que hay que descargar y ampliar en el celular — el error más común y el más caro en clientes perdidos</li>
+          <li>Carrusel con flechas en la portada</li>
+          <li>Fotos de banco de imágenes — mejor una foto propia regular tratada en oscuro que una ajena impecable</li>
+          <li>Fondo blanco: es un local de noche</li>
+          <li>"Bienvenidos a nuestro restaurante" como título, teniendo <strong>"Bienvenidos a casa"</strong> escrito en su propia carta</li>
+          <li>Carrusel de reseñas de Google al pie</li>
+          <li>Botón flotante de WhatsApp como único sistema de reserva — es exactamente el problema que venimos a resolver</li>
+        </ul>
+
+        <div class="call gold">
+          <span class="tag">Resumen de dirección</span>
+          <p><strong>Zuma en estructura, Amazónico en concepto, COTE en temperatura, con la paleta del manual de ellos.</strong> Para la reunión alcanza con llevar Amazónico y Don Julio: una muestra hacia dónde vamos, la otra demuestra que ese nivel ya existe en Argentina.</p>
+        </div>
+      </section>
+
+      <!-- 12 -->
+      <section class="sec" id="s12">
+        <div class="sec-num">12 · Entregable</div>
+        <h2>El anteproyecto</h2>
+        <p>Hay una maqueta de la portada publicada y navegable, con la paleta y el espíritu del manual:</p>
+        <p><a class="link" href="https://claude.ai/code/artifact/357e676c-e123-4258-88e8-04b8c4220a63">claude.ai/code/artifact/357e676c-e123-4258-88e8-04b8c4220a63</a><br><span class="no" style="font-family:var(--util);font-size:12px">Archivo local: anteproyecto-paul-roger.html</span></p>
+
+        <h4>Qué contiene</h4>
+        <ul>
+          <li><strong>Portada</strong> con brasas animadas en canvas, logotipo en script y una sola frase: "Bienvenidos a casa"</li>
+          <li><strong>Cinco experiencias</strong> en grilla de hairlines</li>
+          <li><strong>Motor de reservas funcional</strong>: cuatro solapas, complementos seleccionables y resumen que recalcula el total</li>
+          <li><strong>Carta navegable</strong> con platos y precios reales</li>
+          <li><strong>Espacios</strong>, con el argumento de la vidriera escrito</li>
+          <li><strong>Agenda de música en vivo</strong>, marcada como contenido de ejemplo</li>
+          <li><strong>"Por qué se ve así"</strong>: cuatro notas que justifican cada decisión contra su propio manual, más los swatches de la paleta</li>
+        </ul>
+
+        <div class="call">
+          <span class="tag">Cómo presentarlo</span>
+          <p><strong>Tocar los complementos con el mouse delante de la gerencia.</strong> Seleccionar el ramo, seleccionar los bombones, que vea el monto subir. Ese es el momento en que se entiende qué significa vender la ocasión completa, y es el que justifica el salto de plan.</p>
+        </div>
+
+        <h4>Decisiones técnicas del anteproyecto</h4>
+        <ul>
+          <li>Está marcado como anteproyecto en una barra fija y <strong>los formularios no envían ni guardan datos</strong></li>
+          <li>La tipografía es <strong>Prata</strong>, la alternativa libre a IvyMode, aclarado al pie. Si confirman Creative Cloud, se cambia en minutos</li>
+          <li><strong>No hay ni una sola foto</strong>, a propósito: demuestra que se puede ver bien sin material en alta, y deja ver cuánto va a crecer cuando lo haya</li>
+        </ul>
+
+        <h4>Pendiente de sumar</h4>
+        <p>El <strong>disparador contextual por ocasión</strong>: que los complementos aparezcan al elegir "Aniversario" y desaparezcan en "Cena". Funciona en cualquiera de los escenarios de la sección 10 y en la demo se ve muy bien.</p>
+      </section>
+
+      <!-- 13 -->
+      <section class="sec" id="s13">
+        <div class="sec-num">13 · Pendiente</div>
+        <h2>Qué hay que preguntar</h2>
+        <p>Nada de esto se puede averiguar por fuera: no tienen sitio y los precios de eventos y limusina no están publicados en ningún lado. Llevar el cuestionario escrito posiciona distinto.</p>
+
+        <div class="ask">
+          <dl>
+            <dt>Reservas</dt>
+            <dd>¿Cuántas por día y por semana? ¿Quién las atiende y en qué horario? ¿Cuánto tiempo le lleva por día? ¿Cuántas ausencias sin aviso tienen? ¿Usan algún sistema o es agenda de papel?</dd>
+
+            <dt>Salón privado y VIP</dt>
+            <dd>¿Capacidad? ¿Se cobra alquiler del salón o solo consumo? ¿Hay mínimo de consumo? ¿Cuántos eventos por mes? ¿Tienen menús cerrados por persona con precio armado?</dd>
+
+            <dt>Limousine</dt>
+            <dd>¿Es propia o tercerizada? ¿Qué incluye: ida y vuelta, recorrido, tiempo? ¿Precio, o va bonificada según consumo? ¿Cuántos servicios por mes? ¿Se puede contratar sola, para un casamiento por ejemplo, o siempre va con una reserva?</dd>
+
+            <dt>Flores y bombones</dt>
+            <dd>¿Los puede comprar alguien que no viene a comer, o son para quien ya está en la mesa? ¿Stand Flowers es de ustedes o de un socio con stand adentro? ¿Hoy se pueden encargar con anticipación? ¿Cuántos venden por mes?</dd>
+
+            <dt>Música en vivo</dt>
+            <dd>¿Qué noches? ¿Hay grilla fija? Si la hay, es una sección del sitio y contenido recurrente para redes.</dd>
+
+            <dt>Menú ejecutivo</dt>
+            <dd>¿Qué días y en qué horario? ¿Precio fijo? ¿Qué incluye?</dd>
+
+            <dt>La pregunta comercial</dt>
+            <dd><strong>"¿Cuántos eventos privados cerraron el mes pasado, y cuántas consultas recibieron?"</strong> La diferencia entre esos dos números es exactamente el dinero que venimos a recuperar.</dd>
+          </dl>
+        </div>
+
+        <h3>Qué hay que pedirles para no frenarnos</h3>
+        <ul>
+          <li>Accesos al dominio paulroger.com.ar</li>
+          <li>Logos en vectorial (.ai o .svg), en sus cuatro versiones</li>
+          <li>Archivo de IvyMode y su licencia, o confirmación de si tienen Creative Cloud</li>
+          <li>Carta actualizada con precios, en texto editable</li>
+          <li>Fotos y videos en la mejor calidad disponible</li>
+          <li>Horarios reales por servicio</li>
+          <li>Capacidad del salón y del VIP</li>
+          <li><strong>Quién va a recibir y responder las reservas</strong> — define el módulo de notificaciones</li>
+        </ul>
+      </section>
+
+      <!-- 14 -->
+      <section class="sec" id="s14">
+        <div class="sec-num">14 · Acción</div>
+        <h2>Próximos pasos</h2>
+        <ol class="list">
+          <li><strong>Sumar el disparador contextual</strong> al anteproyecto antes de la reunión</li>
+          <li><strong>Llevar el cuestionario impreso</strong> y salir de la reunión con las respuestas de la sección 13</li>
+          <li><strong>Presentar los tres planes juntos</strong>, con el del medio marcado como recomendado. Nunca un precio suelto</li>
+          <li><strong>Abrir el anteproyecto en pantalla</strong> y operar el motor de reservas en vivo</li>
+          <li><strong>Coordinar con quien lleva las redes</strong>: pasarle la lista de tomas y posicionarla como aliada, no como competencia por el presupuesto</li>
+          <li><strong>No cerrar precio en la reunión</strong> si aparece alcance nuevo. Anotarlo, cotizarlo y mandarlo por escrito con validez de 15 días</li>
+        </ol>
+
+        <div class="call gold">
+          <span class="tag">Lo que no hay que perder de vista</span>
+          <p>El cliente ya escribió la mejor frase de su propio sitio y el mejor argumento de nuestra venta. La frase es <strong>"Bienvenidos a casa"</strong>. El argumento es que su recorrido del cliente empieza en la <strong>Reserva</strong>, y ese paso es el único que todavía no diseñó nadie.</p>
+        </div>
+      </section>
+
+      <footer class="doc">
+        <span>Paul Roger · Documento interno de traspaso</span>
+        <span>13 de septiembre de 2026</span>
+      </footer>
+
+    </main>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+--- hero @ 0s ---
+saved pr-hero-salon-desktop.jpg (1440, 2560, 3)
+	Tile 1/18
+	Tile 2/18
+	Tile 3/18
+	Tile 4/18
+	Tile 5/18
+	Tile 6/18
+	Tile 7/18
+	Tile 8/18
+	Tile 9/18
+	Tile 10/18
+	Tile 11/18
+	Tile 12/18
+	Tile 13/18
+	Tile 14/18
+	Tile 15/18
+	Tile 16/18
+	Tile 17/18
+	Tile 18/18
+saved pr-hero-salon-mobile.jpg (1920, 1080, 3)
+--- bife @ 397s ---
+saved pr-mosaico-brasas.jpg (1500, 1200, 3)
+--- sushi @ 397s ---
+saved pr-mosaico-sushi.jpg (1500, 1200, 3)
+--- barra @ 399s ---
+saved pr-mosaico-cocteleria.jpg (1500, 1200, 3)
+saved pr-casa-barra.jpg (1440, 2560, 3)
+--- vinos-etiquetas @ 410s ---
+saved pr-mosaico-vinos.jpg (1500, 1200, 3)
+--- limousine @ 411s ---
+	Tile 1/9
+	Tile 2/9
+	Tile 3/9
+	Tile 4/9
+	Tile 5/9
+	Tile 6/9
+	Tile 7/9
+	Tile 8/9
+	Tile 9/9
+saved pr-complemento-limousine.jpg (1500, 1200, 3)
+--- flores @ 576s ---
+saved pr-complemento-flores.jpg (1000, 800, 3)
+--- bombones @ 576s ---
+saved pr-complemento-chocolates.jpg (1000, 800, 3)
+--- fachada @ 578s ---
+saved pr-eventos-fachada.jpg (1440, 2560, 3)
+--- pared-vinos @ 589s ---
+saved pr-casa-vinos.jpg (1500, 1200, 3)
+--- salon @ 589s ---
+	Tile 1/20
+	Tile 2/20
+	Tile 3/20
+	Tile 4/20
+	Tile 5/20
+	Tile 6/20
+	Tile 7/20
+	Tile 8/20
+	Tile 9/20
+	Tile 10/20
+	Tile 11/20
+	Tile 12/20
+	Tile 13/20
+	Tile 14/20
+	Tile 15/20
+	Tile 16/20
+	Tile 17/20
+	Tile 18/20
+	Tile 19/20
+	Tile 20/20
+saved pr-casa-salon.jpg (1500, 1200, 3)
+--- cava @ 1161s ---
+saved pr-casa-cava.jpg (1000, 800, 3)
+--- sashimi @ 1164s ---
+saved pr-carta-sushi.jpg (1400, 1120, 3)
+--- servilleta @ 1166s ---
+saved pr-fondo-reservar.jpg (1400, 1120, 3)
+--- chorizo @ 1167s ---
+saved pr-card-bife-chorizo.jpg (1000, 800, 3)
+--- flan @ 1169s ---
+saved pr-card-flan.jpg (1000, 1000, 3)
+--- palillos @ 1171s ---
+saved pr-card-sushi-palillos.jpg (1000, 800, 3)
+--- pollo-cenital @ 1171s ---
+saved pr-card-pollo-espinaca.jpg (1000, 800, 3)
+--- espinaca @ 1173s ---
+saved pr-card-espinaca.jpg (1000, 800, 3)
+--- pollo @ 1174s ---
+	Tile 1/9
+	Tile 2/9
+	Tile 3/9
+	Tile 4/9
+	Tile 5/9
+	Tile 6/9
+	Tile 7/9
+	Tile 8/9
+	Tile 9/9
+saved pr-card-pollo.jpg (1000, 800, 3)
+--- DONE @ 1343s ---
+total 1343 s

@@ -1,0 +1,433 @@
+<title>Eventos Paul Roger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@300;400;500;600&display=swap">
+<style>
+  :root{
+    --paper:    #faf7f2;
+    --paper-2:  #f1ebe1;
+    --card:     #ffffff;
+    --ink:      #1d1d1b;
+    --ink-2:    #46413a;
+    --muted:    #736b60;
+    --faint:    #9c9388;
+    --line:     #ded4c6;
+    --line-2:   #c6b9a6;
+    --ember:    #c0201c;
+    --ember-bg: #fbeceb;
+    --gold:     #8a7134;
+    --gold-bg:  #f6efdf;
+    --warn:     #9a6b12;
+    --warn-bg:  #fbf1dc;
+
+    --display:"Prata","Times New Roman",serif;
+    --ui:"Montserrat",Arial,Helvetica,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#131211; --paper-2:#1a1917; --card:#1e1d1a;
+      --ink:#f4ebe0; --ink-2:#d4c9ba; --muted:#9d9488; --faint:#7c7467;
+      --line:#33302a; --line-2:#4a443b;
+      --ember:#ef564f; --ember-bg:#2b1715;
+      --gold:#c7a866; --gold-bg:#262115;
+      --warn:#e0b65c; --warn-bg:#2a2313;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131211; --paper-2:#1a1917; --card:#1e1d1a;
+    --ink:#f4ebe0; --ink-2:#d4c9ba; --muted:#9d9488; --faint:#7c7467;
+    --line:#33302a; --line-2:#4a443b;
+    --ember:#ef564f; --ember-bg:#2b1715;
+    --gold:#c7a866; --gold-bg:#262115;
+    --warn:#e0b65c; --warn-bg:#2a2313;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--ui); font-weight:300; font-size:14.5px; line-height:1.68;
+  }
+  ::selection{ background:var(--ember); color:#fff; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  .wrap{ max-width:1000px; margin-inline:auto; padding-inline:clamp(16px,4vw,40px); }
+  h1,h2,h3,h4{ font-family:var(--display); font-weight:400; margin:0; text-wrap:balance; }
+  p{ margin:0 0 13px; color:var(--ink-2); }
+  strong{ font-weight:600; color:var(--ink); }
+  code{
+    font-family:ui-monospace,"Courier New",monospace; font-size:.88em;
+    background:var(--paper-2); border:1px solid var(--line); padding:1px 5px; color:var(--ink);
+  }
+  .label{ font-size:9.5px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); }
+
+  /* ---------- head ---------- */
+  header.doc{ padding-block:clamp(34px,6vw,62px) 28px; border-bottom:3px double var(--line); }
+  header.doc h1{ font-size:clamp(28px,4.6vw,44px); line-height:1.12; margin:14px 0 14px; max-width:18ch; }
+  header.doc p{ max-width:62ch; font-size:15px; margin:0; }
+  .meta{
+    margin-top:26px; display:flex; flex-wrap:wrap; gap:0;
+    border-top:1px solid var(--line); border-left:1px solid var(--line);
+  }
+  .meta div{ flex:1 1 160px; padding:11px 14px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .meta dt{ font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); font-weight:600; }
+  .meta dd{ margin:3px 0 0; font-size:13px; font-weight:500; }
+
+  section{ padding-block:clamp(36px,5vw,58px); }
+  .sec-head{ margin-bottom:24px; max-width:66ch; }
+  .sec-head h2{ font-size:clamp(21px,3vw,29px); line-height:1.2; margin-top:10px; }
+  .prose{ max-width:66ch; }
+
+  /* ---------- escalera ---------- */
+  #escalones{ background:var(--paper-2); }
+  .steps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .step{
+    background:var(--card); border:1px solid var(--line); padding:22px 21px 24px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .step .n{
+    font-family:var(--display); font-size:13px; color:var(--gold);
+    border-bottom:1px solid var(--line); padding-bottom:9px; letter-spacing:.06em;
+  }
+  .step h3{ font-size:21px; }
+  .step .cap{
+    font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ember);
+  }
+  .step p{ margin:0; font-size:13.5px; }
+  .step .anchor{
+    margin-top:auto; padding-top:11px; border-top:1px solid var(--line);
+    font-size:11px; color:var(--muted);
+  }
+
+  /* ---------- módulos ---------- */
+  .mods{ display:flex; flex-direction:column; gap:14px; }
+  .mod{
+    border:1px dashed var(--line-2); background:var(--card);
+    padding:22px 24px 24px; position:relative;
+  }
+  .mod-num{
+    position:absolute; top:-11px; left:18px; background:var(--paper);
+    border:1px solid var(--ember); color:var(--ember);
+    font-size:11px; font-weight:600; line-height:19px; padding:0 9px;
+    font-variant-numeric:tabular-nums;
+  }
+  .mod-title{
+    font-family:var(--display); font-size:20px; margin:4px 0 4px;
+  }
+  .mod-kind{
+    font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); font-weight:600;
+    margin-bottom:12px;
+  }
+  .mod ul{ list-style:none; margin:0 0 4px; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .mod li{ font-size:13.5px; color:var(--ink-2); padding-left:18px; position:relative; }
+  .mod li::before{ content:""; position:absolute; left:0; top:10px; width:8px; height:1px; background:var(--gold); }
+  .behav{
+    margin-top:14px; border-left:2px solid var(--ember); background:var(--ember-bg);
+    padding:11px 15px; font-size:13px; color:var(--ink-2);
+  }
+  .behav b{ color:var(--ink); font-weight:600; }
+  .copy-src{
+    margin-top:10px; font-size:12px; color:var(--muted); font-style:italic;
+    border-top:1px solid var(--line); padding-top:10px;
+  }
+
+  .gap{
+    display:inline-flex; align-items:center; gap:5px;
+    background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn);
+    font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+    padding:2px 7px; white-space:nowrap;
+  }
+
+  /* ---------- tabla ---------- */
+  .tablewrap{ overflow-x:auto; border:1px solid var(--line); background:var(--card); margin:18px 0; }
+  table{ border-collapse:collapse; width:100%; font-size:13px; min-width:560px; }
+  th,td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th{ font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:600; background:var(--paper-2); white-space:nowrap; }
+  tbody tr:last-child td{ border-bottom:0; }
+  td:first-child{ font-weight:500; color:var(--ink); }
+
+  .note{ border-left:2px solid var(--gold); background:var(--gold-bg); padding:16px 20px; margin:20px 0; max-width:70ch; }
+  .note .label{ display:block; margin-bottom:6px; }
+  .note p:last-child{ margin-bottom:0; }
+
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+  .box{ border:1px solid var(--line); background:var(--card); padding:20px 21px; }
+  .box h4{ font-size:17px; margin-bottom:7px; }
+  .box p:last-child{ margin-bottom:0; }
+  .box ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  .box li{ font-size:13px; color:var(--ink-2); padding-left:17px; position:relative; }
+  .box li::before{ content:""; position:absolute; left:0; top:10px; width:8px; height:1px; background:var(--gold); }
+
+  ol.q{ counter-reset:q; list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; max-width:70ch; }
+  ol.q li{ counter-increment:q; position:relative; padding-left:30px; font-size:14px; color:var(--ink-2); }
+  ol.q li::before{
+    content:counter(q,decimal-leading-zero); position:absolute; left:0; top:0;
+    font-size:10.5px; font-weight:600; color:var(--gold);
+  }
+
+  footer.doc{
+    margin-top:44px; padding:20px 0 60px; border-top:3px double var(--line);
+    font-size:11px; letter-spacing:.06em; color:var(--faint);
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="doc">
+    <div class="label">Documento de estructura · Paul Roger</div>
+    <h1>Arquitectura de la página de Eventos</h1>
+    <p>Blueprint de <code>/eventos</code> antes de wireframear. Define módulos, contenido, comportamiento y de dónde sale cada texto. Construido sobre la <em>Propuesta de Servicios &amp; Eventos</em> que envió el cliente.</p>
+    <dl class="meta">
+      <div><dt>Página</dt><dd><code>/eventos</code></dd></div>
+      <div><dt>Módulos</dt><dd>8</dd></div>
+      <div><dt>Estado</dt><dd>Estructura definida · Faltan precios</dd></div>
+      <div><dt>Actualizado</dt><dd>VIP = Salón Privado, confirmado</dd></div>
+    </dl>
+  </header>
+
+  <section id="escalones">
+    <div class="sec-head">
+      <div class="label">El criterio que ordena la página</div>
+      <h2>Tres escalones, no tres sinónimos</h2>
+      <p class="prose">El documento del cliente confirma que el salón privado es de <strong>16 personas</strong> y que además existe la <strong>privatización del espacio completo</strong>. Son productos distintos, no formas de nombrar lo mismo. La página se organiza por <strong>tamaño del grupo y nivel de privacidad</strong>, que es como el cliente piensa su propio evento.</p>
+    </div>
+
+    <div class="steps">
+      <article class="step">
+        <div class="n">Escalón 1</div>
+        <h3>Mesa de festejo</h3>
+        <div class="cap">Dentro del salón general</div>
+        <p>Cumpleaños y celebraciones en una mesa del salón, con menú establecido o personalizado. Sin exclusividad.</p>
+        <div class="anchor">Ancla <code>#mesa</code> · Deriva al camino <strong>Mesa</strong> de la reserva, con ocasión precargada</div>
+      </article>
+
+      <article class="step">
+        <div class="n">Escalón 2</div>
+        <h3>Salón privado</h3>
+        <div class="cap">Hasta 16 personas</div>
+        <p>Espacio cerrado con TV, aire acondicionado y privacidad. Sirve para cenas íntimas y también para reuniones de trabajo.</p>
+        <p style="font-size:12.5px;color:var(--muted)"><strong>Es el mismo espacio que el cliente llama “VIP”</strong> puertas adentro y en Instagram. Confirmado por el cliente.</p>
+        <div class="anchor">Ancla <code>#privado</code> · Deriva al camino <strong>Evento</strong>, escalón preseleccionado</div>
+      </article>
+
+      <article class="step">
+        <div class="n">Escalón 3</div>
+        <h3>Exclusividad total</h3>
+        <div class="cap"><span class="gap">Capacidad a confirmar</span></div>
+        <p>Privatización del espacio completo. Máxima privacidad, ambientación a medida y planificación integral de la velada.</p>
+        <div class="anchor">Ancla <code>#exclusivo</code> · Deriva al camino <strong>Evento</strong>, escalón preseleccionado</div>
+      </article>
+    </div>
+
+    <div class="note">
+      <span class="label">Lo que esto resuelve</span>
+      <p>Cierra la discusión entre <em>Eventos</em>, <em>Private Dining</em> y <em>VIP</em>. No eran cuatro puertas a la misma habitación: son <strong>tres</strong> habitaciones, y faltaban dos datos para verlo — la capacidad del salón privado y qué era el VIP.</p>
+      <p><strong>El VIP no es un cuarto más: es el salón privado.</strong> Confirmado por el cliente. Eran el mismo espacio con dos nombres, uno interno y otro comercial.</p>
+    </div>
+
+    <div class="note" style="border-left-color:var(--ember);background:var(--ember-bg)">
+      <span class="label" style="color:var(--ember)">Regla de nomenclatura</span>
+      <p>En todo el sitio, ese espacio se llama <strong>Salón Privado</strong> — es el término que usa la propia carta impresa cuando lo vende. <strong>La palabra “VIP” no se usa en ninguna parte del sitio público</strong>: si aparece en dos lugares con sentidos distintos, el usuario cree que son dos espacios y pregunta por los dos.</p>
+      <p>Consecuencia directa: <strong>“Vip” sale del selector de sector</strong> de la reserva de mesa. Ese selector queda con <strong>Salón principal</strong> y <strong>Barra</strong> únicamente — el salón privado no es un sector que se elige en una cena normal, es un espacio que se reserva desde esta página.</p>
+    </div>
+  </section>
+
+  <section id="modulos">
+    <div class="sec-head">
+      <div class="label">Blueprint</div>
+      <h2>Los ocho módulos de la página</h2>
+    </div>
+
+    <div class="mods">
+
+      <div class="mod">
+        <div class="mod-num">01</div>
+        <div class="mod-kind">Apertura</div>
+        <div class="mod-title">Encabezado de sección</div>
+        <ul>
+          <li>Título de página y una sola frase de apertura</li>
+          <li>Un llamado a la acción: <strong>Consultar disponibilidad</strong> (scrollea al módulo 08, no abre otra página)</li>
+          <li>Imagen tratada en oscuro, no video: es una página de lectura, no una portada</li>
+        </ul>
+        <div class="behav"><b>Comportamiento:</b> encabezado contenido, no a pantalla completa. El usuario que llega acá ya tiene intención — hay que darle contenido rápido, no una segunda portada.</div>
+        <div class="copy-src">Texto disponible: “En Paul Roger diseñamos momentos inolvidables. Nuestra propuesta combina gastronomía de excelencia, espacios sofisticados y atención al detalle adaptada a cada celebración.”</div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">02</div>
+        <div class="mod-kind">Pieza central</div>
+        <div class="mod-title">Selector de escalón</div>
+        <ul>
+          <li>Las tres opciones en fila, cada una con capacidad visible</li>
+          <li>El dato de capacidad es lo primero que se lee: es el criterio real de decisión</li>
+          <li>Cada tarjeta ancla a su bloque de detalle más abajo</li>
+        </ul>
+        <div class="behav"><b>Comportamiento:</b> al elegir un escalón, la selección <b>queda recordada</b> y llega hasta el formulario del módulo 08 ya precargada. El usuario no vuelve a elegir lo mismo dos veces.</div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">03</div>
+        <div class="mod-kind">Detalle · tres bloques</div>
+        <div class="mod-title">Cada escalón, en profundidad</div>
+        <ul>
+          <li><strong>Mesa de festejo</strong> — qué incluye, menú establecido o personalizado, para qué ocasiones</li>
+          <li><strong>Salón privado</strong> — 16 pax, TV, aire acondicionado, privacidad, doble uso social y laboral. Es el espacio que internamente llaman VIP; acá se presenta con un solo nombre</li>
+          <li><strong>Exclusividad total</strong> — espacio completo, ambientación a medida, coordinación logística, arreglos florales propios, planificación integral</li>
+          <li>Cada bloque cierra con su propio botón de consulta</li>
+        </ul>
+        <div class="behav"><b>Comportamiento:</b> bloques alternados, imagen a un lado y texto al otro, invirtiendo el lado en cada uno. Da ritmo sin necesitar tres fotos espectaculares.</div>
+        <div class="copy-src">Los tres textos salen casi literales de los puntos 1, 2 y 4 del documento del cliente. <span class="gap">Falta: mínimo de consumo y si se alquila por hora o por evento</span></div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">04</div>
+        <div class="mod-kind">Oferta gastronómica</div>
+        <div class="mod-title">Menús de evento</div>
+        <ul>
+          <li><strong>Menú establecido de cumpleaños</strong> — entrada, principal y postre; pensado para agilidad de servicio en grupos</li>
+          <li><strong>Menú personalizado</strong> — a medida, coordinado con cocina ejecutiva, contempla preferencias dietéticas</li>
+          <li><strong>Formal / cocktail</strong> — finger food, pasos de alta cocina y barra libre</li>
+          <li><strong>Islas gastronómicas</strong> — estaciones temáticas: fiambres artesanales, sushi bar, carnes al corte y opciones vegetarianas</li>
+        </ul>
+        <div class="behav"><b>Comportamiento:</b> cuatro tarjetas iguales, con el contenido de cada menú. <b>No son acordeones</b>: son pocas y se leen de un vistazo.</div>
+        <div class="copy-src">Punto 3 del documento. <span class="gap">Falta: precio por persona de cada uno</span></div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">05</div>
+        <div class="mod-kind">Adicionales</div>
+        <div class="mod-title">Servicios del evento</div>
+        <ul>
+          <li><strong>DJ y musicalización</strong> — ambientación sonora profesional, sets en vivo, equipamiento adaptado al estilo</li>
+          <li><strong>Ambientación y arreglos florales propios</strong></li>
+          <li><strong>Coordinación logística</strong> y planificación de la velada</li>
+          <li><strong>Limousine con chofer privado</strong> — precio según trayecto, siempre a consultar</li>
+        </ul>
+        <div class="behav"><b>Regla firme:</b> el <b>DJ no es la agenda de música en vivo</b>. El DJ es un servicio que se contrata para tu evento y vive acá. La agenda de shows es contenido público del restaurante y vive en <code>/la-casa</code>. No pueden aparecer en el mismo bloque ni llamarse igual.</div>
+        <div class="copy-src">Puntos 3 y 5 del documento. <span class="gap">Falta: costo de DJ e islas · si la limousine es propia o tercerizada</span></div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">06</div>
+        <div class="mod-kind">Público distinto</div>
+        <div class="mod-title">Reuniones de trabajo y coworking</div>
+        <ul>
+          <li>Salón privado para 16, con TV y aire acondicionado</li>
+          <li>Combinable con el <strong>menú ejecutivo</strong> de lunes a viernes</li>
+          <li>Llamado a la acción propio, separado del de eventos sociales</li>
+        </ul>
+        <div class="behav"><b>Por qué va aparte:</b> el público es otro — empresas, días de semana, mediodía. Mezclarlo con cumpleaños hace que ninguno de los dos se entienda. Es un bloque más sobrio, sin fotos de celebración.</div>
+        <div class="copy-src">Punto 4 del documento: “Alquiler de salón privado, espacio coworking”. <strong>Este producto todavía no existe armado.</strong> Salón privado + TV + menú ejecutivo es una propuesta corporativa de mediodía que podemos proponerles nosotros. <span class="gap">Falta: días, horarios y precio</span></div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">07</div>
+        <div class="mod-kind">Línea de producto</div>
+        <div class="mod-title">Productos Paul Roger</div>
+        <ul>
+          <li><strong>Ramos de flores</strong> de calidad y variedad</li>
+          <li><strong>Chocolate belga artesanal</strong>, exclusivo para Paul Roger</li>
+          <li><strong>Pistacho de altura de Mendoza</strong>, con cáscara</li>
+        </ul>
+        <div class="behav"><b>Comportamiento:</b> los tres se ofrecen tanto para sumar a un evento como a una reserva de mesa común. Desde acá, el botón lleva a <code>/reservar</code> con ese producto <b>ya tildado</b>.</div>
+        <div class="copy-src">Punto 6 del documento. El cliente los agrupa bajo un nombre propio — <strong>“Productos Paul Roger”</strong> — así que los tres van juntos, incluido el pistacho. <span class="gap">Falta: si se venden sueltos a quien no consume en el local</span></div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-num">08</div>
+        <div class="mod-kind">Conversión</div>
+        <div class="mod-title">Formulario de consulta</div>
+        <ul>
+          <li>Escalón elegido (viene precargado del módulo 02)</li>
+          <li>Tipo de evento, cantidad de invitados y fecha tentativa</li>
+          <li>Menú de preferencia y servicios adicionales</li>
+          <li>Datos de contacto y un campo libre</li>
+        </ul>
+        <div class="behav"><b>Decisión de arquitectura:</b> este formulario y el camino <b>Evento</b> de <code>/reservar</code> son <b>el mismo componente en dos lugares</b>, no dos formularios distintos. Una sola fuente de verdad: si mañana cambia un campo, se cambia una vez.</div>
+        <div class="copy-src">La consulta llega al equipo con todos los datos cargados. Eso convierte una conversación de veinte mensajes en una cotización.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="conexiones">
+    <div class="sec-head">
+      <div class="label">Cómo se conecta</div>
+      <h2>Entradas y salidas de la página</h2>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Desde</th><th>Llega a</th><th>Comportamiento</th></tr></thead>
+        <tbody>
+          <tr><td>Menú principal → Eventos</td><td><code>/eventos</code></td><td>Entrada principal, arriba de todo</td></tr>
+          <tr><td>Portada → banner de Eventos</td><td><code>/eventos</code></td><td>Entrada secundaria desde la home</td></tr>
+          <tr><td>Portada → selector de 4 caminos → Evento</td><td><code>/reservar</code></td><td>Atajo para quien ya decidió: salta el contenido y va al formulario</td></tr>
+          <tr><td><code>/eventos</code> → escalón 1</td><td><code>/reservar</code> · camino Mesa</td><td>Ocasión precargada (cumpleaños, aniversario)</td></tr>
+          <tr><td><code>/eventos</code> → escalones 2 y 3</td><td>Módulo 08 en la misma página</td><td>Escalón precargado, sin cambiar de página</td></tr>
+          <tr><td><code>/eventos</code> → Productos</td><td><code>/reservar</code></td><td>Producto tildado como complemento</td></tr>
+          <tr><td><code>/eventos</code> → Limousine</td><td>Módulo 08</td><td>Marca el adicional en la consulta. Nunca reserva directa</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="label">La división de trabajo entre páginas</span>
+      <p><strong><code>/eventos</code> convence. <code>/reservar</code> captura.</strong> La página de eventos explica, muestra y despeja dudas; el formulario del final es el único punto donde se pide información. No hay teléfono ni WhatsApp suelto en el medio de la página compitiendo con el formulario.</p>
+    </div>
+  </section>
+
+  <section id="mobile">
+    <div class="sec-head">
+      <div class="label">Adaptación</div>
+      <h2>Qué cambia en celular</h2>
+    </div>
+    <div class="grid2">
+      <div class="box">
+        <h4>Se mantiene</h4>
+        <ul>
+          <li>El orden de los ocho módulos</li>
+          <li>La capacidad visible en cada escalón</li>
+          <li>El precargado del escalón hasta el formulario</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>Se adapta</h4>
+        <ul>
+          <li>Selector de escalones: de tres columnas a tres bloques apilados</li>
+          <li>Bloques de detalle: la imagen va arriba del texto, sin alternar lados</li>
+          <li>Menús: de cuatro tarjetas a un carrusel horizontal o dos columnas</li>
+          <li>Botón de consulta fijo al pie mientras se recorre la página</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="pendiente">
+    <div class="sec-head">
+      <div class="label">Bloqueante</div>
+      <h2>Lo que falta para poder escribir la página</h2>
+      <p class="prose">La estructura está cerrada. El contenido no: el documento del cliente <strong>no tiene un solo precio</strong>. Sin estos datos no se puede redactar el detalle de los escalones ni construir el cotizador del plan Autonomía.</p>
+    </div>
+    <ol class="q">
+      <li>Precio por persona de cada menú de evento: establecido, personalizado, formal y por isla gastronómica</li>
+      <li>Alquiler del salón privado: ¿por hora, por turno o por evento? ¿Hay mínimo de consumo?</li>
+      <li>Capacidad del espacio completo para la privatización</li>
+      <li>Costo del servicio de DJ y de cada isla gastronómica</li>
+      <li>Anticipación mínima para reservar un evento y si se pide seña</li>
+      <li>Días y horarios disponibles para el uso como coworking</li>
+      <li>Si los Productos Paul Roger se venden a alguien que no consume en el local</li>
+      <li>Si la limousine es propia o tercerizada, y qué incluye el trayecto</li>
+    </ol>
+
+    <div class="note">
+      <span class="label">Aviso a pasarle al cliente</span>
+      <p>El documento recibido tiene erratas y una inconsistencia de nombre: figura como <em>“Pistache de altura de Mendoza”</em> mientras que en la carta impresa es <em>“Pistachos premium de altura”</em>. Vamos a corregir y unificar los textos antes de publicarlos — conviene avisarlo ahora y no que lo descubran en el sitio.</p>
+    </div>
+  </section>
+
+  <footer class="doc">
+    <span>Paul Roger · Estructura de <code>/eventos</code></span>
+    <span>14 de septiembre de 2026</span>
+  </footer>
+
+</div>

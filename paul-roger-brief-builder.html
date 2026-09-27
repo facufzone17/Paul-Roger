@@ -1,0 +1,466 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Armador de Build Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E8EAE5;
+    --panel:#DEE1DB;
+    --card:#F0F1ED;
+    --ink:#20272F;
+    --ink-soft:#5C6670;
+    --line:#C9CCC5;
+    --blueprint:#38567F;
+    --marker:#F2D44E;
+    --ok:#3E7C55;
+    --radius:4px;
+    --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --sans:"Inter",system-ui,-apple-system,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 120px}
+
+  /* Header */
+  header.top{
+    padding:30px 0 22px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:26px;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:26px 26px;
+    background-position:-1px -1px;
+    background-repeat:repeat-x;
+    background-blend-mode:normal;
+  }
+  header.top .inner{background:var(--paper);display:inline-block;padding-right:18px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blueprint);margin:0 0 6px}
+  h1{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.02;margin:0 0 10px;letter-spacing:.3px}
+  h1 .mk{position:relative;white-space:nowrap}
+  h1 .mk::after{content:"";position:absolute;left:-2px;right:-4px;bottom:5px;height:42%;background:var(--marker);z-index:-1;opacity:.85;transform:skewX(-3deg)}
+  .lede{max-width:660px;color:var(--ink-soft);font-size:15px;margin:0}
+  .lede b{color:var(--ink);font-weight:600}
+
+  /* Meta row */
+  .meta{display:flex;gap:14px;flex-wrap:wrap;margin:22px 0 4px}
+  .meta .field{flex:1;min-width:200px}
+  label.lab{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 5px}
+  input.txt,select.txt{
+    width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:9px 11px;outline:none;
+  }
+  input.txt:focus,select.txt:focus,textarea:focus{border-color:var(--blueprint);box-shadow:0 0 0 3px rgba(56,86,127,.14)}
+
+  .layout{display:grid;grid-template-columns:212px 1fr;gap:30px;align-items:start;margin-top:26px}
+
+  /* Rail */
+  nav.rail{position:sticky;top:18px}
+  .rail .navlist{list-style:none;margin:0 0 18px;padding:0;border-left:1px solid var(--line)}
+  .rail .navlist li{position:relative}
+  .rail .navlist a{
+    display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--ink-soft);
+    padding:5px 10px 5px 14px;font-size:13px;line-height:1.3;border-left:2px solid transparent;margin-left:-1px;
+  }
+  .rail .navlist a .n{font-family:var(--mono);font-size:11px;color:var(--blueprint);min-width:15px}
+  .rail .navlist a:hover{color:var(--ink)}
+  .rail .navlist a.active{color:var(--ink);border-left-color:var(--ink);font-weight:500}
+  .rail .navlist a .dot{margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--ok);align-self:center;opacity:0;transition:opacity .2s}
+  .rail .navlist a.filled .dot{opacity:1}
+
+  .saveline{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:0 0 14px;padding-left:14px}
+  .saveline b{color:var(--ok);font-weight:500}
+
+  .actions{display:flex;flex-direction:column;gap:8px}
+  button{font-family:var(--sans);font-size:13.5px;font-weight:600;cursor:pointer;border-radius:var(--radius);border:1px solid var(--ink);transition:transform .04s ease,background .15s}
+  button:active{transform:translateY(1px)}
+  .btn-primary{background:var(--ink);color:var(--paper);padding:11px 14px}
+  .btn-primary:hover{background:#2c3540}
+  .btn-ghost{background:transparent;color:var(--ink);padding:9px 14px;border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn-danger{background:transparent;color:#9A3B2E;border-color:transparent;padding:6px 4px;font-weight:500;font-size:12px;text-align:left}
+  .btn-danger:hover{text-decoration:underline}
+
+  /* Cards */
+  main.col{min-width:0}
+  section.bcard{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px 20px;margin-bottom:16px;scroll-margin-top:18px;position:relative;
+  }
+  section.bcard.spotlight{border-color:var(--blueprint)}
+  section.bcard.spotlight::before{
+    content:"";position:absolute;left:-1px;top:14px;bottom:14px;width:3px;background:var(--marker);border-radius:2px;
+  }
+  .bhead{display:flex;align-items:baseline;gap:10px;margin-bottom:3px}
+  .bnum{font-family:var(--mono);font-size:12px;color:var(--blueprint);padding-top:7px}
+  .btitle{font-family:var(--serif);font-size:25px;font-weight:400;line-height:1.1;margin:0}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--blueprint);color:var(--blueprint);padding:2px 6px;border-radius:20px;margin-left:auto;align-self:center}
+  .tag.tu{border-color:#9A6B12;color:#7d5608;background:var(--marker)}
+  .guide{color:var(--ink-soft);font-size:13.5px;margin:2px 0 12px;font-style:italic}
+  textarea{
+    width:100%;min-height:96px;resize:vertical;font-family:var(--sans);font-size:14.5px;line-height:1.55;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:11px 12px;outline:none;
+  }
+  textarea.tall{min-height:140px}
+  textarea::placeholder{color:#9aa2a8}
+
+  .note{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);background:var(--panel);border:1px dashed var(--line);border-radius:var(--radius);padding:10px 12px;margin-bottom:16px;line-height:1.5}
+
+  /* Modal */
+  .scrim{position:fixed;inset:0;background:rgba(20,26,32,.5);display:none;align-items:flex-start;justify-content:center;padding:34px 18px;z-index:50;overflow:auto}
+  .scrim.open{display:flex}
+  .modal{background:var(--card);border:1px solid var(--ink);border-radius:var(--radius);max-width:820px;width:100%;box-shadow:0 24px 60px rgba(20,26,32,.3)}
+  .modal .mhead{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .modal .mhead h2{font-family:var(--serif);font-weight:400;font-size:24px;margin:0}
+  .modal .mhead .x{margin-left:auto;background:none;border:none;font-size:22px;color:var(--ink-soft);cursor:pointer;line-height:1;padding:2px 6px}
+  .modal .mbody{padding:16px 20px 20px}
+  .modal pre{
+    font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px;max-height:46vh;overflow:auto;white-space:pre-wrap;word-break:break-word;color:var(--ink);margin:0 0 14px
+  }
+  .mrow{display:flex;gap:10px;flex-wrap:wrap}
+  .copied{font-family:var(--mono);font-size:12px;color:var(--ok);align-self:center;opacity:0;transition:opacity .2s}
+  .copied.show{opacity:1}
+
+  footer.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;font-family:var(--mono)}
+
+  @media (max-width:760px){
+    h1{font-size:38px}
+    .layout{grid-template-columns:1fr;gap:20px}
+    nav.rail{position:static}
+    .rail .navlist{display:none}
+    .actions{flex-direction:row;flex-wrap:wrap}
+    .btn-primary,.btn-ghost{flex:1;min-width:140px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="inner">
+      <p class="eyebrow">Mesa de trabajo · handoff a Claude Code</p>
+      <h1>Armá el <span class="mk">brief</span> antes de construir</h1>
+    </div>
+    <p class="lede">Volcá acá todo lo que vas pensando —por sección o todo junto en el bloque libre—. Se guarda solo en este navegador. Cuando estés listo, <b>generás el markdown limpio</b> y se lo pegás a Claude Code como ley del proyecto.</p>
+    <div class="meta">
+      <div class="field">
+        <label class="lab" for="proj">Nombre del proyecto</label>
+        <input class="txt" id="proj" type="text" placeholder="Ej: Ronda Pampa — tienda" autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="lab" for="stype">Tipo de sitio</label>
+        <select class="txt" id="stype">
+          <option value="">Elegí…</option>
+          <option>Landing page</option>
+          <option>Tienda / e-commerce</option>
+          <option>Sitio institucional</option>
+          <option>Dashboard / SaaS</option>
+          <option>App web</option>
+          <option>Otro</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="rail">
+      <p class="saveline" id="saveline">Sin guardar todavía</p>
+      <ul class="navlist" id="navlist"></ul>
+      <div class="actions">
+        <button class="btn-primary" id="gen">Generar brief →</button>
+        <button class="btn-ghost" id="download">Descargar .md</button>
+        <button class="btn-danger" id="reset">Borrar todo</button>
+      </div>
+    </nav>
+
+    <main class="col" id="col">
+      <div class="note" id="topnote">Las <b>secciones 1, 2 y 3</b> son las que definen que el sitio salga con identidad y no genérico. La 3 (Dirección de diseño) la llenás vos sí o sí: es lo único que Claude Code no puede inventar. El resto lo podés volcar suelto y ordenar después.</div>
+    </main>
+  </div>
+
+  <footer class="foot">El brief generado incluye además, de forma automática, las reglas fijas para Claude Code y la línea de handoff. Tus notas viven solo en este navegador.</footer>
+</div>
+
+<div class="scrim" id="scrim">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+    <div class="mhead">
+      <h2 id="mtitle">Brief listo</h2>
+      <span class="copied" id="copied">¡Copiado!</span>
+      <button class="x" id="closeModal" aria-label="Cerrar">×</button>
+    </div>
+    <div class="mbody">
+      <pre id="out"></pre>
+      <div class="mrow">
+        <button class="btn-primary" id="copy">Copiar para Claude Code</button>
+        <button class="btn-ghost" id="download2">Descargar .md</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "build-brief:v1";
+
+  // Section model. "tu" marks the section the human must own; "free" is unstructured.
+  var SECTIONS = [
+    {id:"dump", n:"0", title:"Volcado libre", tag:"opcional",
+     guide:"Pegá o escribí todo lo que tengas en la cabeza, sin orden. Después lo repartís en las secciones de abajo (o lo dejás acá como apéndice).",
+     ph:"Lo que se te ocurra: ideas sueltas, links de referencia, frases, lo que dijo el cliente, lo que viste en la auditoría…", tall:true},
+
+    {id:"objetivo", n:"1", title:"Objetivo y posicionamiento",
+     guide:"¿Qué es, para quién, y qué tiene que LOGRAR el sitio? La acción primaria, la métrica de éxito, el contexto de uso (¿mobile-first?).",
+     ph:"Qué ofrece:\nPara quién:\nAcción primaria (qué tiene que hacer el visitante):\nCómo sé que funciona:\nContexto de uso (mobile/desktop):"},
+
+    {id:"auditoria", n:"2", title:"Requisitos de la auditoría",
+     guide:"Convertí cada hallazgo de la skill ux-audit en un REQUISITO del sitio nuevo, no en un parche del viejo. Síntoma → regla a cumplir.",
+     ph:"Síntoma del sitio viejo → Requisito del sitio nuevo\n— precio escondido en DM → precio visible en cada producto\n— CTA sin contraste → una acción primaria dominante por pantalla\n(Si no hay sitio previo: listá los no-negociables de las 5 lentes)"},
+
+    {id:"diseno", n:"3", title:"Dirección de diseño", tag:"tu",
+     guide:"ACÁ vive “a tu manera”. Lo decidís vos. Si lo dejás vago, sale la plantilla por default.",
+     ph:"Referencias (2-3 sitios + qué te gusta de cada uno):\nVibe (3-5 adjetivos):\nPaleta:\nTipografía (títulos / cuerpo / mono):\nTono del copy:\nAnti-referencias (qué EVITAR):", tall:true},
+
+    {id:"arquitectura", n:"4", title:"Arquitectura / sitemap",
+     guide:"Páginas del sitio y el orden de las secciones de la home (gancho → valor → prueba → acción). Una acción primaria por página.",
+     ph:"Páginas:\nOrden de la home:\n1.\n2.\n3.\nAcción primaria por página:"},
+
+    {id:"contenido", n:"5", title:"Contenido e inventario",
+     guide:"Qué contenido real tenés y qué falta, para que no se invente datos ni llene de Lorem ipsum.",
+     ph:"Productos / ítems (y de dónde salen):\nFotos / assets (qué hay / qué falta):\nCopy (qué existe / qué escribir):\nDatos de marca (logo, contacto, políticas):"},
+
+    {id:"stack", n:"6", title:"Stack y restricciones",
+     guide:"Framework, integraciones (pagos, envíos, analytics), hosting, dominio, y qué NO usar.",
+     ph:"Stack:\nIntegraciones (pagos / envíos / analytics):\nHosting / dominio:\nNo-negociables (mobile-first, AA, performance):\nQué NO usar:"},
+
+    {id:"plan", n:"7", title:"Plan de construcción",
+     guide:"El orden de armado, sección por sección (no todo de un saque). Claude Code construye un bloque y espera tu OK.",
+     ph:"1. Scaffold + design tokens\n2. Layout base (header/footer/nav)\n3. Hero\n4. …\n(ajustá según tu sitio)"},
+
+    {id:"qa", n:"8", title:"Definición de “terminado”",
+     guide:"El sitio está listo cuando pasa SU propia auditoría con la skill ux-audit. Cerrás el loop.",
+     ph:"— Le corrí ux-audit y los 🔴 resueltos\n— Pasa el test de los 5 segundos\n— Core Web Vitals OK (Lighthouse)\n— Sin placeholders ni datos inventados sin marcar"}
+  ];
+
+  // Fixed footer appended to every generated brief.
+  var FIXED_RULES =
+    "## Reglas fijas para Claude Code (la ley)\n" +
+    "1. Seguí la dirección de diseño al pie. Si una decisión no está definida, preguntá antes de inventar — no tires el default genérico.\n" +
+    "2. Mobile-first siempre.\n" +
+    "3. Una acción primaria dominante por pantalla.\n" +
+    "4. No inventes contenido: sin contenido real, dejá un placeholder marcado, nunca datos/precios/testimonios falsos.\n" +
+    "5. Construí de a una sección y no avances sin mi confirmación.\n" +
+    "6. Cada decisión sirve al objetivo del sitio. Lo que no aporta a la acción primaria, sobra.\n" +
+    "7. Accesibilidad y performance no son opcionales: contraste AA, targets ≥44px, imágenes optimizadas.\n" +
+    "8. Cuando termines una sección, recordame correrle la skill ux-audit antes de seguir.\n\n" +
+    "---\n### Handoff\nLeé este brief completo: es la ley de este proyecto. Empezá por el paso 1 del plan de construcción y no avances de sección sin que confirme.";
+
+  var state = {};       // id -> value
+  var saveTimer = null;
+  var memFallback = false;
+
+  var col = document.getElementById("col");
+  var navlist = document.getElementById("navlist");
+  var saveline = document.getElementById("saveline");
+  var projEl = document.getElementById("proj");
+  var stypeEl = document.getElementById("stype");
+
+  // Build cards + nav
+  SECTIONS.forEach(function(s){
+    var card = document.createElement("section");
+    card.className = "bcard" + (s.tag==="tu" ? " spotlight" : "");
+    card.id = "sec-" + s.id;
+    var tagHtml = s.tag ? '<span class="tag '+(s.tag==="tu"?"tu":"")+'">'+(s.tag==="tu"?"lo decidís vos":s.tag)+'</span>' : '';
+    card.innerHTML =
+      '<div class="bhead"><span class="bnum">'+s.n+'</span><h3 class="btitle">'+s.title+'</h3>'+tagHtml+'</div>' +
+      '<p class="guide">'+s.guide+'</p>' +
+      '<textarea class="'+(s.tall?"tall":"")+'" id="ta-'+s.id+'" data-id="'+s.id+'" placeholder="'+s.ph.replace(/"/g,"&quot;")+'"></textarea>';
+    col.appendChild(card);
+
+    var li = document.createElement("li");
+    li.innerHTML = '<a href="#sec-'+s.id+'" data-id="'+s.id+'"><span class="n">'+s.n+'</span><span class="t">'+s.title+'</span><span class="dot"></span></a>';
+    navlist.appendChild(li);
+  });
+
+  var areas = Array.prototype.slice.call(document.querySelectorAll("textarea[data-id]"));
+  var navAnchors = Array.prototype.slice.call(navlist.querySelectorAll("a"));
+
+  // ---- Storage helpers (graceful) ----
+  function persist(){
+    var payload = JSON.stringify({proj:projEl.value, stype:stypeEl.value, state:state, ts:Date.now()});
+    try{
+      if(window.storage && window.storage.set){
+        window.storage.set(STORAGE_KEY, payload, false).then(function(){
+          stamp("Guardado");
+        }).catch(function(){ memFallback=true; stamp("Guardado (solo esta sesión)"); });
+        return;
+      }
+    }catch(e){}
+    memFallback = true;
+    stamp("Guardado (solo esta sesión)");
+  }
+
+  function stamp(msg){
+    var t = new Date();
+    var hh = String(t.getHours()).padStart(2,"0"), mm = String(t.getMinutes()).padStart(2,"0");
+    saveline.innerHTML = '<b>'+msg+'</b> · '+hh+':'+mm;
+  }
+
+  function load(){
+    try{
+      if(window.storage && window.storage.get){
+        window.storage.get(STORAGE_KEY, false).then(function(res){
+          if(res && res.value){ hydrate(res.value); }
+        }).catch(function(){ /* no saved key yet */ });
+      }
+    }catch(e){}
+  }
+
+  function hydrate(raw){
+    try{
+      var data = JSON.parse(raw);
+      if(data.proj) projEl.value = data.proj;
+      if(data.stype) stypeEl.value = data.stype;
+      state = data.state || {};
+      areas.forEach(function(a){ if(state[a.dataset.id]) a.value = state[a.dataset.id]; });
+      refreshFilled();
+      stamp("Recuperado");
+    }catch(e){}
+  }
+
+  // ---- Input wiring ----
+  function onInput(){
+    areas.forEach(function(a){ state[a.dataset.id] = a.value; });
+    refreshFilled();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 500);
+  }
+  areas.forEach(function(a){ a.addEventListener("input", onInput); });
+  projEl.addEventListener("input", function(){ clearTimeout(saveTimer); saveTimer=setTimeout(persist,500); });
+  stypeEl.addEventListener("change", persist);
+
+  function refreshFilled(){
+    navAnchors.forEach(function(a){
+      var v = state[a.dataset.id];
+      a.classList.toggle("filled", !!(v && v.trim()));
+    });
+  }
+
+  // ---- Active section on scroll ----
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var id = en.target.id.replace("sec-","");
+          navAnchors.forEach(function(a){ a.classList.toggle("active", a.dataset.id===id); });
+        }
+      });
+    }, {rootMargin:"-20% 0px -70% 0px"});
+    SECTIONS.forEach(function(s){ io.observe(document.getElementById("sec-"+s.id)); });
+  }
+
+  // ---- Generate markdown ----
+  function buildMarkdown(){
+    var proj = (projEl.value||"").trim() || "[NOMBRE DEL PROYECTO]";
+    var lines = [];
+    lines.push("# BUILD BRIEF — " + proj);
+    var metaBits = [];
+    if(stypeEl.value) metaBits.push("Tipo: " + stypeEl.value);
+    metaBits.push("Documento de ley fija para construir este sitio con Claude Code.");
+    lines.push("> " + metaBits.join(" · "));
+    lines.push("");
+
+    // Brain dump goes as an appendix note at the end if present; structured sections first.
+    var dump = (state.dump||"").trim();
+
+    SECTIONS.forEach(function(s){
+      if(s.id==="dump") return;
+      var v = (state[s.id]||"").trim();
+      lines.push("## " + s.n + ". " + s.title);
+      if(v){ lines.push(v); }
+      else { lines.push("_[FALTA COMPLETAR]_"); }
+      lines.push("");
+    });
+
+    if(dump){
+      lines.push("## Notas sueltas (volcado)");
+      lines.push(dump);
+      lines.push("");
+    }
+
+    lines.push("---");
+    lines.push("");
+    lines.push(FIXED_RULES);
+    return lines.join("\n");
+  }
+
+  function filename(){
+    var p = (projEl.value||"build").trim().toLowerCase()
+      .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || "build";
+    return p + "-brief.md";
+  }
+
+  function downloadMd(){
+    var blob = new Blob([buildMarkdown()], {type:"text/markdown"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = filename();
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }
+
+  // ---- Modal ----
+  var scrim = document.getElementById("scrim");
+  var out = document.getElementById("out");
+  var copied = document.getElementById("copied");
+
+  function openModal(){ out.textContent = buildMarkdown(); scrim.classList.add("open"); }
+  function closeModal(){ scrim.classList.remove("open"); copied.classList.remove("show"); }
+
+  document.getElementById("gen").addEventListener("click", openModal);
+  document.getElementById("closeModal").addEventListener("click", closeModal);
+  scrim.addEventListener("click", function(e){ if(e.target===scrim) closeModal(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeModal(); });
+
+  function copyOut(){
+    var text = out.textContent;
+    function ok(){ copied.classList.add("show"); setTimeout(function(){copied.classList.remove("show");}, 1800); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok).catch(fallbackCopy);
+    } else { fallbackCopy(); }
+    function fallbackCopy(){
+      var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.left="-9999px";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); ok(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  }
+  document.getElementById("copy").addEventListener("click", copyOut);
+  document.getElementById("download").addEventListener("click", downloadMd);
+  document.getElementById("download2").addEventListener("click", downloadMd);
+
+  // ---- Reset ----
+  document.getElementById("reset").addEventListener("click", function(){
+    if(!confirm("¿Borrar todas las notas de este brief? No se puede deshacer.")) return;
+    state = {}; projEl.value=""; stypeEl.value="";
+    areas.forEach(function(a){ a.value=""; });
+    refreshFilled();
+    try{ if(window.storage && window.storage.delete){ window.storage.delete(STORAGE_KEY, false).catch(function(){}); } }catch(e){}
+    stamp("Vacío");
+  });
+
+  // Paul Roger: contenido precargado (lo guardado en el navegador tiene prioridad)
+  hydrate(JSON.stringify({"proj": "Paul Roger — Brasas & Cocktail", "stype": "Sitio institucional", "state": {"objetivo": "**Qué ofrece:** Paul Roger es un restaurante premium de Polo Design, en Guillermo E. Hudson (zona sur de Buenos Aires). La marca es \"Brasas & Cocktail\": parrilla contemporánea y barra de autor. Además tiene sushi, más de 90 etiquetas de vino, música en vivo, menú ejecutivo al mediodía, un salón privado para 16 personas, eventos y limousine con chofer, y vende ramos de flores y chocolates belgas.\nPaul Roger no vende comida, vende ocasiones: aniversarios, cumpleaños, pedidas de mano y cenas de empresa. Su propia carta impresa empieza por las flores, los bombones, el salón privado y la limousine, antes que por los platos.\n\n**Para quién:**\n- Parejas y grupos de zona sur que buscan dónde festejar algo.\n- Gente que busca dónde comer en la zona y llega desde Google o Instagram (@paulroger.hudson).\n- Empresas que necesitan un espacio para reuniones o cenas corporativas, sobre todo al mediodía y en días de semana.\n\n**Acción primaria (qué tiene que hacer el visitante):** RESERVAR. Hay cuatro tipos de reserva: Mesa, Evento, Limousine y Menú ejecutivo. La acción secundaria es dejar una consulta de evento con todos los datos.\n\n**Cómo sé que funciona:**\n- Las reservas y las consultas de evento llegan por la web con los datos completos y dejan de llegar por WhatsApp.\n- El cliente se entera de que existen la limousine, el salón privado y los complementos antes de sentarse a la mesa.\n- En 5 segundos se entiende qué es Paul Roger y dónde se reserva.\n\n**Contexto de uso:** mobile-first. La mayoría de la gente llega desde Instagram con el celular. En desktop tiene que verse tan bien como en mobile, porque la gerencia y el comité evalúan la propuesta en una computadora.\n\n**Objetivo de esta etapa:** la Etapa 1 es una maqueta navegable que tiene que verse igual a la versión final. Se envía junto con el presupuesto y su función es demostrar la calidad del trabajo. Tiene que dar ganas de contratar el plan Experiencia.", "auditoria": "No existe un sitio anterior, porque el dominio paulroger.com.ar figura en la papelería pero nunca se publicó. Los dolores actuales del negocio se convierten en estos requisitos:\n- **Nadie los encuentra en internet → requisito:** sitio propio en paulroger.com.ar con SEO local (Hudson, Polo Design, parrilla, sushi), metadatos completos y schema Restaurant.\n- **Todo entra por un solo WhatsApp (11 2300 5015) sin orden → requisito:** /reservar es el único lugar donde se piden datos. No va botón flotante de WhatsApp, ni formulario de contacto, ni teléfono suelto en el medio de una página. Todo lo que compite con Reservar le quita reservas.\n- **Los productos de más margen solo aparecen en la carta impresa, que se lee ya sentado → requisito:** tienen que estar a la vista en la home (sección 4) y se ofrecen como complemento dentro de /reservar según la ocasión. Con \"Aniversario\" o \"Cumpleaños\" aparecen, con \"Cena\" no.\n- **La carta tiene 90 vinos impresos y cada cambio de precio obliga a reimprimir → requisito:** carta en HTML, legible en el celular sin zoom y NUNCA en PDF. Los vinos se filtran por uva y los whiskies por tipo.\n- **La música en vivo no aparece en ningún lado → requisito:** agenda de próximas fechas en La Casa, con acceso desde la home.\n- **La limousine es un solo vehículo → requisito:** NUNCA se \"agrega al carrito\" ni se confirma al instante. Siempre es una consulta.\n- **Los complementos se pagan en la mesa → requisito:** no hay pagos online ni carrito.\n- **No negociables:** contraste AA, targets de 44px o más, una acción primaria por pantalla, carga rápida en 4G, el sitio funciona sin animaciones y respeta prefers-reduced-motion.", "diseno": "**Base:** el Manual de Identidad Visual de Paul Roger (42 páginas, en Documentos/Manual_identidad_visual_PR.pdf). No se inventan colores ni tipografías: ya están definidos ahí.\n\n**Referencias (y qué tomar de cada una):**\n- **Zuma:** la estructura. Se sostiene con tipografía, negro y silencio visual, casi sin fotos grandes. Es la referencia clave porque no hay fotos en alta.\n- **Amazónico (Madrid):** el concepto. Cada ambiente se presenta como una experiencia con carácter propio y los menús van separados por propuesta.\n- **COTE / Cote Korean Steakhouse:** la temperatura. Brasa y carne premium sin caer en lo rústico. También es la referencia del scrollytelling de Servicios.\n- **Don Julio:** la sobriedad. Una parrilla de lujo que no grita.\n- **Sexy Fish:** la música y el entretenimiento como sección propia.\n\n**Vibe:** nocturno, sobrio, cálido, editorial, hospitalario.\n\n**Paleta (tokens del manual):**\n- Principal: rojo #e52521, negro #1d1d1b, gris #3c3c3b, blanco.\n- Secundaria: crudo #f9ecdc, tierra #392513, tinto #4d160d.\n- Especiales: oro #987d3b y plata #c4c4c4, solo como detalle puntual y NUNCA sobre el logo.\n- El fondo es siempre oscuro (negro del manual). El crudo va para texto largo sobre negro.\n- ⚠ El rojo #e52521 sobre negro da un contraste de ~3.7:1. Solo sirve para CTAs, bordes y texto grande (≥24px), nunca para texto de cuerpo. Texto blanco sobre botón rojo: ~4.5:1, está OK.\n\n**Tipografía:**\n- Títulos: IvyMode, que dice el manual. Se usa vía Adobe Fonts solo si confirman que tienen Creative Cloud. Mientras tanto, Prata como alternativa libre, dejada en un solo token para cambiarla en minutos.\n- Cuerpo: Montserrat (Google Fonts). La impone el manual, así que el aviso \"overused-font\" es un falso positivo en este proyecto.\n- El logotipo es script manuscrito. Se usa siempre el archivo del logo (SVG, versión negativa porque el fondo es más de 60% negro). Nunca se escribe con una fuente.\n- Reglas del logo: no expandir, no condensar, no inclinar, sin degradés ni efectos. El claim es exactamente \"Brasas & Cocktail\".\n\n**Tratamiento de fotos (según el manual):**\n- Alto contraste, con overlay en degradé rojo #e52521 o negro #1d1d1b para ganar contraste. Se admite escala de grises.\n- Las fotos van en bloques medianos. Pantalla completa solo en el hero.\n- Una foto regular tratada en oscuro se ve intencional. Una foto regular a pantalla completa se ve pobre.\n\n**Movimiento:** fades y reveals al scrollear, sobrios. Scrollytelling en la sección Servicios de la home. Header que pasa de transparente a sólido. Nada rebota ni se mueve solo sin motivo.\n\n**Tono del copy:** \"cordial, pero amigable y cercano\", como dice el manual. Se usa el voseo rioplatense (\"Conocé\", \"Reservá\"). La frase de la marca es \"Bienvenidos a casa\", tomada de su propia carta. La idea de lujo sale de su cultura interna: \"que el cliente sienta que todo fue pensado para él\". Nada de palabras en inglés innecesarias, excepto los nombres propios de la marca (Private Dining, Stand Flowers).\n\n**Anti-referencias (qué EVITAR):**\n- Carta en PDF para descargar.\n- Carrusel con flechas en la portada.\n- Fotos de banco de imágenes.\n- Fondo blanco (es un local de noche).\n- \"Bienvenidos a nuestro restaurante\" como título.\n- Carrusel de reseñas de Google.\n- Botón flotante de WhatsApp.\n- Mapa embebido.\n- Look de plantilla o de librería UI genérica: cards redondeadas con sombras, gradientes violetas, íconos de stock.\n- Dorado o plateado en el logo.", "arquitectura": "**Header (todas las páginas):**\n- Izquierda: La Casa · Carta · Eventos.\n- Centro: el logo PAUL ROGER.\n- Derecha: Private Dining · Nosotros, y el botón RESERVAR (rojo, siempre visible).\n- Es transparente sobre el hero y se vuelve sólido al scrollear.\n- En mobile: menú a pantalla completa (base: ejemplo del manual, pág. 36), con RESERVAR siempre visible.\n- Contacto NO va en el header, va en el footer.\n\n**Páginas:**\n- `/` Home\n- `/la-casa` La Casa: el salón, la barra, la música en vivo con su agenda. El wireframe la llamaba /experiencia; se usa /la-casa para que la URL coincida con el nombre del menú.\n- `/carta` Carta\n- `/eventos` Eventos\n- `/private-dining` Private Dining (el salón privado)\n- `/nosotros` Nosotros\n- `/reservar` Reservar\n\n**Regla de nombres:** \"VIP\" y \"Private Dining\" son EL MISMO espacio, el salón privado de hasta 16 personas con TV y aire acondicionado. El cliente lo confirmó. Todo lo que diga VIP lleva a /private-dining, y esa página lo aclara (\"nuestro salón privado, el VIP de la casa\"). Nunca pueden parecer dos espacios distintos.\n\n**Orden de la home (según wireframe):**\n1. **Hero:** imagen tratada en oscuro (o un loop corto de video optimizado, solo si se confirma), el logo, \"Bienvenidos a casa\" y el CTA RESERVAR. Abajo a la izquierda, el link \"↓ Conocer\", que scrollea a la sección 2.\n2. **La Casa:** tres bloques. BARRA → /la-casa#barra. VIP → /private-dining. MÚSICA EN VIVO → /la-casa#musica (agenda).\n3. **Servicios (scrollytelling):** el título \"Conocé nuestros servicios\" queda fijo en pantalla. El scroll del usuario (no una animación automática) va reemplazando las imágenes del mosaico que lo rodea: Brasas · Sushi · Coctelería · Vinos. Cada imagen linkea a /carta#seccion. Cierra con un CTA RESERVAR grande.\n   - Mobile y reduced-motion: sin pin, bloques apilados con el mismo contenido.\n4. **Eventos / Complementos:**\n   - Banner 1: Eventos en general (cumpleaños, corporativos, privatización) → /eventos.\n   - Banner 2: tres franjas, Flores 20% · Chocolates 20% · Limousine 60%. Al tocar una franja se despliega una card con texto explicativo y un CTA.\n     - Flores y chocolates: el CTA dice \"Sumar a mi reserva\" y lleva a /reservar?extra=flores (o chocolates), con el complemento ya tildado.\n     - Limousine: el CTA dice \"Consultar\" y lleva a /reservar?tipo=limousine.\n5. **Contacto / Footer:**\n   - Imagen del local y los datos: Calle 47 6750, Polo Design, Guillermo E. Hudson, Buenos Aires · horarios por servicio · reservas@paulroger.com.ar.\n   - Footer: \"Paul Roger — Brasas & Cocktail\" · Brasas · Sushi · Coctelería · Salón VIP · **Eventos Privados** · Limousine · @paulroger.hudson.\n   - Sin formulario y sin mapa embebido.\n\n**Resto de las páginas (bloques en orden):**\n- **/carta:** Se toma el prototipo del socio y se respeta.\n  - Arriba de todo, una franja destacada para el Menú ejecutivo (lunes a viernes al mediodía), con su propia reserva.\n  - Cuatro secciones: Cocina · Sushi · Barra · Vinos. En desktop van en una columna lateral y en mobile como tabs sticky.\n  - Adentro de cada sección, las subcategorías.\n  - Filtros por uva en Vinos y por tipo en Whiskies.\n  - RESERVAR sticky.\n  - En mobile la carta se recorre de corrido con scroll continuo, no de a una subcategoría por vez.\n  - Sin foto por plato. Se escribe \"Coctelería\", nunca \"Cóctail\".\n- **/la-casa:**\n  - Apertura: una foto del salón de noche y una frase.\n  - `#salon`: las brasas a la vista, las mesas, la recepción con el stand de flores.\n  - `#barra`: coctelería de autor y pared de vinos → /carta#barra.\n  - `#musica`: qué se toca y la lista de próximas fechas (día, horario).\n  - Cierra con RESERVAR.\n- **/eventos** (según estructura-eventos.html, adaptada):\n  - 01 Apertura.\n  - 02 Selector de 3 escalones con la capacidad visible: Mesa de festejo · Salón privado (16) · Exclusividad total (capacidad a confirmar). El escalón \"Salón privado\" lleva a /private-dining.\n  - 03 Detalle de \"Mesa de festejo\" y de \"Exclusividad total\".\n  - 04 Menús de evento: establecido, personalizado, formal/cocktail, islas gastronómicas.\n  - 05 Adicionales: DJ, ambientación y flores, coordinación, limousine siempre a consultar.\n  - 06 Productos Paul Roger: flores, chocolate belga, pistacho de Mendoza → /reservar con el producto tildado.\n  - 07 Formulario de consulta, con el escalón elegido ya precargado.\n  - El DJ (servicio del evento) NUNCA se mezcla con la agenda de música en vivo (contenido del restaurante).\n- **/private-dining:**\n  - Apertura.\n  - Qué es: hasta 16 personas, TV, aire acondicionado, privacidad.\n  - Dos usos: cenas y celebraciones íntimas, y reuniones de trabajo o coworking combinables con el menú ejecutivo de lunes a viernes.\n  - Menús y adicionales disponibles (link a /eventos#menus).\n  - Formulario de consulta con el escalón \"Salón privado\" precargado.\n- **/nosotros:**\n  - La historia: dos amigos, el campo y la buena comida (\"alrededor de una mesa pasan cosas importantes\").\n  - Misión y valores en tono de marca, breve. No es una página de RRHH.\n  - Cierra con RESERVAR.\n- **/reservar:**\n  1. Cuatro tabs: Mesa · Evento · Limousine · Menú ejecutivo. Se preseleccionan desde la URL (?tipo=, ?extra=).\n  2. Mesa: fecha, horario, cantidad de personas, sector (Salón o Barra, sin VIP), ocasión y a nombre de quién.\n  3. Complementos (flores, chocolates, pistachos, limousine): solo aparecen si la ocasión es Aniversario, Cumpleaños o Celebración. Se aclara \"se abona en la mesa\".\n  4. Resumen de todo lo elegido y el total de los complementos.\n  5. Confirmación.\n  - Evento es EL MISMO componente de formulario que el de /eventos y /private-dining: una sola fuente de verdad.\n  - Limousine pide trayecto, horario y pasajeros, y siempre es una consulta.\n  - Menú ejecutivo es el formulario más corto: día, horario y cantidad de personas.\n\n**Acción primaria por página:**\n- Home, La Casa, Carta, Nosotros → Reservar.\n- Eventos y Private Dining → Consulta de evento.\n- Reservar → Confirmar.", "contenido": "**Carta:** son fotos de la carta impresa con precios de septiembre de 2026, en `Imagenes menu/` (8 JPG de WhatsApp). Hay que transcribirla a un archivo de datos estructurado (JSON/TS por sección → subcategoría → ítem, precio). La carta es la fuente de los precios reales. No se inventa ningún plato ni ningún precio. El prototipo de carta del socio es la base de la UI.\n\n**Complementos (precios de la carta):**\n- Bombones belgas: 6 / 12 / 20 unidades → $19.900 / $36.900 / $59.000.\n- Ramo floral pequeño / grande → $18.900 / $30.000.\n- Pistachos premium de altura → $29.000.\n- Salón privado y limousine → a consultar.\n\n**Eventos:** el texto sale de `Paul_Roger_Servicios_y_Eventos (1).docx`, que trae los escalones, los menús de evento, los adicionales y los productos. El documento tiene erratas: el nombre correcto es \"Pistachos premium de altura\", no \"Pistache\". Se corrigen al usarlo.\n\n**Historia / tono:** del documento de cultura del cliente (Capacitación Nº 1, Consultoría Mentor):\n- Misión: \"Crear experiencias gastronómicas únicas y memorables, integrando excelencia, hospitalidad y calidez humana\".\n- Valores: hospitalidad, excelencia, respeto, compromiso, trabajo en equipo, pasión.\n- El recorrido del cliente de 10 pasos empieza en la Reserva.\n\n**Fotos (carpeta `img/`, auditadas el 25/09):**\n- Casi todas vienen de Instagram o WhatsApp: 1440px como máximo y con mucha compresión.\n- Listas para usar (solo falta exportarlas a AVIF/WebP):\n  - `591147118…`: bife con copa, la mejor foto de producto.\n  - `660997074…`: cava con mozo.\n  - `669630515…`: etiquetas de vino.\n- Hay que retocar el resto. Tener cuidado con `foto_hero_desktop.jfif`, porque el agrandado con IA deformó el neón \"Paul Roger\".\n- Descartadas:\n  - `642608666`, `656274139`, `641658784` (collage).\n  - Las capturas de historias de Instagram.\n  - `IMG_5026`, `IMG_4892` (se ve una patente).\n  - La foto de la pareja cenando: son clientes reales y no hay consentimiento. NO usarla.\n- Tamaños que necesita el sitio: hero de ~2560px, secciones de ~1600px, cards de ~1200px. Se exporta en AVIF y WebP con srcset.\n- Faltan: el Salón Privado, algún cóctel en buena resolución, la fachada de día y guarniciones. Mientras tanto va un placeholder marcado, tratado en oscuro.\n- REGLA: después de mejorar cualquier foto, revisar que el texto de la marca (neón, servilletas, sello del flan) no esté deformado.\n\n**Datos de marca:**\n- Dirección: Calle 47 6750, Polo Design, Guillermo E. Hudson, Buenos Aires.\n- Mail: reservas@paulroger.com.ar.\n- Instagram: @paulroger.hudson.\n- Dominio: paulroger.com.ar (falta el acceso).\n- Logos: se usan los del manual hasta que lleguen los vectoriales (.svg) en sus 4 versiones.\n\n**Datos que FALTAN** (van como placeholder visible `[FALTA: …]`, nunca inventados):\n- Horarios por servicio.\n- Días y precio del menú ejecutivo.\n- Grilla de música en vivo. Hasta que llegue, la agenda va con fechas de ejemplo marcadas como tal.\n- Precio por persona de los menús de evento, costo del DJ y de las islas.\n- Si el salón privado se alquila por hora o por evento, y el mínimo de consumo.\n- La capacidad del espacio completo.\n- Si la limousine es propia o tercerizada y qué incluye.\n- La anticipación mínima y si se pide seña en los eventos.", "stack": "**Stack:** propuesta, a confirmar con el socio.\n- Next.js (App Router) + TypeScript, con CSS basado en tokens (variables CSS del manual).\n- GSAP + ScrollTrigger solo para el scrollytelling y los reveals.\n- Imágenes con next/image, en AVIF/WebP.\n- Fuentes con next/font: Montserrat y Prata. IvyMode por Adobe Fonts si se confirma.\n\n**Etapa 1 (maqueta):**\n- Sin backend.\n- La carta, la agenda, los eventos y los complementos viven en archivos de datos tipados (/data). Tienen que estar pensados para migrar a una base de datos sin tocar los componentes.\n- Los formularios validan y muestran la pantalla de confirmación, pero NO envían ni guardan nada.\n- Una barra fija discreta avisa que es una maqueta.\n\n**Etapa 2 (según el plan que elijan, no se construye ahora):**\n- Supabase (Postgres + auth) para las reservas y el panel.\n- Resend para el correo de confirmación con la identidad de la casa y el aviso de nueva reserva al equipo.\n- Botón de WhatsApp dentro del panel, para escribirle al cliente.\n- Carta y agenda editables por el equipo.\n- El panel tiene que ser autoexplicativo: se usa entre pedido y pedido con el local lleno. Si necesita manual, está mal hecho.\n\n**Integraciones:**\n- Ninguna en la Etapa 1.\n- En la Etapa 2: Google Business Profile, SEO local, analítica simple (Vercel Analytics).\n\n**Hosting / dominio:** Vercel. La Etapa 1 se publica en un link de preview para mandar con el presupuesto. Después va a paulroger.com.ar (falta el acceso al dominio).\n\n**No negociables:**\n- Mobile-first.\n- Contraste AA (ver la aclaración del rojo en la sección 3).\n- Targets de 44px o más.\n- LCP menor a 2.5s en 4G, con el hero optimizado y sin video pesado.\n- prefers-reduced-motion respetado.\n- HTML semántico y navegable por teclado.\n\n**Qué NO usar:**\n- Pasarela de pago, carrito ni stock online: los complementos se pagan en la mesa y la venta suelta sería otro proyecto.\n- Widget flotante de WhatsApp, mapa embebido, formulario de contacto.\n- PDF de carta.\n- Librerías de componentes con look genérico (shadcn por defecto, Bootstrap).\n- Carruseles automáticos.\n- Fotos de stock.\n- Lorem ipsum.", "plan": "**ETAPA 1 — Maqueta navegable (lo que se manda con el presupuesto)**\n1. Scaffold de Next.js + tokens del manual (colores, tipografías, espaciado) + fuentes + modelos de datos en /data (carta transcrita, complementos, agenda de ejemplo, escalones de eventos).\n2. Layout base: header (transparente → sólido, menú mobile a pantalla completa), footer con contacto, barra de \"maqueta\".\n3. Home · Hero.\n4. Home · La Casa (Barra · VIP · Música).\n5. Home · Servicios con scrollytelling, más el fallback mobile y reduced-motion.\n6. Home · Eventos / Complementos (banner 1 + banner 2 con las cards desplegables).\n7. Home · Contacto / Footer, y revisión completa de la home en 375px y 1440px.\n8. /reservar: tabs, preselección por URL, complementos según la ocasión, resumen y confirmación sin envío.\n9. /carta: portar el prototipo del socio con los datos reales, filtros, tabs sticky y scroll continuo en mobile.\n10. /eventos (con el formulario compartido con /reservar).\n11. /private-dining.\n12. /la-casa (con los anclas #salon, #barra, #musica).\n13. /nosotros.\n14. SEO base: metadata, Open Graph, schema Restaurant, sitemap.xml, 404 con identidad.\n15. Deploy de preview en Vercel y pasada final de QA.\n\n**ETAPA 2 (después de que el cliente elija el plan):** backend de reservas, panel, correos, carta editable. Se escribe un brief aparte cuando el alcance esté confirmado.", "qa": "- Se le corrió ux-audit al sitio y todos los 🔴 están resueltos.\n- Pasa el test de los 5 segundos: se entiende qué es Paul Roger y dónde se reserva.\n- Lighthouse mobile: Performance ≥ 90, Accessibility ≥ 95, LCP < 2.5s. En Core Web Vitals, CLS < 0.1.\n- Todos los links y anclas funcionan, incluida la preselección (?tipo=, ?extra=) y el escalón precargado en los formularios.\n- Sin scroll horizontal en 375px. El menú mobile y los CTAs se tocan bien con el pulgar.\n- No hay precios, platos, fechas ni testimonios inventados. Cada dato que falta se ve como `[FALTA: …]`, y la agenda de ejemplo está rotulada.\n- Ninguna foto muestra el logo deformado, clientes reconocibles ni patentes.\n- VIP y Private Dining se leen como el mismo espacio en todo el sitio.\n- La maqueta está publicada en un link de preview y la revisamos los dos socios antes de mandarla.", "dump": "**Documentos de contexto en la carpeta del proyecto:**\n- `briefing-paul-roger.html`: todo el análisis del negocio, la identidad, las referencias y las preguntas pendientes.\n- `mapa-del-sitio.html` (versión del 14/09, reemplazada por el wireframe en el sitemap).\n- `estructura-eventos.html`: el detalle de /eventos.\n- `presupuesto-paul-roger.html`: los planes.\n- `paul_roger_wireframe_home.html`: la estructura de la home que manda.\n- Anteproyecto anterior de la home: `anteproyecto-paul-roger.html`. Sirve como referencia de tono y de motor de reservas, pero sus decisiones de estructura quedaron viejas.\n\n**Planes de la propuesta (15/09):** Presencia USD 400 · Experiencia USD 680 (recomendado) · Autonomía USD 900, más un abono de USD 25/mes. La maqueta tiene que mostrar el alcance del plan Experiencia.\n\n**Pendiente de pedir al cliente:** accesos al dominio, logos en vectorial, confirmación de Creative Cloud (IvyMode), carta en texto editable, fotos originales (sobre todo del Salón Privado), horarios y quién va a recibir las reservas.\n\n**Redes:** las maneja una amiga del equipo por separado. No competimos con ella: coordinamos la lista de tomas que necesitamos (fachada de noche, barra, salón privado vacío, plato cenital, limousine)."}}));
+  load();
+})();
+</script>

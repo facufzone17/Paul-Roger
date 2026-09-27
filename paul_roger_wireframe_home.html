@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Paul Roger — Wireframe Home</title>
+<style>
+  :root{
+    --bg: #0d0d0c;
+    --line: #4a4a48;
+    --line-strong: #e52521;
+    --text: #eae6df;
+    --text-dim: #8c8c89;
+    --module: #171715;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: 'Courier New', monospace;
+    padding: 40px 24px 120px;
+  }
+  .doc-head{
+    max-width: 960px;
+    margin: 0 auto 48px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  .doc-head .tag{
+    color: var(--line-strong);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .doc-head h1{
+    font-size: 22px;
+    margin: 8px 0 4px;
+    font-weight: 400;
+  }
+  .doc-head p{
+    color: var(--text-dim);
+    font-size: 13px;
+    margin: 0;
+    max-width: 620px;
+    line-height: 1.5;
+  }
+  .canvas{
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .section{
+    position: relative;
+    border: 1px dashed var(--line);
+    background: var(--module);
+    padding: 20px 22px;
+  }
+  .section-num{
+    position: absolute;
+    top: -11px;
+    left: 16px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-size: 12px;
+    color: var(--line-strong);
+    border: 1px solid var(--line-strong);
+    line-height: 18px;
+  }
+  .section-title{
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin: 6px 0 14px;
+  }
+  .note{
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin: 0 0 12px;
+    border-left: 2px solid var(--line);
+    padding-left: 10px;
+  }
+  .row{
+    display:flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .block{
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    font-size: 11px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    min-width: 90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height: 46px;
+  }
+  .block.strong{
+    border-color: var(--line-strong);
+    color: var(--text);
+  }
+  .arrow-note{
+    font-size: 10px;
+    color: var(--line-strong);
+    margin-top: 6px;
+  }
+
+  /* HERO */
+  .hero-box{
+    height: 190px;
+    border: 1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    position: relative;
+  }
+  .hero-label{ font-size: 13px; color: var(--text-dim); letter-spacing: 2px;}
+  .cta{
+    border: 1px solid var(--line-strong);
+    color: var(--line-strong);
+    font-size: 11px;
+    padding: 8px 18px;
+  }
+  .link-small{
+    position:absolute;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+  .link-conocer{ bottom: 10px; left: 14px; }
+
+  /* LA CASA */
+  .casa-blocks{ display:flex; gap:10px; }
+  .casa-blocks .block{ height: 70px; }
+
+  /* SERVICIOS scrolly */
+  .scrolly{
+    border: 1px solid var(--line);
+    padding: 16px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 14px;
+  }
+  .scrolly-title{
+    font-size: 13px;
+    color: var(--text-dim);
+    border: 1px dashed var(--line);
+    padding: 14px 26px;
+  }
+  .mosaic{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+  .mosaic .block{ height: 54px; font-size:10px; }
+  .scrolly-cta{
+    border: 1px solid var(--line-strong);
+    color: var(--line-strong);
+    font-size: 11px;
+    padding: 10px 24px;
+    margin-top: 4px;
+  }
+
+  /* EVENTOS */
+  .banner1{
+    height: 90px;
+    border: 1px solid var(--line-strong);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .banner2{
+    display:flex;
+    height: 70px;
+  }
+  .banner2 .b-flores{ flex: 20; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--text-dim);}
+  .banner2 .b-choco{ flex: 20; border:1px solid var(--line); border-left:none; display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--text-dim);}
+  .banner2 .b-limo{ flex: 60; border:1px solid var(--line-strong); border-left:none; display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--text);}
+
+  /* CONTACTO */
+  .contact-row{ display:flex; gap: 10px; }
+  .contact-img{ flex:1; height: 90px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--text-dim);}
+  .contact-info{ flex:1; border:1px solid var(--line); padding:10px; font-size:10px; color:var(--text-dim); line-height:1.6;}
+  .footer{
+    margin-top: 14px;
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size: 10px;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer .services{ color: var(--text); }
+  .footer .highlight{ color: var(--line-strong); }
+
+  .annot{
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* HEADER */
+  .site-header{
+    max-width: 960px;
+    margin: 0 auto 32px;
+    border: 1px solid var(--line);
+    padding: 14px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    font-size: 11px;
+  }
+  .site-header .nav-side{
+    display:flex;
+    gap: 16px;
+    flex: 1;
+    color: var(--text-dim);
+  }
+  .site-header .nav-side.right{ justify-content:flex-end; }
+  .site-header .logo{
+    color: var(--text);
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 0 16px;
+    white-space: nowrap;
+  }
+  .site-header .cta-header{
+    border: 1px solid var(--line-strong);
+    color: var(--line-strong);
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+  <div class="doc-head">
+    <div class="tag">PAUL ROGER · BRASAS &amp; COCKTAIL</div>
+    <h1>Wireframe — Home (desktop, baja fidelidad)</h1>
+    <p>Estructura y comportamiento de las 5 secciones definidas. No representa diseño final: cada bloque indica jerarquía, contenido y funcionamiento, no estilo visual.</p>
+  </div>
+
+  <div class="site-header">
+    <div class="nav-side left">La Casa &nbsp;·&nbsp; Carta &nbsp;·&nbsp; Eventos</div>
+    <div class="logo">PAUL ROGER</div>
+    <div class="nav-side right">Private Dining &nbsp;·&nbsp; Nosotros</div>
+    <div class="cta-header">RESERVAR</div>
+  </div>
+  <div class="annot" style="max-width:960px;margin:-24px auto 32px;text-align:center;">Header transparente sobre el Hero, sólido al hacer scroll. Contacto no va en el header: queda cubierto en el footer. Mobile: menú a pantalla completa (base: ejemplo del manual, pág. 36).</div>
+
+
+  <div class="canvas">
+
+    <div class="section">
+      <div class="section-num">1</div>
+      <div class="section-title">HERO</div>
+      <div class="hero-box">
+        <div class="hero-label">VIDEO / IMAGEN TRATADA — A DEFINIR</div>
+        <div class="cta">CTA RESERVAR</div>
+        <div class="link-small link-conocer">↓ "Conocer" (scroll a sección 2)</div>
+      </div>
+      <div class="note">Sin material fotográfico en alta: priorizar imagen tratada en oscuro sobre video pesado, salvo que se confirme un loop corto optimizado.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">2</div>
+      <div class="section-title">LA CASA</div>
+      <div class="row casa-blocks">
+        <div class="block">BARRA<br>→ /experiencia (La Casa)</div>
+        <div class="block strong">VIP<br>→ redirige a Private Dining</div>
+        <div class="block">MÚSICA EN VIVO<br>→ ver calendario</div>
+      </div>
+      <div class="note">Barra reemplaza a Salón: tiene destino propio en /experiencia, la página general de "La Casa" (salón, barra, VIP, música). VIP y Música mantienen sus destinos diferenciados.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">3</div>
+      <div class="section-title">SERVICIOS (scrollytelling)</div>
+      <div class="scrolly">
+        <div class="scrolly-title">"Conocé nuestros servicios" — título fijo mientras se scrollea</div>
+        <div class="mosaic">
+          <div class="block">BRASAS</div>
+          <div class="block">SUSHI</div>
+          <div class="block">CÓCTAIL</div>
+          <div class="block">VINOS</div>
+        </div>
+        <div class="scrolly-cta">RESERVAR</div>
+      </div>
+      <div class="note">Referencia: efecto tipo Cotekorean — título fijo en pantalla, y el scroll del usuario va reemplazando las imágenes del mosaico alrededor (no es una animación automática). Cada imagen linkea a /carta con ancla a esa sección. Cierra en CTA de Reserva grande.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">4</div>
+      <div class="section-title">EVENTOS / COMPLEMENTOS</div>
+      <div class="banner1">BANNER 1 — Eventos (general: cumpleaños, corporativos, privatización — Private Dining ya tiene su lugar propio en La Casa)</div>
+      <div class="banner2">
+        <div class="b-flores">FLORES<br>20%</div>
+        <div class="b-choco">CHOCOLATES<br>20%</div>
+        <div class="b-limo">LIMUSINA — 60%</div>
+      </div>
+      <div class="note">Al clickear cualquier franja del Banner 2 se despliega una card con texto explicativo + CTA interactivo (ej. "agregar a mi reserva").</div>
+    </div>
+
+    <div class="section">
+      <div class="section-num">5</div>
+      <div class="section-title">CONTACTO / FOOTER</div>
+      <div class="contact-row">
+        <div class="contact-img">IMAGEN DEL LOCAL</div>
+        <div class="contact-info">
+          Calle 47 6750, Polo Design<br>
+          Guillermo E. Hudson, Buenos Aires<br><br>
+          Horarios por servicio<br>
+          reservas@paulroger.com.ar
+        </div>
+      </div>
+      <div class="annot">Sin formulario de contacto: todo tráfico de intención pasa por /reservar. Sin mapa embebido (rompe la estética) — se resuelve con imagen + dirección en texto.</div>
+      <div class="footer">
+        <div>Paul Roger — Brasas &amp; Cocktail</div>
+        <div class="services">Brasas · Sushi · Coctelería · Salón VIP · <span class="highlight">Eventos Privados</span> · Limusina</div>
+        <div>@paulroger.hudson</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

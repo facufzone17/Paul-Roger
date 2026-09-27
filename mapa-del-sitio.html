@@ -1,0 +1,431 @@
+<title>Mapa del Sitio Paul Roger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@300;400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#faf7f2; --paper-2:#f1ebe1; --card:#ffffff;
+    --ink:#1d1d1b; --ink-2:#46413a; --muted:#736b60; --faint:#9c9388;
+    --line:#ded4c6; --line-2:#c6b9a6;
+    --ember:#c0201c; --ember-bg:#fbeceb;
+    --gold:#8a7134; --gold-bg:#f6efdf;
+    --display:"Prata","Times New Roman",serif;
+    --ui:"Montserrat",Arial,Helvetica,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#131211; --paper-2:#1a1917; --card:#1e1d1a;
+      --ink:#f4ebe0; --ink-2:#d4c9ba; --muted:#9d9488; --faint:#7c7467;
+      --line:#33302a; --line-2:#4a443b;
+      --ember:#ef564f; --ember-bg:#2b1715;
+      --gold:#c7a866; --gold-bg:#262115;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131211; --paper-2:#1a1917; --card:#1e1d1a;
+    --ink:#f4ebe0; --ink-2:#d4c9ba; --muted:#9d9488; --faint:#7c7467;
+    --line:#33302a; --line-2:#4a443b;
+    --ember:#ef564f; --ember-bg:#2b1715;
+    --gold:#c7a866; --gold-bg:#262115;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--ui); font-weight:300; font-size:14.5px; line-height:1.65;
+  }
+  ::selection{ background:var(--ember); color:#fff; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .wrap{ max-width:1060px; margin-inline:auto; padding-inline:clamp(16px,4vw,40px); }
+  h1,h2,h3{ font-family:var(--display); font-weight:400; margin:0; text-wrap:balance; }
+  p{ margin:0 0 12px; color:var(--ink-2); }
+  strong{ font-weight:600; color:var(--ink); }
+  code{ font-family:ui-monospace,"Courier New",monospace; font-size:.88em; background:var(--paper-2); border:1px solid var(--line); padding:1px 5px; }
+  .label{ font-size:9.5px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); }
+
+  header.doc{ padding-block:clamp(32px,5.5vw,58px) 26px; border-bottom:3px double var(--line); }
+  header.doc h1{ font-size:clamp(27px,4.4vw,42px); line-height:1.12; margin:13px 0 13px; max-width:16ch; }
+  header.doc p{ max-width:62ch; font-size:15px; margin:0; }
+
+  section{ padding-block:clamp(32px,4.5vw,50px); }
+  .sec-head{ margin-bottom:22px; max-width:66ch; }
+  .sec-head h2{ font-size:clamp(20px,2.9vw,27px); line-height:1.2; margin-top:9px; }
+
+  /* ---------- barra común ---------- */
+  .common{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .cbox{ border:1px solid var(--line); background:var(--card); padding:19px 20px; }
+  .cbox h3{ font-size:17px; margin-bottom:8px; }
+  .cbox p:last-child{ margin-bottom:0; }
+  .navbar{
+    border:1px solid var(--line-2); background:var(--paper-2);
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:13px 18px; flex-wrap:wrap; margin-bottom:16px;
+    font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  }
+  .navbar .nlogo{ font-family:var(--display); font-size:15px; color:var(--ink); text-transform:none; letter-spacing:0; }
+  .navbar .ncta{ border:1px solid var(--ember); color:var(--ember); padding:6px 15px; font-weight:600; }
+  .navbar .nlinks{ display:flex; gap:18px; flex-wrap:wrap; }
+
+  /* ---------- páginas ---------- */
+  .page{ border:1px solid var(--line); background:var(--card); margin-bottom:20px; }
+  .page-head{
+    padding:20px 24px 18px; border-bottom:1px solid var(--line); background:var(--paper-2);
+    display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; justify-content:space-between;
+  }
+  .page-head h3{ font-size:23px; margin-bottom:4px; }
+  .page-head .url{ font-size:11.5px; color:var(--ember); font-weight:500; }
+  .page-head .job{ font-size:13.5px; color:var(--muted); max-width:46ch; margin-top:7px; }
+  .page-head .count{
+    font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
+    font-weight:600; white-space:nowrap; padding-top:5px;
+  }
+  .blocks{ padding:16px 24px 24px; display:flex; flex-direction:column; gap:7px; }
+  .blk{
+    border:1px solid var(--line);
+    padding:13px 16px; display:grid; grid-template-columns:26px 1fr; gap:14px; align-items:start;
+  }
+  .blk.key{ border-color:var(--ember); background:var(--ember-bg); }
+  .blk .bn{
+    font-family:var(--display); font-size:14px; color:var(--gold); padding-top:1px;
+    font-variant-numeric:tabular-nums;
+  }
+  .blk.key .bn{ color:var(--ember); }
+  .blk .bt{ font-size:14.5px; font-weight:600; color:var(--ink); }
+  .blk .bd{ font-size:13px; color:var(--ink-2); margin-top:3px; }
+  .blk .bl{
+    font-size:11.5px; color:var(--muted); margin-top:6px; padding-top:6px;
+    border-top:1px solid var(--line);
+  }
+  .blk .bl b{ color:var(--ember); font-weight:500; }
+
+  .note{ border-left:2px solid var(--gold); background:var(--gold-bg); padding:15px 19px; margin:18px 0; max-width:70ch; }
+  .note .label{ display:block; margin-bottom:5px; }
+  .note p:last-child{ margin-bottom:0; }
+
+  .tablewrap{ overflow-x:auto; border:1px solid var(--line); background:var(--card); margin:16px 0; }
+  table{ border-collapse:collapse; width:100%; font-size:13px; min-width:520px; }
+  th,td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th{ font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:600; background:var(--paper-2); }
+  tbody tr:last-child td{ border-bottom:0; }
+  td:first-child{ font-weight:500; color:var(--ink); }
+
+  footer.doc{
+    margin-top:36px; padding:18px 0 56px; border-top:3px double var(--line);
+    font-size:11px; color:var(--faint); display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="doc">
+    <div class="label">Estructura del sitio · Paul Roger</div>
+    <h1>Qué va en cada página</h1>
+    <p>Las cinco páginas del sitio, con los bloques que lleva cada una en orden de arriba hacia abajo. Es la lista de contenido previa al dibujo: sirve para saber qué hay que escribir, qué fotos hacen falta y qué lleva a dónde.</p>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <div class="label">Antes de las páginas</div>
+      <h2>Lo que se repite en todo el sitio</h2>
+    </div>
+
+    <div class="navbar">
+      <span class="nlinks">La Casa · Carta · Eventos</span>
+      <span class="nlogo">Paul Roger</span>
+      <span class="ncta">Reservar</span>
+    </div>
+
+    <div class="common">
+      <div class="cbox">
+        <h3>El menú de arriba</h3>
+        <p>Tres links y un botón. Nada más. Transparente sobre la portada, sólido al bajar. En celular, menú de pantalla completa.</p>
+        <p><strong>Contacto no va acá</strong>: está en el pie de todas las páginas.</p>
+      </div>
+      <div class="cbox">
+        <h3>El pie de página</h3>
+        <p>Logo, dirección, horarios, correo, Instagram y la lista de servicios. Sin formulario de contacto: <strong>todo el que quiere algo pasa por Reservar</strong>.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">Dos decisiones ya cerradas</span>
+      <p><strong>La palabra “VIP” no aparece en el sitio.</strong> Ese espacio es el Salón Privado y vive en Eventos.<br>
+      <strong>No hay página “Nosotros”.</strong> La historia de la marca va adentro de La Casa.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="label">Las cinco páginas</div>
+      <h2>Bloque por bloque</h2>
+    </div>
+
+    <!-- HOME -->
+    <div class="page">
+      <div class="page-head">
+        <div>
+          <h3>Portada</h3>
+          <div class="url">/</div>
+          <div class="job">Que en treinta segundos se entienda qué es Paul Roger y que se pueda reservar sin buscar.</div>
+        </div>
+        <div class="count">6 bloques</div>
+      </div>
+      <div class="blocks">
+        <div class="blk">
+          <div class="bn">1</div>
+          <div>
+            <div class="bt">Portada</div>
+            <div class="bd">Imagen o video corto de las brasas, el logo y una sola frase: “Bienvenidos a casa”. Un botón: Reservar.</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">2</div>
+          <div>
+            <div class="bt">Dónde sentarte</div>
+            <div class="bd">Los espacios del local: el Salón, la Barra y el escenario de música en vivo.</div>
+            <div class="bl">Cada uno lleva a <b>La Casa</b></div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">3</div>
+          <div>
+            <div class="bt">Qué vas a comer</div>
+            <div class="bd">Las cuatro propuestas: Brasas, Sushi, Coctelería y Vinos.</div>
+            <div class="bl">Cada una lleva a <b>Carta</b>, directo a esa parte</div>
+          </div>
+        </div>
+        <div class="blk key">
+          <div class="bn">4</div>
+          <div>
+            <div class="bt">Reservá lo que necesites</div>
+            <div class="bd">Los cuatro caminos a la vista: Mesa · Evento · Limousine · Menú ejecutivo. No un botón suelto que diga “Reservar”.</div>
+            <div class="bl">Lleva a <b>Reservar</b> con el camino ya elegido — <b>es el bloque más importante de la portada</b></div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">5</div>
+          <div>
+            <div class="bt">Celebrar en Paul Roger</div>
+            <div class="bd">Arriba, los festejos y eventos. Abajo, los tres productos de la casa: ramos de flores, chocolate belga y pistacho de Mendoza.</div>
+            <div class="bl">Los eventos llevan a <b>Eventos</b>. Los productos llevan a <b>Reservar</b> con ese producto ya marcado</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">6</div>
+          <div>
+            <div class="bt">Dónde estamos</div>
+            <div class="bd">Foto del local, dirección y horarios. Sin mapa incrustado y sin formulario.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTA -->
+    <div class="page">
+      <div class="page-head">
+        <div>
+          <h3>Carta</h3>
+          <div class="url">/carta</div>
+          <div class="job">Que se pueda leer toda la carta en el celular sin descargar nada y sin agrandar con los dedos.</div>
+        </div>
+        <div class="count">4 bloques</div>
+      </div>
+      <div class="blocks">
+        <div class="blk">
+          <div class="bn">1</div>
+          <div>
+            <div class="bt">Menú ejecutivo</div>
+            <div class="bd">Franja destacada arriba de todo. De lunes a viernes al mediodía, con su propio botón de reserva.</div>
+            <div class="bl">Va arriba para que no quede enterrado entre los platos</div>
+          </div>
+        </div>
+        <div class="blk key">
+          <div class="bn">2</div>
+          <div>
+            <div class="bt">Las cuatro secciones</div>
+            <div class="bd">Cocina · Sushi · Barra · Vinos. En computadora van en una columna al costado; en celular, como pestañas arriba.</div>
+            <div class="bl">Adentro de cada una, las subcategorías: entradas, fuertes, postres, y así</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">3</div>
+          <div>
+            <div class="bt">Vinos y Whiskies con filtros</div>
+            <div class="bd">Son demasiados para listarlos. Vinos se filtra por uva (Malbec, Cabernet, Chardonnay…) y Whiskies por tipo.</div>
+            <div class="bl">Con 90 etiquetas, sin filtro la carta es ilegible</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">4</div>
+          <div>
+            <div class="bt">Botón de reservar siempre visible</div>
+            <div class="bd">Queda fijo mientras se recorre la carta. Alguien que está mirando los platos es alguien a punto de reservar.</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 24px 22px"><div class="note" style="margin:0">
+        <span class="label">Sin cambios</span>
+        <p>Esta página ya está resuelta en el prototipo que armó tu socio. Se mantiene como está, salvo que en celular la carta debería poder recorrerse de corrido, no de a una subcategoría por vez.</p>
+      </div></div>
+    </div>
+
+    <!-- LA CASA -->
+    <div class="page">
+      <div class="page-head">
+        <div>
+          <h3>La Casa</h3>
+          <div class="url">/la-casa</div>
+          <div class="job">Mostrar el lugar y contar de dónde viene. Es la página que da ganas de ir.</div>
+        </div>
+        <div class="count">5 bloques</div>
+      </div>
+      <div class="blocks">
+        <div class="blk">
+          <div class="bn">1</div>
+          <div>
+            <div class="bt">Apertura</div>
+            <div class="bd">Una foto del salón de noche y una frase. Corto.</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">2</div>
+          <div>
+            <div class="bt">El salón</div>
+            <div class="bd">El ambiente principal: las brasas a la vista, las mesas, la recepción con el stand de flores.</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">3</div>
+          <div>
+            <div class="bt">La barra</div>
+            <div class="bd">La coctelería de autor y la pared de vinos. Hoy no está representada en ningún lado y es de lo mejor que tienen.</div>
+            <div class="bl">Lleva a la sección Barra de la <b>Carta</b></div>
+          </div>
+        </div>
+        <div class="blk key">
+          <div class="bn">4</div>
+          <div>
+            <div class="bt">Música en vivo</div>
+            <div class="bd">Qué se toca y cuándo. La lista de las próximas fechas, con día, horario y dónde.</div>
+            <div class="bl">Se renueva todas las semanas: es contenido para las redes sin producir nada nuevo</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">5</div>
+          <div>
+            <div class="bt">La historia</div>
+            <div class="bd">De dónde nace Paul Roger: dos amigos, el campo y la buena comida. Alrededor de una mesa pasan cosas importantes.</div>
+            <div class="bl">El texto ya existe, sale del documento de cultura del cliente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTOS -->
+    <div class="page">
+      <div class="page-head">
+        <div>
+          <h3>Eventos</h3>
+          <div class="url">/eventos</div>
+          <div class="job">Que alguien que quiere festejar algo entienda qué opción le corresponde y deje su consulta.</div>
+        </div>
+        <div class="count">8 bloques · ya definida</div>
+      </div>
+      <div class="blocks">
+        <div class="blk key">
+          <div class="bn">—</div>
+          <div>
+            <div class="bt">Los tres espacios, ordenados por tamaño</div>
+            <div class="bd">Mesa de festejo en el salón · Salón privado para 16 · Alquiler del local completo. Después bajan los menús de evento, los extras (DJ, flores, limousine), las reuniones de trabajo, los productos y el formulario.</div>
+            <div class="bl">El detalle completo está en el documento aparte de <b>Eventos</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESERVAR -->
+    <div class="page">
+      <div class="page-head">
+        <div>
+          <h3>Reservar</h3>
+          <div class="url">/reservar</div>
+          <div class="job">Sacar las reservas del WhatsApp. Es la página que justifica todo el proyecto.</div>
+        </div>
+        <div class="count">5 bloques</div>
+      </div>
+      <div class="blocks">
+        <div class="blk key">
+          <div class="bn">1</div>
+          <div>
+            <div class="bt">Elegir qué se reserva</div>
+            <div class="bd">Cuatro solapas arriba: Mesa · Evento · Limousine · Menú ejecutivo. Si llegó desde otra página, ya viene elegida la que corresponde.</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">2</div>
+          <div>
+            <div class="bt">Los datos de la mesa</div>
+            <div class="bd">Fecha, horario, cuántos son, sector (Salón o Barra), la ocasión y a nombre de quién.</div>
+            <div class="bl">El sector ya no incluye VIP: ese espacio se reserva desde <b>Eventos</b></div>
+          </div>
+        </div>
+        <div class="blk key">
+          <div class="bn">3</div>
+          <div>
+            <div class="bt">Sumar algo a la mesa</div>
+            <div class="bd">Ramo de flores, chocolates, pistachos o traslado en limousine. <strong>Aparecen solo si la ocasión lo amerita</strong>: si eligió “Cena” no se muestran; si eligió “Aniversario” o “Cumpleaños”, sí.</div>
+            <div class="bl">Se paga en la mesa junto con la cuenta. Sin pagos por internet</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">4</div>
+          <div>
+            <div class="bt">Resumen antes de confirmar</div>
+            <div class="bd">Una línea con todo lo elegido y el total de los adicionales. Que nadie confirme sin saber qué pidió.</div>
+          </div>
+        </div>
+        <div class="blk">
+          <div class="bn">5</div>
+          <div>
+            <div class="bt">Confirmación</div>
+            <div class="bd">Mensaje en pantalla y correo automático con la identidad de la casa. Al local le llega el pedido con todos los datos ordenados.</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 24px 22px"><div class="note" style="margin:0">
+        <span class="label">Las otras tres solapas</span>
+        <p><strong>Evento</strong> es el mismo formulario que está al final de la página de Eventos, no otro distinto. <strong>Limousine</strong> pide trayecto y horario, y es siempre una consulta: nunca una reserva confirmada al instante, porque hay un solo vehículo. <strong>Menú ejecutivo</strong> es el más corto de todos: día, horario y cuántos son.</p>
+      </div></div>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="label">Resumen</div>
+      <h2>Qué hace cada página</h2>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Página</th><th>Su trabajo</th><th>Termina en</th></tr></thead>
+        <tbody>
+          <tr><td>Portada</td><td>Enamorar y repartir el tránsito</td><td>Reservar</td></tr>
+          <tr><td>Carta</td><td>Dar ganas y sacar dudas de precio</td><td>Reservar</td></tr>
+          <tr><td>La Casa</td><td>Mostrar el lugar y contar la historia</td><td>Reservar</td></tr>
+          <tr><td>Eventos</td><td>Explicar las opciones de festejo</td><td>Consulta de evento</td></tr>
+          <tr><td>Reservar</td><td>Tomar el pedido y ordenarlo</td><td>Confirmación</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="label">La regla que sostiene todo</span>
+      <p>Las cuatro primeras páginas convencen. <strong>Reservar es la única que pide datos.</strong> Por eso no hay formulario de contacto, ni botón flotante de WhatsApp, ni teléfono suelto en el medio de una página: todo lo que compite con Reservar le resta.</p>
+    </div>
+  </section>
+
+  <footer class="doc">
+    <span>Paul Roger · Estructura de las cinco páginas</span>
+    <span>14 de septiembre de 2026</span>
+  </footer>
+
+</div>
