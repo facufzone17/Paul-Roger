@@ -273,7 +273,15 @@
   justify-items: center;
   gap: 1rem;
   padding-block: clamp(4.5rem, 9vw, 8rem) var(--seccion);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--linea);
+  background: radial-gradient(60% 90% at 50% 120%, color-mix(in srgb, var(--pr-rojo) 16%, transparent) 0%, transparent 70%);
   text-align: center;
+}
+
+.cierreFirma {
+  color: var(--accion);
+  margin-bottom: 0.25rem;
 }
 
 .cierreTitulo {

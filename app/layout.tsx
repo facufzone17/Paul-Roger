@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Montserrat, Prata } from 'next/font/google'
+import { Cormorant_Garamond, Montserrat } from 'next/font/google'
 
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
@@ -9,9 +9,14 @@ import { SITIO } from '@/data/sitio'
 
 import './globals.css'
 
-/* Títulos: IvyMode según el manual. Mientras no se confirme Creative Cloud, Prata (libre).
+/* Títulos: IvyMode según el manual. Mientras no se confirme Creative Cloud, Cormorant Garamond (libre).
    Para cambiarla alcanza con reemplazar esta fuente: todo el sitio lee --fuente-titulos. */
-const prata = Prata({ weight: '400', subsets: ['latin'], display: 'swap', variable: '--font-prata' })
+const titulos = Cormorant_Garamond({
+  weight: ['300', '500'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-titulos',
+})
 const montserrat = Montserrat({ subsets: ['latin'], display: 'swap', variable: '--font-montserrat' })
 
 /** La maqueta no se indexa. Al publicar en paulroger.com.ar: NEXT_PUBLIC_INDEXAR=si */
@@ -44,7 +49,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-AR" data-scroll-behavior="smooth" className={`${prata.variable} ${montserrat.variable}`}>
+    <html lang="es-AR" data-scroll-behavior="smooth" className={`${titulos.variable} ${montserrat.variable}`}>
       <body>
         <a href="#contenido" className="saltar">
           Saltar al contenido
