@@ -5,8 +5,7 @@ import { Carta } from '@/components/carta/Carta'
 import { Glifo, Icono } from '@/components/marca/Icono'
 import { Apertura } from '@/components/ui/Apertura'
 import { CierreReservar } from '@/components/ui/CierreReservar'
-import { Falta } from '@/components/ui/Falta'
-import { CARTA, FECHA_PRECIOS, SERVICIO_DE_MESA } from '@/data/carta'
+import { CARTA, FECHA_PRECIOS, MENU_EJECUTIVO, SERVICIO_DE_MESA } from '@/data/carta'
 import { precio } from '@/lib/formato'
 
 import s from './carta.module.css'
@@ -34,18 +33,39 @@ export default function PaginaCarta() {
       {/* Franja destacada del Menú ejecutivo, con su propia reserva */}
       <div className={`contenedor ${s.ejecutivoMarco}`}>
         <aside className={s.ejecutivo} aria-labelledby="ejecutivo-titulo">
-          <Icono nombre="servicio" alto={46} className={s.ejecutivoIcono} />
-          <div className={s.ejecutivoTexto}>
-            <h2 id="ejecutivo-titulo" className={s.ejecutivoTitulo}>
-              Menú ejecutivo
-            </h2>
-            <p>De lunes a viernes, al mediodía.</p>
-            <Falta>horario, precio y qué incluye</Falta>
+          <div className={s.ejecutivoCabecera}>
+            <Icono nombre="servicio" alto={40} className={s.ejecutivoIcono} />
+            <div>
+              <h2 id="ejecutivo-titulo" className={s.ejecutivoTitulo}>
+                Menú ejecutivo
+              </h2>
+              <p className={s.ejecutivoHorario}>{MENU_EJECUTIVO.horario}</p>
+            </div>
           </div>
-          <Link href="/reservar?tipo=ejecutivo" className="btn btn-primario">
-            Reservar mediodía
-            <Glifo tipo="flecha" />
-          </Link>
+
+          <ul role="list" className={s.ejecutivoOpciones}>
+            {MENU_EJECUTIVO.opciones.map((op) => (
+              <li key={op.id} className={s.ejecutivoOpcion}>
+                <p className={s.ejecutivoOpcionNombre}>
+                  {op.nombre}
+                  <span className={s.ejecutivoOpcionDescripcion}> — {op.descripcion}</span>
+                </p>
+                <p className={s.ejecutivoOpcionPrecio}>{precio(op.precio)}</p>
+              </li>
+            ))}
+          </ul>
+
+          <p className={s.ejecutivoNota}>
+            Postre a elección: {MENU_EJECUTIVO.postres.join(', ')}. {MENU_EJECUTIVO.incluye}
+          </p>
+
+          <div className={s.ejecutivoPie}>
+            <p className={s.ejecutivoDescuento}>{MENU_EJECUTIVO.descuentoEfectivo}% off abonando en efectivo</p>
+            <Link href="/reservar?tipo=ejecutivo" className="btn btn-primario">
+              Reservar mediodía
+              <Glifo tipo="flecha" />
+            </Link>
+          </div>
         </aside>
       </div>
 

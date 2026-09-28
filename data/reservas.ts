@@ -52,4 +52,7 @@ export const TURNOS_EJEMPLO = {
   noche: cadaMediaHora('20:00', '23:30'),
 }
 
+/** Turnos del menú ejecutivo: confirmados (Instagram, septiembre de 2026), de lunes a viernes de 12 a 16 h. */
+export const TURNOS_EJECUTIVO = cadaMediaHora('12:00', '16:00')
+
 export const PERSONAS_MAX_MESA = 12

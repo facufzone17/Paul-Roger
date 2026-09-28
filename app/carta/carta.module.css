@@ -4,30 +4,88 @@
 
 .ejecutivo {
   display: grid;
-  gap: 1.1rem 1.75rem;
-  align-items: center;
+  gap: 1.25rem;
   padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
   border: 1px solid var(--accion);
   border-radius: var(--radio-control);
   background: linear-gradient(100deg, color-mix(in srgb, var(--pr-rojo) 14%, transparent) 0%, transparent 70%);
 }
 
-.ejecutivoIcono {
-  color: var(--accion);
+.ejecutivoCabecera {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.ejecutivoTexto {
-  display: grid;
-  justify-items: start;
-  gap: 0.35rem;
+.ejecutivoIcono {
+  flex: none;
+  color: var(--accion);
 }
 
 .ejecutivoTitulo {
   font-size: var(--t-3);
 }
 
+.ejecutivoHorario {
+  color: var(--texto-2);
+}
+
+.ejecutivoOpciones {
+  display: grid;
+}
+
+.ejecutivoOpcion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.3rem 1.25rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+.ejecutivoOpcion:last-child {
+  border-bottom: none;
+}
+
+.ejecutivoOpcionNombre {
+  font-weight: 500;
+  color: var(--pr-crudo);
+}
+
+.ejecutivoOpcionDescripcion {
+  font-weight: 400;
+  color: var(--texto-2);
+}
+
+.ejecutivoOpcionPrecio {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--pr-crudo);
+}
+
+.ejecutivoNota {
+  max-width: 62ch;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--texto-2);
+}
+
+.ejecutivoPie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ejecutivoDescuento {
+  font-weight: 600;
+  color: var(--accion);
+}
+
 @media (min-width: 760px) {
-  .ejecutivo {
-    grid-template-columns: auto 1fr auto;
+  .ejecutivoOpcion {
+    padding-block: 0.55rem;
   }
 }
