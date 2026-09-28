@@ -9,7 +9,7 @@
   object-fit: cover;
 }
 
-/* Degradé negro #1d1d1b (100% → 0%) o rojo #e52521, como pide el manual */
+/* Degradé negro (--pr-negro, 100% → 0%) o rojo #e52521, como pide el manual */
 .marco::after {
   content: '';
   position: absolute;

@@ -7,7 +7,7 @@
 :root {
   /* Paleta del manual (pág. 16) */
   --pr-rojo: #e52521;
-  --pr-negro: #1d1d1b;
+  --pr-negro: #000000; /* fondo de la web: negro puro (antes el #1d1d1b del manual) */
   --pr-gris: #3c3c3b;
   --pr-blanco: #ffffff;
   --pr-crudo: #f9ecdc;
@@ -93,6 +93,44 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Barra de scroll de la marca: fina, sin flechas, sobre el fondo de la web y con
+   el deslizador en rojo Paul Roger, como una brasa (más vivo al pasar el mouse).
+   Chrome/Safari/Edge usan los ::-webkit-scrollbar; Firefox, las propiedades
+   estándar (que en Chrome anularían el degradé, por eso van aparte). */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--pr-rojo), color-mix(in srgb, var(--pr-rojo) 62%, #000));
+  border: 3px solid var(--bg);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: var(--pr-rojo);
+  border-width: 2px;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+  display: none;
+  background: var(--bg);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--pr-rojo) var(--bg);
   }
 }
 
