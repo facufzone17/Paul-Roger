@@ -32,12 +32,12 @@ export const SITIO = {
 export const NAV_IZQUIERDA = [
   { label: 'La Casa', href: '/la-casa' },
   { label: 'Carta', href: '/carta' },
-  { label: 'Eventos', href: '/eventos' },
+  { label: 'Nosotros', href: '/nosotros' },
 ] as const
 
 export const NAV_DERECHA = [
+  { label: 'Eventos Privados', href: '/eventos' },
   { label: 'Sala VIP', href: '/sala-vip' },
-  { label: 'Nosotros', href: '/nosotros' },
 ] as const
 
 /** Servicios del pie de página (wireframe: "Eventos Privados" destacado). */
