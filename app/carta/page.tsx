@@ -61,8 +61,8 @@ export default function PaginaCarta() {
 
           <div className={s.ejecutivoPie}>
             <p className={s.ejecutivoDescuento}>{MENU_EJECUTIVO.descuentoEfectivo}% off abonando en efectivo</p>
-            <Link href="/reservar?tipo=ejecutivo" className="btn btn-primario">
-              Reservar mediodía
+            <Link href="/reservar?tipo=mesa" className="btn btn-primario">
+              Reservar mesa al mediodía
               <Glifo tipo="flecha" />
             </Link>
           </div>

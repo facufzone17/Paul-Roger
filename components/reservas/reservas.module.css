@@ -6,7 +6,7 @@
 
 .tabs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid var(--linea-fuerte);
   border-radius: var(--radio-control);
   overflow: hidden;
@@ -17,13 +17,12 @@
   min-height: 58px;
   padding: 0.75rem 0.5rem;
   border: 0;
-  border-top: 1px solid var(--linea);
   border-left: 1px solid var(--linea);
   background: transparent;
   color: var(--texto-2);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
   transition:
@@ -31,11 +30,7 @@
     color 200ms ease;
 }
 
-.tab:nth-child(-n + 2) {
-  border-top: 0;
-}
-
-.tab:nth-child(odd) {
+.tab:first-child {
   border-left: 0;
 }
 
@@ -63,20 +58,9 @@
 }
 
 @media (min-width: 720px) {
-  .tabs {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .tab {
-    border-top: 0;
-  }
-
-  .tab:nth-child(odd) {
-    border-left: 1px solid var(--linea);
-  }
-
-  .tab:first-child {
-    border-left: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
   }
 }
 

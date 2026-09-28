@@ -256,9 +256,12 @@
   min-height: 60px;
   padding-inline: 8px;
   font-family: var(--fuente-titulos);
-  font-size: clamp(2rem, 1.3rem + 3.6vw, 3.1rem);
-  line-height: 1;
+  /* Escala con el ancho: "Eventos Privados" entra en una línea hasta en un Android de 320-360 px */
+  font-size: clamp(1.4rem, 8vw, 3.1rem);
+  line-height: 1.05;
   letter-spacing: 0.02em;
+  text-align: center;
+  text-wrap: balance;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--pr-blanco);

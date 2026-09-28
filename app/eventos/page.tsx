@@ -52,7 +52,7 @@ export default function PaginaEventos() {
           <article id="mesa-festejo" className={s.detalle}>
             <Foto foto={FOTOS.cardFlan} sizes="(min-width: 900px) 45vw, 100vw" capa="suave" className={s.detalleFoto} />
             <div className={s.detalleTexto} data-reveal>
-              <p className="volanta">Escalón 01 · Mesa de festejo</p>
+              <p className="volanta">Mesa de festejo</p>
               <h3 className="titulo-3">{DETALLE_MESA_FESTEJO.titulo}</h3>
               <dl className={s.puntos}>
                 {DETALLE_MESA_FESTEJO.puntos.map((p) => (
@@ -75,7 +75,7 @@ export default function PaginaEventos() {
           <article id="exclusividad" className={`${s.detalle} ${s.detalleInvertido}`}>
             <Foto foto={FOTOS.casaSalon} sizes="(min-width: 900px) 45vw, 100vw" capa="suave" className={s.detalleFoto} />
             <div className={s.detalleTexto} data-reveal>
-              <p className="volanta">Escalón 03 · Exclusividad total</p>
+              <p className="volanta">Exclusividad total</p>
               <h3 className="titulo-3">{DETALLE_EXCLUSIVIDAD.titulo}</h3>
               <dl className={s.puntos}>
                 {DETALLE_EXCLUSIVIDAD.puntos.map((p) => (
@@ -111,7 +111,6 @@ export default function PaginaEventos() {
           <ul role="list" className={s.menus}>
             {MENUS_EVENTO.map((m, i) => (
               <li key={m.id} className={s.menu} data-reveal style={{ '--reveal-delay': `${i * 70}ms` } as React.CSSProperties}>
-                <span className={s.menuNumero}>{String(i + 1).padStart(2, '0')}</span>
                 <h3 className={s.menuNombre}>{m.nombre}</h3>
                 <p>{m.descripcion}</p>
               </li>
@@ -130,9 +129,8 @@ export default function PaginaEventos() {
             </h2>
           </div>
           <ul role="list" className={s.adicionales}>
-            {ADICIONALES.map((a, i) => (
+            {ADICIONALES.map((a) => (
               <li key={a.id} className={s.adicional} data-reveal>
-                <span className={s.adicionalNumero}>{String(i + 1).padStart(2, '0')}</span>
                 <h3 className={s.adicionalNombre}>{a.nombre}</h3>
                 <p>{a.descripcion}</p>
                 {a.id === 'dj' && <Falta>costo del DJ y de las islas gastronómicas</Falta>}

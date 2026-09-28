@@ -73,6 +73,39 @@
   color: var(--texto-2);
 }
 
+/* Celular: la foto arriba, entera y sin texto encima; el texto va debajo, sobre el negro. */
+@media (max-width: 699px) {
+  .conBloque .bloque {
+    display: block;
+    min-height: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .conBloque .foto {
+    position: relative !important;
+    z-index: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radio-media);
+  }
+
+  /* Sin texto encima, alcanza con un velo suave abajo */
+  .conBloque .bloque .foto::after {
+    background: linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--pr-negro) 35%, transparent) 100%);
+  }
+
+  .conBloque .texto {
+    padding: 1.75rem calc(var(--gutter) - clamp(10px, 1.4vw, 20px)) 0;
+  }
+
+  .conBloque .vacio {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radio-media);
+  }
+}
+
 .acciones {
   display: flex;
   flex-wrap: wrap;

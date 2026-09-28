@@ -17,8 +17,12 @@
 }
 
 .tituloApilado {
-  max-width: 12ch;
+  max-width: 16ch;
+  margin-inline: auto;
   font-size: var(--t-1);
+  line-height: 1.05;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .lista {

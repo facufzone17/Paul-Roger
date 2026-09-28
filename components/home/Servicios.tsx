@@ -221,7 +221,7 @@ export function Servicios() {
       <div className={`contenedor ${s.cierre}`} data-reveal>
         <Icono nombre="reserva" alto={34} className={s.cierreFirma} />
         <p className={s.cierreTitulo}>La mesa está puesta.</p>
-        <p className={s.cierreTexto}>Mesa, evento, limousine o menú ejecutivo: todo se reserva desde acá.</p>
+        <p className={s.cierreTexto}>Mesa, evento o limousine: todo se reserva desde acá.</p>
         <Link href="/reservar" className="btn btn-primario btn-grande">
           Reservar
         </Link>

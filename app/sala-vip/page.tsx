@@ -72,7 +72,6 @@ export default function PaginaSalaVip() {
           </div>
           <div className={s.dosUsos}>
             <article className={s.uso} data-reveal>
-              <span className={s.usoNumero}>01</span>
               <h3 className={s.usoTitulo}>Cenas y celebraciones íntimas</h3>
               <p>
                 Un cumpleaños, un aniversario, una pedida de mano o una cena de amigos, con la cocina de la casa o un menú pensado para la ocasión, y
@@ -80,7 +79,6 @@ export default function PaginaSalaVip() {
               </p>
             </article>
             <article className={s.uso} data-reveal>
-              <span className={s.usoNumero}>02</span>
               <h3 className={s.usoTitulo}>Reuniones de trabajo y coworking</h3>
               <p>
                 Un espacio cerrado con TV para presentar, combinable con el menú ejecutivo de lunes a viernes al mediodía. Para equipos, clientes o

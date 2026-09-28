@@ -12,7 +12,6 @@ export const EVENTOS_INTRO =
 export const ESCALONES: Escalon[] = [
   {
     id: 'mesa-festejo',
-    numero: '01',
     nombre: 'Mesa de festejo',
     capacidad: 'En el salón',
     capacidadFalta: 'cantidad máxima de personas por mesa',
@@ -20,14 +19,12 @@ export const ESCALONES: Escalon[] = [
   },
   {
     id: 'salon-privado',
-    numero: '02',
     nombre: 'Sala VIP',
     capacidad: 'Hasta 16 personas',
     resumen: 'Un espacio cerrado con TV, aire acondicionado y privacidad.',
   },
   {
     id: 'exclusividad',
-    numero: '03',
     nombre: 'Exclusividad total',
     capacidad: 'El espacio completo',
     capacidadFalta: 'capacidad del espacio completo',

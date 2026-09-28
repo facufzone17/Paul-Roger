@@ -153,9 +153,8 @@
 .sub {
   padding-top: 2rem;
   scroll-margin-top: calc(var(--arriba) + var(--barra-movil) + 8px);
-  /* Lo que está lejos de la pantalla no se calcula hasta que el usuario llega (la carta es muy larga). */
-  content-visibility: auto;
-  contain-intrinsic-size: auto 720px;
+  /* Sin content-visibility: con alturas estimadas, las subcategorías crecían al
+     aparecer durante el scroll y los saltos de las pestañas quedaban cortos. */
 }
 
 .subCabecera {

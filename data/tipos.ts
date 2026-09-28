@@ -120,7 +120,6 @@ export type EscalonId = 'mesa-festejo' | 'salon-privado' | 'exclusividad'
 
 export interface Escalon {
   id: EscalonId
-  numero: string
   nombre: string
   capacidad: string
   capacidadFalta?: string

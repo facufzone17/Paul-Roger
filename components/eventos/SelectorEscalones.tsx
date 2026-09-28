@@ -31,7 +31,6 @@ export function SelectorEscalones() {
         const esPagina = e.id === 'salon-privado'
         return (
           <li key={e.id} className={cx(s.escalon, elegido && s.escalonElegido)}>
-            <span className={s.escalonNumero}>Escalón {e.numero}</span>
             <p className={s.escalonCapacidad}>{e.capacidad}</p>
             {e.capacidadFalta && <Falta>{e.capacidadFalta}</Falta>}
             <h3 className={s.escalonNombre}>{e.nombre}</h3>

@@ -36,7 +36,25 @@ export function ScrollSuave() {
       gsap.ticker.add(tick)
       gsap.ticker.lagSmoothing(0)
 
+      // Las anclas de la misma página (#consulta, pestañas de la carta…) las lleva Lenis.
+      // Si el salto quedara en manos del navegador, Lenis lo pisa cuando todavía tiene
+      // inercia, y cualquier otro scroll suave (la fila de chips de la carta) lo corta a mitad de camino.
+      const alClick = (e: MouseEvent) => {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+        const link = (e.target as Element | null)?.closest?.('a[href*="#"]') as HTMLAnchorElement | null
+        if (!link || (link.target && link.target !== '_self')) return
+        const url = new URL(link.href)
+        if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search || !url.hash) return
+        const destino = document.getElementById(decodeURIComponent(url.hash.slice(1)))
+        if (!destino) return
+        e.preventDefault()
+        lenis.scrollTo(destino)
+        if (url.hash !== location.hash) history.pushState(null, '', url.hash)
+      }
+      document.addEventListener('click', alClick)
+
       deshacer = () => {
+        document.removeEventListener('click', alClick)
         gsap.ticker.remove(tick)
         lenis.destroy()
       }

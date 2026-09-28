@@ -58,13 +58,15 @@ export function Carta({ secciones }: { secciones: SeccionCarta[] }) {
   }, [secciones])
 
   // En el celular, el chip de la subcategoría activa se asoma solo (scroll horizontal, sin mover la página).
+  // Sin "smooth" a propósito: en Chrome un scroll suave nuevo cancela el que está en curso, y
+  // al tocar una pestaña (Cocina → Vinos) la página quedaba frenada a mitad de camino.
   useEffect(() => {
     const fila = chips.current
     const chip = fila?.querySelector<HTMLElement>(`[data-chip="${activa.sub}"]`)
     if (!fila || !chip) return
     const izquierda = chip.offsetLeft - 16
     if (izquierda < fila.scrollLeft || chip.offsetLeft + chip.offsetWidth > fila.scrollLeft + fila.clientWidth) {
-      fila.scrollTo({ left: izquierda, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+      fila.scrollLeft = izquierda
     }
   }, [activa.sub])
 
@@ -137,7 +139,9 @@ export function Carta({ secciones }: { secciones: SeccionCarta[] }) {
         {/* ---------- contenido de corrido */}
         <div className={s.contenido}>
           {secciones.map((sec) => (
-            <section key={sec.id} id={sec.id} className={s.seccion} aria-labelledby={`${sec.id}-titulo`}>
+            // La sección entera también la mira el scroll-spy: al saltar con una pestaña, lo que queda
+            // a la altura de la línea es su margen de arriba, y la pestaña tiene que marcarse igual.
+            <section key={sec.id} id={sec.id} className={s.seccion} aria-labelledby={`${sec.id}-titulo`} data-seccion={sec.id} data-primera={sec.subcategorias[0].id}>
               <div className={s.franja}>
                 <Image src={FOTO_SECCION[sec.id].src} alt="" fill sizes="100vw" quality={60} className={s.franjaImg} />
               </div>

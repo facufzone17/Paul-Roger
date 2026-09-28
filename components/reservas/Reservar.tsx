@@ -6,7 +6,6 @@ import { TIPOS_RESERVA, type OcasionId, type TipoReserva } from '@/data/reservas
 import type { ComplementoId, EscalonId } from '@/data/tipos'
 import { cx } from '@/lib/formato'
 
-import { FormEjecutivo } from './FormEjecutivo'
 import { FormEvento } from './FormEvento'
 import { FormLimousine } from './FormLimousine'
 import { FormMesa } from './FormMesa'
@@ -20,8 +19,9 @@ interface Props {
 }
 
 /**
- * Motor de reservas: cuatro pestañas (Mesa · Evento · Limousine · Menú ejecutivo),
- * preseleccionadas desde la URL (?tipo=, ?extra=, ?escalon=). Los cuatro formularios
+ * Motor de reservas: tres pestañas (Mesa · Evento · Limousine), preseleccionadas
+ * desde la URL (?tipo=, ?extra=, ?escalon=). El menú ejecutivo no es un tipo de
+ * reserva: se pide en la mesa, así que se reserva como Mesa. Los tres formularios
  * quedan montados para no perder lo escrito al cambiar de pestaña.
  */
 export function Reservar({ tipoInicial, extras, ocasionInicial, escalonInicial }: Props) {
@@ -76,9 +76,6 @@ export function Reservar({ tipoInicial, extras, ocasionInicial, escalonInicial }
       </div>
       <div role="tabpanel" id="panel-limousine" aria-labelledby="tab-limousine" hidden={tipo !== 'limousine'} className={s.panel}>
         <FormLimousine />
-      </div>
-      <div role="tabpanel" id="panel-ejecutivo" aria-labelledby="tab-ejecutivo" hidden={tipo !== 'ejecutivo'} className={s.panel}>
-        <FormEjecutivo />
       </div>
     </div>
   )

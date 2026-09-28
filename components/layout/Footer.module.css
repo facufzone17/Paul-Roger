@@ -110,28 +110,23 @@
   height: auto;
 }
 
+/* Celular: grilla de dos columnas, así todas las filas arrancan en la misma línea */
 .servicios {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 0.25rem;
-  row-gap: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  column-gap: 2.25rem;
 }
 
 .servicios a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding-inline: 0.7rem;
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--texto-2);
-}
-
-.servicios li:first-child a {
-  padding-left: 0;
 }
 
 .servicios a:hover {
@@ -155,6 +150,14 @@
 
 .instagram svg {
   color: var(--accion);
+}
+
+@media (min-width: 640px) {
+  .servicios {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.6rem;
+  }
 }
 
 @media (min-width: 1100px) {

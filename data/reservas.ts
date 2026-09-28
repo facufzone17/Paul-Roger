@@ -7,7 +7,6 @@ export const TIPOS_RESERVA = [
   { id: 'mesa', titulo: 'Mesa' },
   { id: 'evento', titulo: 'Evento' },
   { id: 'limousine', titulo: 'Limousine' },
-  { id: 'ejecutivo', titulo: 'Menú ejecutivo' },
 ] as const
 
 export type TipoReserva = (typeof TIPOS_RESERVA)[number]['id']
@@ -51,8 +50,5 @@ export const TURNOS_EJEMPLO = {
   mediodia: cadaMediaHora('12:00', '15:00'),
   noche: cadaMediaHora('20:00', '23:30'),
 }
-
-/** Turnos del menú ejecutivo: confirmados (Instagram, septiembre de 2026), de lunes a viernes de 12 a 16 h. */
-export const TURNOS_EJECUTIVO = cadaMediaHora('12:00', '16:00')
 
 export const PERSONAS_MAX_MESA = 12

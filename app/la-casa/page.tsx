@@ -53,7 +53,7 @@ export default function PaginaLaCasa() {
       <section id="salon" className={`seccion ${s.bloque}`} aria-labelledby="salon-titulo">
         <div className={`contenedor ${s.bloqueGrilla}`}>
           <div className={s.bloqueTexto} data-reveal>
-            <p className="volanta">01 · El salón</p>
+            <p className="volanta">El salón</p>
             <h2 id="salon-titulo" className="titulo-2">
               Fuego a la vista y mesas para la cena larga
             </h2>
@@ -76,7 +76,7 @@ export default function PaginaLaCasa() {
       <section id="barra" className={`seccion ${s.bloque} ${s.bloqueOscuro}`} aria-labelledby="barra-titulo">
         <div className={`contenedor ${s.bloqueGrilla} ${s.invertido}`}>
           <div className={s.bloqueTexto} data-reveal>
-            <p className="volanta">02 · La barra</p>
+            <p className="volanta">La barra</p>
             <h2 id="barra-titulo" className="titulo-2">
               Coctelería de autor y una pared de vinos
             </h2>
@@ -108,7 +108,7 @@ export default function PaginaLaCasa() {
         <div className="contenedor">
           <div className={s.musicaCabecera} data-reveal>
             <div>
-              <p className="volanta">03 · Música en vivo</p>
+              <p className="volanta">Música en vivo</p>
               <h2 id="musica-titulo" className="titulo-2">
                 La música también es de la casa
               </h2>

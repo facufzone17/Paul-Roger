@@ -12,7 +12,7 @@ import s from './reservar.module.css'
 
 export const metadata: Metadata = {
   title: 'Reservar',
-  description: 'Reservá tu mesa en Paul Roger, Polo Design, Hudson. También eventos, Sala VIP, limousine y menú ejecutivo, con todos los datos en un solo lugar.',
+  description: 'Reservá tu mesa en Paul Roger, Polo Design, Hudson. También eventos, Sala VIP y limousine, con todos los datos en un solo lugar.',
   alternates: { canonical: '/reservar' },
 }
 
@@ -20,7 +20,7 @@ const primero = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] :
 
 /**
  * /reservar: el único lugar del sitio donde se piden datos.
- * ?tipo=mesa|evento|limousine|ejecutivo · ?extra=flores|chocolates|pistachos|limousine
+ * ?tipo=mesa|evento|limousine · ?extra=flores|chocolates|pistachos|limousine
  * ?escalon=mesa-festejo|salon-privado|exclusividad · ?ocasion=aniversario|cumpleanos|…
  */
 export default async function PaginaReservar({ searchParams }: PageProps<'/reservar'>) {
@@ -43,7 +43,7 @@ export default async function PaginaReservar({ searchParams }: PageProps<'/reser
         <div className={`contenedor ${s.texto}`}>
           <p className="volanta">Reservar</p>
           <h1 className="titulo-1">Reservá en Paul Roger</h1>
-          <p className="bajada">Mesa, evento, limousine o menú ejecutivo. Todo desde acá, con los datos completos y sin idas y vueltas por mensajes.</p>
+          <p className="bajada">Mesa, evento o limousine. Todo desde acá, con los datos completos y sin idas y vueltas por mensajes.</p>
         </div>
       </header>
       <div className={`contenedor ${s.cuerpo}`}>

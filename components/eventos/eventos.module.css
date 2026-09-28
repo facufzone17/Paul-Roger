@@ -27,17 +27,9 @@
   border-color: var(--pr-crudo);
 }
 
-.escalonNumero {
-  font-size: var(--t-mini);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--texto-3);
-}
 
 /* La capacidad es lo primero que se lee: es el criterio de decisión */
 .escalonCapacidad {
-  margin-top: 0.5rem;
   font-family: var(--fuente-titulos);
   font-size: clamp(1.9rem, 1.4rem + 1.5vw, 2.6rem);
   line-height: 1.05;
@@ -180,12 +172,6 @@
   color: var(--texto-2);
 }
 
-.menuNumero {
-  font-size: var(--t-mini);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--texto-3);
-}
 
 .menuNombre {
   font-size: 1.45rem;
@@ -225,19 +211,10 @@
   color: var(--texto-2);
 }
 
-.adicionalNumero {
-  display: block;
-  width: 100%;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid var(--linea-fuerte);
-  font-size: var(--t-mini);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--texto-3);
-}
-
 .adicionalNombre {
-  margin-top: 0.4rem;
+  width: 100%;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea-fuerte);
   font-size: 1.35rem;
   color: var(--pr-crudo);
 }

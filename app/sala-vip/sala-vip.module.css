@@ -64,12 +64,6 @@
   color: var(--texto-2);
 }
 
-.usoNumero {
-  font-size: var(--t-mini);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--texto-3);
-}
 
 .usoTitulo {
   font-size: var(--t-3);
