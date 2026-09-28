@@ -50,20 +50,6 @@ export const SERVICIOS_FOOTER = [
   { label: 'Limousine', href: '/reservar?tipo=limousine' },
 ] as const
 
-/** Recorrido del cliente, del documento de cultura (Capacitación Nº 1, Consultoría Mentor). */
-export const RECORRIDO_DEL_CLIENTE = [
-  'Reserva',
-  'Llegada',
-  'Recepción',
-  'Mesa',
-  'Pedido',
-  'Comida',
-  'Servicio',
-  'Pago',
-  'Despedida',
-  'Recuerdo',
-] as const
-
 export const CULTURA = {
   mision:
     'Crear experiencias gastronómicas únicas y memorables, integrando excelencia, hospitalidad y calidez humana.',
