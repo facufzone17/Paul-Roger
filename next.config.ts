@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     // (la mayoría llega desde Instagram, por primera vez y en 4G).
     inlineCss: true,
   },
+  async redirects() {
+    // La sección se llamaba Private Dining: los links viejos (Instagram, Google) siguen andando.
+    return [{ source: '/private-dining', destination: '/sala-vip', permanent: true }]
+  },
   images: {
     // AVIF primero (más liviano en 4G), WebP de respaldo.
     formats: ['image/avif', 'image/webp'],

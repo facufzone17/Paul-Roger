@@ -184,7 +184,7 @@ export function FormMesa({ extras, ocasionInicial, onPasarAEvento }: Props) {
           ]}
           valor={d.sector}
           onCambio={(v) => setD((x) => ({ ...x, sector: v }))}
-          ayuda="¿Buscás el salón privado? Se consulta como evento, desde la pestaña Evento."
+          ayuda="¿Buscás la Sala VIP? Se consulta como evento, desde la pestaña Evento."
         />
 
         <Opciones

@@ -2,6 +2,8 @@ import type { StaticImageData } from 'next/image'
 
 import casaBarra from '@/public/img/pr-casa-barra.webp'
 import casaCava from '@/public/img/pr-casa-cava.webp'
+import casaMusica from '@/public/img/pr-casa-musica.webp'
+import casaPrivado from '@/public/img/pr-casa-privado.webp'
 import casaSalon from '@/public/img/pr-casa-salon.webp'
 import casaVinos from '@/public/img/pr-casa-vinos.webp'
 import cardBifeChorizo from '@/public/img/pr-card-bife-chorizo.webp'
@@ -43,6 +45,8 @@ export const FOTOS = {
   casaBarra: { src: casaBarra, alt: 'La barra de noche: botellero iluminado, bartenders trabajando y sushi sobre la barra' },
   casaVinos: { src: casaVinos, alt: 'La pared de vinos iluminada, con un mozo pasando entre las mesas' },
   casaSalon: { src: casaSalon, alt: 'El salón de día, con la barra y el neón de Paul Roger al fondo' },
+  casaPrivado: { src: casaPrivado, alt: 'La Sala VIP: mesa larga de madera oscura puesta para dieciséis, lámpara de cristal y el neón de Paul Roger en la pared' },
+  casaMusica: { src: casaMusica, alt: 'La batería acrílica sobre el escenario, iluminada en rojo y azul' },
   casaCava: { src: casaCava, alt: 'La cava de vinos iluminada, vista desde las mesas en penumbra' },
   complementoLimousine: { src: complementoLimousine, alt: 'La limousine negra de Paul Roger estacionada frente al cartel de la casa' },
   complementoFlores: { src: complementoFlores, alt: 'Heladera exhibidora con ramos de flores de colores' },
