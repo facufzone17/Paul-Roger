@@ -3,10 +3,10 @@
 import { useId, useRef, useState } from 'react'
 
 import { fechaLarga } from '@/data/agenda'
-import { PERSONAS_MAX_MESA, TURNOS_EJEMPLO } from '@/data/reservas'
+import { PERSONAS_MAX_MESA, TURNOS_EJECUTIVO } from '@/data/reservas'
 import { cx } from '@/lib/formato'
 
-import { AvisoErrores, Campo, enfocarPrimerError, NotaFalta, useHoy, validarContacto, validarFecha, type Errores } from './campos'
+import { AvisoErrores, Campo, enfocarPrimerError, useHoy, validarContacto, validarFecha, type Errores } from './campos'
 import { Confirmacion } from './Confirmacion'
 import s from './reservas.module.css'
 
@@ -64,8 +64,7 @@ export function FormEjecutivo() {
   return (
     <form ref={form} className={cx(s.form, s.formUnaColumna)} onSubmit={enviar} noValidate aria-label="Reserva de menú ejecutivo">
       <div className={s.campos}>
-        <p className={s.intro}>De lunes a viernes, al mediodía. Pensado para una reunión de trabajo o un almuerzo sin apuro.</p>
-        <NotaFalta>días, horario, precio y qué incluye el menú ejecutivo</NotaFalta>
+        <p className={s.intro}>De lunes a viernes, de 12 a 16 h. Pensado para una reunión de trabajo o un almuerzo sin apuro.</p>
         <AvisoErrores cantidad={cantidadErrores} />
 
         <div className={s.fila}>
@@ -76,7 +75,7 @@ export function FormEjecutivo() {
             {(p) => (
               <select {...p} name="horario" value={d.horario} onChange={cambiar('horario')}>
                 <option value="">Elegí un horario</option>
-                {TURNOS_EJEMPLO.mediodia.map((h) => (
+                {TURNOS_EJECUTIVO.map((h) => (
                   <option key={h}>{h}</option>
                 ))}
               </select>
