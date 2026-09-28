@@ -179,15 +179,14 @@
 
 /* ------------------------------------------------ foto ancha */
 
+/* 16:9 para mostrar el video entero, sin recortar arriba ni abajo */
 .ancha {
-  aspect-ratio: 16 / 10;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--superficie);
   border-radius: var(--radio-media);
-}
-
-@media (min-width: 700px) {
-  .ancha {
-    aspect-ratio: 21 / 9;
-  }
 }
 
 /* ------------------------------------------------ lo que nos mueve */
