@@ -21,9 +21,9 @@ export const ESCALONES: Escalon[] = [
   {
     id: 'salon-privado',
     numero: '02',
-    nombre: 'Salón privado',
+    nombre: 'Sala VIP',
     capacidad: 'Hasta 16 personas',
-    resumen: 'El VIP de la casa: un espacio cerrado con TV, aire acondicionado y privacidad.',
+    resumen: 'Un espacio cerrado con TV, aire acondicionado y privacidad.',
   },
   {
     id: 'exclusividad',
@@ -126,7 +126,7 @@ export const PRODUCTOS_PAUL_ROGER = [
 
 export const TIPOS_EVENTO = ['Cumpleaños', 'Aniversario', 'Pedida de mano', 'Cena de empresa', 'Reunión de trabajo', 'Otro'] as const
 
-/** Salón privado (Private Dining). El cliente confirmó: VIP y salón privado son el mismo espacio. */
+/** Sala VIP (antes "salón privado" / Private Dining): un solo espacio, confirmado por el cliente. */
 export const SALON_PRIVADO = {
   capacidad: 16,
   equipamiento: ['TV', 'Aire acondicionado', 'Privacidad'],

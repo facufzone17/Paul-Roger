@@ -30,7 +30,7 @@ export default function NoEncontrada() {
         <Link href="/carta">Carta</Link>
         <Link href="/la-casa">La Casa</Link>
         <Link href="/eventos">Eventos</Link>
-        <Link href="/private-dining">Private Dining</Link>
+        <Link href="/sala-vip">Sala VIP</Link>
       </nav>
     </section>
   )

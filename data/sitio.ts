@@ -9,7 +9,7 @@ export const SITIO = {
   frase: 'Bienvenidos a casa',
   url: 'https://paulroger.com.ar',
   descripcion:
-    'Parrilla contemporánea, sushi y coctelería de autor en Polo Design, Guillermo E. Hudson. Salón privado, eventos, música en vivo y limousine.',
+    'Parrilla contemporánea, sushi y coctelería de autor en Polo Design, Guillermo E. Hudson. Sala VIP, eventos, música en vivo y limousine.',
   direccion: {
     calle: 'Calle 47 6750',
     zona: 'Polo Design',
@@ -22,8 +22,12 @@ export const SITIO = {
     usuario: '@paulroger.hudson',
     url: 'https://www.instagram.com/paulroger.hudson/',
   },
+  /** Fuente: bio de @paulroger.hudson en Instagram (relevado 28-09-2026). */
   horarios: {
-    falta: 'horarios de cafetería, mediodía y noche',
+    turnos: [
+      { dias: 'Domingo a miércoles', abre: '09:00', cierra: '00:00', schema: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'] },
+      { dias: 'Jueves a sábado', abre: '09:00', cierra: '02:00', schema: ['Thursday', 'Friday', 'Saturday'] },
+    ],
   },
   /** Link para llegar: no es un mapa embebido, abre la app de mapas del celular. */
   comoLlegar: 'https://www.google.com/maps/search/?api=1&query=Paul+Roger+Calle+47+6750+Guillermo+E.+Hudson',
@@ -32,12 +36,12 @@ export const SITIO = {
 export const NAV_IZQUIERDA = [
   { label: 'La Casa', href: '/la-casa' },
   { label: 'Carta', href: '/carta' },
-  { label: 'Eventos', href: '/eventos' },
+  { label: 'Nosotros', href: '/nosotros' },
 ] as const
 
 export const NAV_DERECHA = [
-  { label: 'Private Dining', href: '/private-dining' },
-  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Eventos Privados', href: '/eventos' },
+  { label: 'Sala VIP', href: '/sala-vip' },
 ] as const
 
 /** Servicios del pie de página (wireframe: "Eventos Privados" destacado). */
@@ -45,7 +49,7 @@ export const SERVICIOS_FOOTER = [
   { label: 'Brasas', href: '/carta#fuertes' },
   { label: 'Sushi', href: '/carta#sushi' },
   { label: 'Coctelería', href: '/carta#cocteleria-de-autor' },
-  { label: 'Salón VIP', href: '/private-dining' },
+  { label: 'Sala VIP', href: '/sala-vip' },
   { label: 'Eventos Privados', href: '/eventos', destacado: true },
   { label: 'Limousine', href: '/reservar?tipo=limousine' },
 ] as const

@@ -16,7 +16,7 @@ import { FOTOS } from '@/lib/imagenes'
 export const metadata: Metadata = {
   title: 'Eventos',
   description:
-    'Cumpleaños, cenas de empresa y eventos privados en Paul Roger, Hudson: mesa de festejo, salón privado para 16 personas o la casa entera. Menús de evento, DJ y limousine.',
+    'Cumpleaños, cenas de empresa y eventos privados en Paul Roger, Hudson: mesa de festejo, Sala VIP para 16 personas o la casa entera. Menús de evento, DJ y limousine.',
   alternates: { canonical: '/eventos' },
 }
 

@@ -12,86 +12,86 @@
   padding-block: var(--seccion);
 }
 
-.foto {
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radio-media);
-  max-height: 72svh;
+.datos {
+  display: grid;
+  justify-items: center;
+  align-self: center;
+  text-align: center;
 }
 
-.datos {
-  align-self: center;
+.titulo {
+  font-size: var(--t-1);
+}
+
+/* Filete punteado dorado con el monograma, como la carta impresa */
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: min(100%, 360px);
+  margin: 1.25rem 0 2.5rem;
+  color: var(--accion);
+}
+
+.divisor::before,
+.divisor::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: radial-gradient(circle, var(--pr-oro) 0.9px, transparent 1.2px) left center / 7px 2px repeat-x;
 }
 
 .lista {
   display: grid;
-  gap: 1.75rem;
-  margin: 2.5rem 0 0;
+  gap: 2.25rem;
+  margin: 0;
 }
 
 .lista > div {
   display: grid;
-  gap: 0.4rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--linea);
+  justify-items: center;
+  gap: 0.3rem;
 }
 
 .lista dt {
-  font-size: var(--t-mini);
+  margin-bottom: 0.35rem;
+  font-family: var(--fuente-titulos);
+  font-size: var(--t-4);
   font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--texto-3);
+  line-height: 1.2;
+  color: var(--texto);
 }
 
 .lista dd {
   margin: 0;
-  display: grid;
-  justify-items: start;
-  gap: 0.4rem;
   font-size: 1.0625rem;
+  color: var(--texto-2);
 }
 
 .lista address {
   font-style: normal;
 }
 
-.mapa {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  min-height: 44px;
-  font-size: 0.875rem;
+.horario span {
+  color: var(--texto);
   font-weight: 500;
-  color: var(--texto-2);
-  text-decoration: underline;
-  text-decoration-color: var(--linea-fuerte);
-}
-
-.mapa svg {
-  color: var(--accion);
+  font-variant-numeric: tabular-nums;
 }
 
 .mail {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  color: var(--texto);
   text-decoration: underline;
   text-decoration-color: var(--accion);
   overflow-wrap: anywhere;
 }
 
-.online {
-  margin-top: -0.25rem;
-}
-
 @media (min-width: 900px) {
   .contacto {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
     align-items: center;
-  }
-
-  .foto {
-    max-height: none;
   }
 }
 

@@ -13,14 +13,14 @@ import s from './eventos.module.css'
 
 const DESTINO: Record<EscalonId, string> = {
   'mesa-festejo': '#mesa-festejo',
-  'salon-privado': '/private-dining',
+  'salon-privado': '/sala-vip',
   exclusividad: '#exclusividad',
 }
 
 /**
  * Selector de 3 escalones con la capacidad visible (es el criterio real de decisión).
  * Al elegir uno queda recordado y llega precargado al formulario del final.
- * "Salón privado" lleva a /private-dining.
+ * "Sala VIP" lleva a /sala-vip.
  */
 export function SelectorEscalones() {
   const contexto = useEscalon()
@@ -43,7 +43,7 @@ export function SelectorEscalones() {
                 if (!esPagina) contexto?.elegir(e.id)
               }}
             >
-              <span>{esPagina ? 'Conocé el salón privado' : 'Ver el detalle'}</span>
+              <span>{esPagina ? 'Conocé la Sala VIP' : 'Ver el detalle'}</span>
               <Glifo tipo="flecha" />
             </Link>
             {elegido && (

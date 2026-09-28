@@ -14,6 +14,23 @@ import type { ItemCarta, SeccionCarta, TipoWhisky, Uva, Vino, Whisky } from './t
 export const SERVICIO_DE_MESA = 3500
 export const FECHA_PRECIOS = 'septiembre de 2026'
 
+/**
+ * Menú ejecutivo, transcrito del Instagram de la casa (flyer, septiembre de 2026).
+ * El precio de cada opción ya incluye el servicio de mesa: no se le suma aparte.
+ * "Postre" se lee como opciones a elegir, no como un combo con las tres cosas.
+ */
+export const MENU_EJECUTIVO = {
+  horario: 'Lunes a viernes, de 12 a 16 h',
+  opciones: [
+    { id: 'milanesa-napolitana-eje', nombre: 'Milanesa a la napolitana', descripcion: 'Con papas españolas', precio: 30000 },
+    { id: 'pollo-grillado-eje', nombre: 'Pollo grillado', descripcion: 'Con papas plomo', precio: 30000 },
+    { id: 'sushi-burger-eje', nombre: 'Sushi burger', descripcion: 'Opción de sushi', precio: 32000 },
+  ],
+  postres: ['Cheesecake', 'Frutillas con crema', 'Tiramisú'],
+  incluye: 'Incluye servicio de mesa, principal, bebida sin alcohol, postre y café.',
+  descuentoEfectivo: 20,
+}
+
 const item = (id: string, nombre: string, precio: number | null, extra: Partial<ItemCarta> = {}): ItemCarta => ({
   id,
   nombre,

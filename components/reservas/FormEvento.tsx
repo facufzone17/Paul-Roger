@@ -18,13 +18,13 @@ interface Props {
   escalonInicial?: EscalonId | null
   /** Adicional que llega marcado (p. ej. la limousine). */
   adicionalesIniciales?: string[]
-  /** Dentro de /reservar lleva su propio encabezado; en /eventos y /private-dining el de la página. */
+  /** Dentro de /reservar lleva su propio encabezado; en /eventos y /sala-vip el de la página. */
   titulo?: string
 }
 
 /**
  * Consulta de evento. ES EL MISMO COMPONENTE en /reservar (pestaña Evento),
- * /eventos y /private-dining: una sola fuente de verdad. Si cambia un campo,
+ * /eventos y /sala-vip: una sola fuente de verdad. Si cambia un campo,
  * se cambia acá una vez.
  */
 export function FormEvento({ escalonInicial = null, adicionalesIniciales = [], titulo }: Props) {
@@ -140,7 +140,7 @@ export function FormEvento({ escalonInicial = null, adicionalesIniciales = [], t
             id={`${uid}invitados`}
             etiqueta="Invitados"
             error={errores.invitados}
-            ayuda={superaSalon ? 'El salón privado es para hasta 16 personas. Para más, mirá la exclusividad total.' : undefined}
+            ayuda={superaSalon ? 'La Sala VIP es para hasta 16 personas. Para más, mirá la exclusividad total.' : undefined}
           >
             {(p) => <input {...p} type="number" name="invitados" inputMode="numeric" min={1} max={500} placeholder="Aproximado" value={d.invitados} onChange={cambiar('invitados')} />}
           </Campo>

@@ -14,7 +14,7 @@ import s from './Header.module.css'
 const TODOS = [...NAV_IZQUIERDA, ...NAV_DERECHA]
 
 /**
- * Header de todas las páginas: La Casa · Carta · Eventos | logo | Private Dining · Nosotros + RESERVAR.
+ * Header de todas las páginas: La Casa · Carta · Nosotros | logo | Eventos Privados · Sala VIP + RESERVAR.
  * Transparente sobre la portada, sólido al scrollear. En el celular, menú a pantalla
  * completa en rojo (manual, pág. 36) con RESERVAR siempre visible.
  */

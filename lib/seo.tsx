@@ -1,9 +1,6 @@
 import { SITIO } from '@/data/sitio'
 
-/**
- * Schema Restaurant para SEO local (Hudson, Polo Design, parrilla, sushi).
- * Faltan los horarios: openingHoursSpecification se agrega cuando el cliente los confirme.
- */
+/** Schema Restaurant para SEO local (Hudson, Polo Design, parrilla, sushi). */
 export function restauranteJsonLd() {
   const d = SITIO.direccion
   return {
@@ -30,6 +27,12 @@ export function restauranteJsonLd() {
     hasMenu: `${SITIO.url}/carta`,
     acceptsReservations: `${SITIO.url}/reservar`,
     sameAs: [SITIO.instagram.url],
+    openingHoursSpecification: SITIO.horarios.turnos.map((t) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: t.schema,
+      opens: t.abre,
+      closes: t.cierra,
+    })),
   }
 }
 

@@ -2,27 +2,30 @@ import Link from 'next/link'
 
 import { Glifo, Icono } from '@/components/marca/Icono'
 import { Logo } from '@/components/marca/Logo'
-import { Falta } from '@/components/ui/Falta'
-import { Foto } from '@/components/ui/Foto'
+import { Monograma } from '@/components/marca/Monograma'
 import { SERVICIOS_FOOTER, SITIO } from '@/data/sitio'
-import { FOTOS } from '@/lib/imagenes'
 
+import { MapaUbicacion } from './MapaUbicacion'
 import s from './Footer.module.css'
 
 /**
- * Contacto + pie, en todas las páginas: imagen del local, dirección, horarios y mail.
- * Sin formulario y sin mapa embebido: todo el tráfico con intención va a /reservar.
+ * Contacto + pie, en todas las páginas: mapa del local, dirección, horarios y mail.
+ * Sin formulario y sin iframe de Google Maps: todo el tráfico con intención va a /reservar,
+ * y el mapa abre la ubicación en una pestaña nueva.
  */
 export function Footer() {
   const d = SITIO.direccion
   return (
     <footer className={s.pie} id="contacto">
       <div className={`contenedor ${s.contacto}`}>
-        <Foto foto={FOTOS.contactoFachada} sizes="(min-width: 900px) 40vw, 100vw" capa="suave" className={s.foto} />
+        <MapaUbicacion />
 
         <div className={s.datos} data-reveal>
-          <p className="volanta">Contacto</p>
-          <h2 className="titulo-2">Te esperamos</h2>
+          <h2 className={s.titulo}>Visitanos</h2>
+
+          <div className={s.divisor} aria-hidden="true">
+            <Monograma alto={26} />
+          </div>
 
           <dl className={s.lista}>
             <div>
@@ -33,17 +36,18 @@ export function Footer() {
                   <br />
                   {d.localidad}, {d.provincia}
                 </address>
-                <a href={SITIO.comoLlegar} target="_blank" rel="noopener noreferrer" className={s.mapa}>
-                  <Icono nombre="ubicacion" alto={18} />
-                  Cómo llegar<span className="visually-hidden"> (abre el mapa en otra pestaña)</span>
-                </a>
               </dd>
             </div>
             <div>
               <dt>Horarios</dt>
-              <dd>
-                <Falta>{SITIO.horarios.falta}</Falta>
-              </dd>
+              {SITIO.horarios.turnos.map((t) => (
+                <dd key={t.dias} className={s.horario}>
+                  {t.dias}:{' '}
+                  <span>
+                    {t.abre} a {t.cierra}
+                  </span>
+                </dd>
+              ))}
             </div>
             <div>
               <dt>Reservas</dt>
@@ -51,7 +55,9 @@ export function Footer() {
                 <a href={`mailto:${SITIO.email}`} className={s.mail}>
                   {SITIO.email}
                 </a>
-                <Link href="/reservar" className={`link-flecha ${s.online}`}>
+              </dd>
+              <dd>
+                <Link href="/reservar" className="link-flecha">
                   <span>Reservá online</span>
                   <Glifo tipo="flecha" />
                 </Link>
