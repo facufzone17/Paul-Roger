@@ -66,19 +66,9 @@ export default function PaginaNosotros() {
         </div>
       </section>
 
-      {/* Video ancho: el reel de Instagram pasado a horizontal */}
+      {/* Foto ancha */}
       <div className="contenedor">
-        <video
-          className={s.ancha}
-          src="/video/nosotros-casa.mp4"
-          poster="/video/nosotros-casa-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label="La casa de noche: la barra con el neón de Paul Roger, el botellero iluminado y el salón"
-        />
+        <Foto foto={FOTOS.casaBarra} sizes="(min-width: 1320px) 1240px, 100vw" capa="ninguna" className={s.ancha} />
       </div>
 
       {/* Lo que nos mueve, contado en prosa */}
