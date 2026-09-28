@@ -22,8 +22,12 @@ export const SITIO = {
     usuario: '@paulroger.hudson',
     url: 'https://www.instagram.com/paulroger.hudson/',
   },
+  /** Fuente: bio de @paulroger.hudson en Instagram (relevado 28-09-2026). */
   horarios: {
-    falta: 'horarios de cafetería, mediodía y noche',
+    turnos: [
+      { dias: 'Domingo a miércoles', abre: '09:00', cierra: '00:00', schema: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'] },
+      { dias: 'Jueves a sábado', abre: '09:00', cierra: '02:00', schema: ['Thursday', 'Friday', 'Saturday'] },
+    ],
   },
   /** Link para llegar: no es un mapa embebido, abre la app de mapas del celular. */
   comoLlegar: 'https://www.google.com/maps/search/?api=1&query=Paul+Roger+Calle+47+6750+Guillermo+E.+Hudson',
