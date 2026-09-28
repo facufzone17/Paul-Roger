@@ -1,5 +1,5 @@
 /**
- * Opciones de los formularios de /reservar, /eventos y /private-dining.
+ * Opciones de los formularios de /reservar, /eventos y /sala-vip.
  * En la Etapa 2 los turnos salen de la configuración del panel.
  */
 
@@ -31,7 +31,7 @@ export const OCASIONES_CON_COMPLEMENTOS: readonly OcasionId[] = ['aniversario', 
 export const esOcasionId = (valor: unknown): valor is OcasionId =>
   typeof valor === 'string' && OCASIONES.some((o) => o.id === valor)
 
-/** Sin VIP a propósito: el salón privado no es un sector de mesa, se consulta como evento. */
+/** Sin VIP a propósito: la Sala VIP no es un sector de mesa, se consulta como evento. */
 export const SECTORES = [
   { id: 'salon', titulo: 'Salón' },
   { id: 'barra', titulo: 'Barra' },

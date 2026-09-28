@@ -9,7 +9,7 @@ export const SITIO = {
   frase: 'Bienvenidos a casa',
   url: 'https://paulroger.com.ar',
   descripcion:
-    'Parrilla contemporánea, sushi y coctelería de autor en Polo Design, Guillermo E. Hudson. Salón privado, eventos, música en vivo y limousine.',
+    'Parrilla contemporánea, sushi y coctelería de autor en Polo Design, Guillermo E. Hudson. Sala VIP, eventos, música en vivo y limousine.',
   direccion: {
     calle: 'Calle 47 6750',
     zona: 'Polo Design',
@@ -36,7 +36,7 @@ export const NAV_IZQUIERDA = [
 ] as const
 
 export const NAV_DERECHA = [
-  { label: 'Private Dining', href: '/private-dining' },
+  { label: 'Sala VIP', href: '/sala-vip' },
   { label: 'Nosotros', href: '/nosotros' },
 ] as const
 
@@ -45,7 +45,7 @@ export const SERVICIOS_FOOTER = [
   { label: 'Brasas', href: '/carta#fuertes' },
   { label: 'Sushi', href: '/carta#sushi' },
   { label: 'Coctelería', href: '/carta#cocteleria-de-autor' },
-  { label: 'Salón VIP', href: '/private-dining' },
+  { label: 'Sala VIP', href: '/sala-vip' },
   { label: 'Eventos Privados', href: '/eventos', destacado: true },
   { label: 'Limousine', href: '/reservar?tipo=limousine' },
 ] as const

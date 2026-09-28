@@ -12,7 +12,7 @@ import s from './reservar.module.css'
 
 export const metadata: Metadata = {
   title: 'Reservar',
-  description: 'Reservá tu mesa en Paul Roger, Polo Design, Hudson. También eventos, salón privado, limousine y menú ejecutivo, con todos los datos en un solo lugar.',
+  description: 'Reservá tu mesa en Paul Roger, Polo Design, Hudson. También eventos, Sala VIP, limousine y menú ejecutivo, con todos los datos en un solo lugar.',
   alternates: { canonical: '/reservar' },
 }
 

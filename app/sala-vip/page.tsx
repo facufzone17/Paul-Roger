@@ -6,26 +6,28 @@ import { FormEvento } from '@/components/reservas/FormEvento'
 import { Apertura } from '@/components/ui/Apertura'
 import { CtaFijo } from '@/components/ui/CtaFijo'
 import { Falta } from '@/components/ui/Falta'
+import { FOTOS } from '@/lib/imagenes'
 import { SALON_PRIVADO } from '@/data/eventos'
 
-import s from './private-dining.module.css'
+import s from './sala-vip.module.css'
 
 export const metadata: Metadata = {
-  title: 'Private Dining · Salón privado',
+  title: 'Sala VIP',
   description:
-    'El salón privado de Paul Roger, el VIP de la casa: hasta 16 personas, con TV, aire acondicionado y privacidad. Para cenas íntimas, celebraciones y reuniones de trabajo en Hudson.',
-  alternates: { canonical: '/private-dining' },
+    'La Sala VIP de Paul Roger: un espacio cerrado para hasta 16 personas, con TV, aire acondicionado y privacidad. Para cenas íntimas, celebraciones y reuniones de trabajo en Hudson.',
+  alternates: { canonical: '/sala-vip' },
 }
 
-/** Private Dining = el salón privado = el "VIP" de la casa. Es un solo espacio (confirmado por el cliente). */
-export default function PaginaPrivateDining() {
+/** Sala VIP: el espacio privado de la casa (antes "Private Dining" / "salón privado"; el cliente pidió unificar el nombre). */
+export default function PaginaSalaVip() {
   return (
     <>
       <Apertura
-        volanta="Private Dining"
-        titulo="Nuestro salón privado"
-        bajada="El VIP de la casa: un espacio cerrado para hasta 16 personas, con la cocina y la barra de Paul Roger y la tranquilidad de estar solos."
-        falta="foto del Salón Privado (el VIP)"
+        volanta="Espacio privado"
+        titulo="Sala VIP"
+        bajada="Un espacio cerrado para hasta 16 personas, con la cocina y la barra de Paul Roger y la tranquilidad de estar solos."
+        foto={FOTOS.casaPrivado}
+        posicion="60% 55%"
       >
         <a href="#consulta" className="btn btn-primario btn-grande">
           Consultar disponibilidad
@@ -36,7 +38,7 @@ export default function PaginaPrivateDining() {
       <section className="seccion" aria-labelledby="que-es-titulo">
         <div className="contenedor">
           <h2 id="que-es-titulo" className="visually-hidden">
-            Qué es el salón privado
+            Qué es la Sala VIP
           </h2>
           <ul role="list" className={s.datos} data-reveal>
             <li>
@@ -56,9 +58,6 @@ export default function PaginaPrivateDining() {
               <span className={s.datoTexto}>puertas adentro, solo para ustedes</span>
             </li>
           </ul>
-          <p className={s.aclaracion}>
-            Es el mismo espacio que en la casa y en Instagram llamamos <strong>VIP</strong>.
-          </p>
         </div>
       </section>
 
@@ -118,13 +117,13 @@ export default function PaginaPrivateDining() {
         </div>
       </section>
 
-      {/* Formulario con el escalón "Salón privado" precargado */}
+      {/* Formulario con el escalón "Sala VIP" precargado */}
       <section id="consulta" className={`seccion ${s.consulta}`} aria-labelledby="consulta-titulo">
         <div className="contenedor">
           <div className={s.cabecera}>
             <p className="volanta">Consulta</p>
             <h2 id="consulta-titulo" className="titulo-2">
-              Reservá el salón privado
+              Reservá la Sala VIP
             </h2>
             <p className="bajada">Contanos la fecha y cuántos son: te respondemos con disponibilidad y una propuesta.</p>
           </div>

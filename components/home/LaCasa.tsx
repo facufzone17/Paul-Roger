@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
-import { Glifo, Icono } from '@/components/marca/Icono'
-import { Falta } from '@/components/ui/Falta'
+import { Glifo } from '@/components/marca/Icono'
 import { Foto } from '@/components/ui/Foto'
 import { AGENDA, fechaLarga } from '@/data/agenda'
 import { FOTOS } from '@/lib/imagenes'
@@ -10,7 +9,7 @@ import s from './LaCasa.module.css'
 
 /**
  * La Casa (referencia de layout: QITCHEN). Un panel grande y tres tarjetas:
- * BARRA → /la-casa#barra · VIP → /private-dining · MÚSICA EN VIVO → /la-casa#musica.
+ * BARRA → /la-casa#barra · VIP → /sala-vip · MÚSICA EN VIVO → /la-casa#musica.
  */
 export function LaCasa() {
   const proxima = AGENDA[0]
@@ -43,20 +42,15 @@ export function LaCasa() {
             </Link>
           </li>
           <li>
-            <Link href="/private-dining" className={`${s.tarjeta} ${s.vacia} ${s.tinto}`}>
-              <Icono nombre="servicio" alto={120} className={s.marcaAgua} />
-              <span className={s.aviso}>
-                <Falta>foto del Salón Privado</Falta>
-              </span>
-              <span className={s.detalle}>Private Dining · salón privado para hasta 16 personas</span>
+            <Link href="/sala-vip" className={s.tarjeta}>
+              <Foto foto={FOTOS.casaPrivado} sizes="(min-width: 1024px) 30vw, (min-width: 700px) 33vw, 100vw" capa="suave" decorativa className={s.fondo} posicion="55% 55%" />
+              <span className={s.detalle}>Sala VIP · espacio privado para hasta 16 personas</span>
               <Etiqueta>VIP</Etiqueta>
             </Link>
           </li>
           <li>
-            <Link href="/la-casa#musica" className={`${s.tarjeta} ${s.vacia} ${s.tierra}`}>
-              <span className={s.aviso}>
-                <Falta>foto de música en vivo</Falta>
-              </span>
+            <Link href="/la-casa#musica" className={`${s.tarjeta} ${s.conAgenda}`}>
+              <Foto foto={FOTOS.casaMusica} sizes="(min-width: 1024px) 30vw, (min-width: 700px) 33vw, 100vw" capa="suave" decorativa className={s.fondo} posicion="50% 60%" />
               {proxima && f && (
                 <span className={s.agenda}>
                   <span className={s.agendaVolanta}>

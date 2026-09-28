@@ -31,15 +31,6 @@
   color: var(--texto-2);
 }
 
-.aclaracion {
-  margin-top: 1.5rem;
-  color: var(--texto-2);
-}
-
-.aclaracion strong {
-  color: var(--pr-crudo);
-}
-
 @media (min-width: 900px) {
   .datos {
     grid-template-columns: repeat(4, minmax(0, 1fr));
