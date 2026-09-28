@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Pipeline de retoque para las fotos de Paul Roger, siguiendo guia-retoque-fotos.html"""
-import os, cv2, numpy as np, time
+import os, sys, cv2, numpy as np, time
 
 IMG = os.path.dirname(os.path.abspath(__file__)) + "/img"
 HEIC = "C:/Users/zonev/AppData/Local/Temp/claude/C--Users-zonev-OneDrive-Documentos-Paul-rogers/bab38c28-b0fa-4e15-8834-f48b68d0acd7/scratchpad"
@@ -88,9 +88,10 @@ def blur_box(img, box, k=25):
     return img
 
 def save(img, name, w, h):
+    # Las finales van en WebP (img/final/ es lo que importa scripts/importar_fotos.py).
     img = cv2.resize(img, (w, h), interpolation=cv2.INTER_LANCZOS4)
-    path = f"{OUT}/{name}"
-    cv2.imwrite(path, img, [cv2.IMWRITE_JPEG_QUALITY, 92])
+    path = f"{OUT}/{os.path.splitext(name)[0]}.webp"
+    cv2.imwrite(path, img, [cv2.IMWRITE_WEBP_QUALITY, 90])
     print("saved", name, img.shape)
 
 def load(fn):
@@ -101,184 +102,197 @@ def crop(img, box):
     return img[y0:y1, x0:x1]
 
 t_start = time.time()
+SOLO = set(sys.argv[1:])  # p. ej.: python process_photos.py bife sushi  (vacío = todas)
 def step(name):
+    if SOLO and name not in SOLO:
+        return False
     print(f"--- {name} @ {time.time()-t_start:.0f}s ---")
+    return True
 
 # 1. PORTADA (hero)
-step("hero")
-img = load("foto_hero_desktop.jfif")
-img = desat_hue_range(img, 80, 130, 0.35)          # receta B: sacar aguamarina/azul
-img = desat_hue_range(img, 5, 25, 0.85)            # naranja sat -10 approx
-img = contrast(img, 10)
-img = highlights_down(img, 20)
-# comensales: a pedido del cliente quedan visibles, sin difuminar
-d = crop(img, (10, 0, 2741, 1536))
-save(d, "pr-hero-salon-desktop.jpg", 2560, 1440)
-m = crop(img, (781, 0, 1645, 1536))
-m = upscale2x(m)
-save(m, "pr-hero-salon-mobile.jpg", 1080, 1920)
+if step("hero"):
+    img = load("foto_hero_desktop.jfif")
+    img = desat_hue_range(img, 80, 130, 0.35)          # receta B: sacar aguamarina/azul
+    img = desat_hue_range(img, 5, 25, 0.85)            # naranja sat -10 approx
+    img = contrast(img, 10)
+    img = highlights_down(img, 20)
+    # comensales: a pedido del cliente quedan visibles, sin difuminar
+    d = crop(img, (10, 0, 2741, 1536))
+    save(d, "pr-hero-salon-desktop.jpg", 2560, 1440)
+    m = crop(img, (781, 0, 1645, 1536))
+    m = upscale2x(m)
+    save(m, "pr-hero-salon-mobile.jpg", 1080, 1920)
 
 # 2. BIFE
-step("bife")
-img = load("591147118_17879424573430342_8135658368094989072_n.jpg")
-img = highlights_down(img, 10)
-img = contrast(img, 6)
-d = crop(img, (4, 0, 1435, 1789))
-d = unsharp(d, 0.6, 1.2, 2)
-save(d, "pr-mosaico-brasas.jpg", 1200, 1500)
+if step("bife"):
+    img = load("591147118_17879424573430342_8135658368094989072_n.jpg")
+    img = highlights_down(img, 10)
+    img = contrast(img, 6)
+    d = crop(img, (4, 0, 1435, 1789))
+    d = unsharp(d, 0.6, 1.2, 2)
+    save(d, "pr-mosaico-brasas.jpg", 1440, 1800)
 
 # 3. SUSHI (mosaico)
-step("sushi")
-img = load("602220566_17880966486430342_5529562833402306687_n.jpg")
-img = denoise(img, 6)
-img = warm(img, 4)
-img = highlights_down(img, 15)
-d = crop(img, (40, 0, 1299, 1574))
-d = unsharp(d, 0.6, 1.2, 2)
-save(d, "pr-mosaico-sushi.jpg", 1200, 1500)
+if step("sushi"):
+    img = load("602220566_17880966486430342_5529562833402306687_n.jpg")
+    img = denoise(img, 6)
+    img = warm(img, 4)
+    img = highlights_down(img, 15)
+    d = crop(img, (40, 0, 1299, 1574))
+    d = upscale2x(d)                                 # el recorte es más chico que 1440x1800
+    save(d, "pr-mosaico-sushi.jpg", 1440, 1800)
 
 # 4. BARRA (coctelería + barra)
-step("barra")
-img = load("c53d15c8-9f4c-49b8-85af-1bda2bab6ba7.jpg")
-img = denoise(img, 8)
-img = crush_blacks_neutral(img, 29)
-img = highlights_down(img, 15)
-c = crop(img, (1000, 100, 2440, 1900))
-save(c, "pr-mosaico-cocteleria.jpg", 1200, 1500)
-b = crop(img, (0, 1650, 3024, 3351))
-save(b, "pr-casa-barra.jpg", 2560, 1440)
+if step("barra"):
+    img = load("c53d15c8-9f4c-49b8-85af-1bda2bab6ba7.jpg")
+    img = denoise(img, 8)
+    img = crush_blacks_neutral(img, 29)
+    img = highlights_down(img, 15)
+    c = crop(img, (1000, 100, 2440, 1900))
+    save(c, "pr-mosaico-cocteleria.jpg", 1440, 1800)
+    b = crop(img, (0, 1650, 3024, 3351))
+    save(b, "pr-casa-barra.jpg", 2560, 1440)
 
 # 5. VINOS (mosaico, etiquetas)
-step("vinos-etiquetas")
-img = load("669630515_17895376686430342_3317093569487055412_n.jpg")
-img = highlights_down(img, 10)
-d = crop(img, (0, 0, 1440, 1800))
-save(d, "pr-mosaico-vinos.jpg", 1200, 1500)
+if step("vinos-etiquetas"):
+    img = load("669630515_17895376686430342_3317093569487055412_n.jpg")
+    img = highlights_down(img, 10)
+    d = crop(img, (0, 0, 1440, 1800))
+    save(d, "pr-mosaico-vinos.jpg", 1440, 1800)
 
 # 6. LIMOUSINE (cartel)
-step("limousine")
-img = load("642660969_17889827718430342_5878010354755103268_n.jpg")
-img = highlights_down(img, 15)
-img = upscale2x(img)
-img = unsharp(img, 0.4, 1.0, 2)
-save(img, "pr-complemento-limousine.jpg", 1200, 1500)
+if step("limousine"):
+    img = load("642660969_17889827718430342_5878010354755103268_n.jpg")
+    img = highlights_down(img, 15)
+    img = upscale2x(img)
+    img = unsharp(img, 0.4, 1.0, 2)
+    save(img, "pr-complemento-limousine.jpg", 1200, 1500)
 
 # 7. FLORES
-step("flores")
-img = load("669681129_17895886383430342_582223711068482936_n.jpg")
-img = desat_hue_range(img, 80, 130, 0.4)
-img = contrast(img, 8)
-d = crop(img, (170, 440, 1090, 1590))
-save(d, "pr-complemento-flores.jpg", 800, 1000)
+if step("flores"):
+    img = load("669681129_17895886383430342_582223711068482936_n.jpg")
+    img = desat_hue_range(img, 80, 130, 0.4)
+    img = contrast(img, 8)
+    d = crop(img, (170, 440, 1090, 1590))
+    save(d, "pr-complemento-flores.jpg", 800, 1000)
 
 # 8. CHOCOLATES (bombones)
-step("bombones")
-img = load("WhatsApp Image 2026-09-25 at 13.03.23 (1).jpeg")
-img = denoise(img, 5)
-img = highlights_down(img, 8)
-d = crop(img, (0, 40, 1170, 1503))
-d = unsharp(d, 0.8, 0.8, 3)
-save(d, "pr-complemento-chocolates.jpg", 800, 1000)
+if step("bombones"):
+    img = load("WhatsApp Image 2026-09-25 at 13.03.23 (1).jpeg")
+    img = denoise(img, 5)
+    img = highlights_down(img, 8)
+    d = crop(img, (0, 40, 1170, 1503))
+    d = unsharp(d, 0.8, 0.8, 3)
+    save(d, "pr-complemento-chocolates.jpg", 800, 1000)
 
 # 9. FACHADA (auto + neon, HEIC ya convertido)
-step("fachada")
-img = cv2.imread(f"{HEIC}/IMG_4881.jpg", cv2.IMREAD_COLOR)
-img = denoise(img, 10)
-img = crush_blacks_neutral(img, 29)
-img = highlights_down(img, 10)
-img = inpaint_box(img, (2560, 1100, 2870, 1460))  # semaforo
-d = crop(img, (0, 520, 3024, 2221))
-save(d, "pr-eventos-fachada.jpg", 2560, 1440)
+if step("fachada"):
+    img = cv2.imread(f"{HEIC}/IMG_4881.jpg", cv2.IMREAD_COLOR)
+    img = denoise(img, 10)
+    img = crush_blacks_neutral(img, 29)
+    img = highlights_down(img, 10)
+    img = inpaint_box(img, (2560, 1100, 2870, 1460))  # semaforo
+    d = crop(img, (0, 520, 3024, 2221))
+    save(d, "pr-eventos-fachada.jpg", 2560, 1440)
 
 # 10. VINOS pared (mozo)
-step("pared-vinos")
-img = load("660997074_17895376668430342_3203253936657576882_n.jpg")
-img = highlights_down(img, 8)
-d = crop(img, (0, 60, 1440, 1860))
-d = unsharp(d, 0.5, 1.0, 2)
-save(d, "pr-casa-vinos.jpg", 1200, 1500)
+if step("pared-vinos"):
+    img = load("660997074_17895376668430342_3203253936657576882_n.jpg")
+    img = highlights_down(img, 8)
+    d = crop(img, (0, 60, 1440, 1860))
+    d = unsharp(d, 0.5, 1.0, 2)
+    save(d, "pr-casa-vinos.jpg", 1200, 1500)
 
 # 11. SALON de dia
-step("salon")
-img = load("692079483_17899819548430342_726979057541205504_n.jpg")
-img = denoise(img, 5)
-img = desat_hue_range(img, 80, 130, 0.35)
-img = upscale2x(img)
-save(img, "pr-casa-salon.jpg", 1200, 1500)
+if step("salon"):
+    img = load("692079483_17899819548430342_726979057541205504_n.jpg")
+    img = denoise(img, 5)
+    img = desat_hue_range(img, 80, 130, 0.35)
+    img = upscale2x(img)
+    save(img, "pr-casa-salon.jpg", 1200, 1500)
 
 # 12. CAVA de noche
-step("cava")
-img = load("WhatsApp Image 2026-09-25 at 13.03.24 (3).jpeg")
-img = denoise(img, 6)
-img = crush_blacks_neutral(img, 29)
-d = crop(img, (330, 420, 1170, 1470))
-save(d, "pr-casa-cava.jpg", 800, 1000)
+if step("cava"):
+    img = load("WhatsApp Image 2026-09-25 at 13.03.24 (3).jpeg")
+    img = denoise(img, 6)
+    img = crush_blacks_neutral(img, 29)
+    d = crop(img, (330, 420, 1170, 1470))
+    d = upscale2x(d)
+    save(d, "pr-casa-cava.jpg", 1440, 1800)
 
 # 13. SASHIMI
-step("sashimi")
-img = load("WhatsApp Image 2026-09-25 at 13.03.24 (1).jpeg")
-img = denoise(img, 6)
-img = crush_blacks_neutral(img, 29)
-d = crop(img, (0, 20, 1150, 1457))
-save(d, "pr-carta-sushi.jpg", 1120, 1400)
+if step("sashimi"):
+    img = load("WhatsApp Image 2026-09-25 at 13.03.24 (1).jpeg")
+    img = denoise(img, 6)
+    img = crush_blacks_neutral(img, 29)
+    d = crop(img, (0, 20, 1150, 1457))
+    d = upscale2x(d)
+    save(d, "pr-carta-sushi.jpg", 1440, 1800)
 
 # 14. SERVILLETA fondo
-step("servilleta")
-img = load("WhatsApp Image 2026-09-25 at 13.03.24 (4).jpeg")
-img = denoise(img, 5)
-img = warm(img, 4)
-d = crop(img, (0, 86, 1170, 1549))
-save(d, "pr-fondo-reservar.jpg", 1120, 1400)
+if step("servilleta"):
+    img = load("WhatsApp Image 2026-09-25 at 13.03.24 (4).jpeg")
+    img = denoise(img, 5)
+    img = warm(img, 4)
+    d = crop(img, (0, 86, 1170, 1549))
+    save(d, "pr-fondo-reservar.jpg", 1120, 1400)
 
 # 15. BIFE DE CHORIZO
-step("chorizo")
-img = load("WhatsApp Image 2026-09-25 at 13.03.24 (2).jpeg")
-img = denoise(img, 5)
-img = warm(img, 4)
-img = crush_blacks_neutral(img, 29)
-d = crop(img, (0, 0, 1143, 1429))
-d = unsharp(d, 0.6, 1.0, 2)
-save(d, "pr-card-bife-chorizo.jpg", 800, 1000)
+if step("chorizo"):
+    img = load("WhatsApp Image 2026-09-25 at 13.03.24 (2).jpeg")
+    img = denoise(img, 5)
+    img = warm(img, 4)
+    img = crush_blacks_neutral(img, 29)
+    d = crop(img, (0, 0, 1143, 1429))
+    d = upscale2x(d)
+    d = unsharp(d, 0.4, 1.0, 2)
+    save(d, "pr-card-bife-chorizo.jpg", 1440, 1800)
 
 # 16. FLAN
-step("flan")
-img = load("WhatsApp Image 2026-09-25 at 13.03.23 (2).jpeg")
-img = denoise(img, 5)
-img = warm(img, 4)
-d = crop(img, (40, 0, 1111, 1071))
-d = unsharp(d, 0.7, 0.8, 3)
-save(d, "pr-card-flan.jpg", 1000, 1000)
+if step("flan"):
+    img = load("WhatsApp Image 2026-09-25 at 13.03.23 (2).jpeg")
+    img = denoise(img, 5)
+    img = warm(img, 4)
+    d = crop(img, (40, 0, 1111, 1071))
+    d = unsharp(d, 0.7, 0.8, 3)
+    save(d, "pr-card-flan.jpg", 1000, 1000)
 
 # 17. SUSHI PALILLOS
-step("palillos")
-img = load("641485916_17889010455430342_6445543607894471225_n.jpg")
-img = warm(img, 3)
-d = crop(img, (0, 50, 1179, 1524))
-d = unsharp(d, 0.7, 0.8, 2)
-save(d, "pr-card-sushi-palillos.jpg", 800, 1000)
+if step("palillos"):
+    img = load("641485916_17889010455430342_6445543607894471225_n.jpg")
+    img = warm(img, 3)
+    d = crop(img, (0, 50, 1179, 1524))
+    d = unsharp(d, 0.7, 0.8, 2)
+    save(d, "pr-card-sushi-palillos.jpg", 800, 1000)
 
 # 18. POLLO + ESPINACA cenital (borrar lata)
-step("pollo-cenital")
-img = load("702255364_17901415680430342_3089838988312360658_n.jpg")
-img = denoise(img, 5)
-img = inpaint_box(img, (60, 0, 400, 400))  # lata de 7up
-img = highlights_down(img, 30)
-save(img, "pr-card-pollo-espinaca.jpg", 800, 1000)
+if step("pollo-cenital"):
+    img = load("702255364_17901415680430342_3089838988312360658_n.jpg")
+    img = denoise(img, 5)
+    img = inpaint_box(img, (60, 0, 400, 400))  # lata de 7up
+    img = highlights_down(img, 30)
+    save(img, "pr-card-pollo-espinaca.jpg", 800, 1000)
 
 # 19. ESPINACA sola
-step("espinaca")
-img = load("702589856_17901415671430342_3049656758253430682_n.jpg")
-img = denoise(img, 5)
-img = crush_blacks_neutral(img, 29)
-img = desat_hue_range(img, 35, 85, 0.9)
-save(img, "pr-card-espinaca.jpg", 800, 1000)
+if step("espinaca"):
+    img = load("702589856_17901415671430342_3049656758253430682_n.jpg")
+    img = denoise(img, 5)
+    img = crush_blacks_neutral(img, 29)
+    img = desat_hue_range(img, 35, 85, 0.9)
+    save(img, "pr-card-espinaca.jpg", 800, 1000)
 
 # 20. POLLO
-step("pollo")
-img = load("702670242_17901415689430342_6951469104016332054_n.jpg")
-img = crush_blacks_neutral(img, 29)
-img = upscale2x(img)
-save(img, "pr-card-pollo.jpg", 800, 1000)
+if step("pollo"):
+    img = load("702670242_17901415689430342_6951469104016332054_n.jpg")
+    img = crush_blacks_neutral(img, 29)
+    img = upscale2x(img)
+    save(img, "pr-card-pollo.jpg", 800, 1000)
 
-step("DONE")
+# 21. COCTELERIA (collage: Black Label, trago y botellero) — detalle de Servicios
+if step("cocteleria"):
+    img = load("641658784_17889827739430342_90276035468449683_n.jpg")
+    img = highlights_down(img, 8)
+    d = crop(img, (0, 0, 1440, 1800))              # ya es 4:5: entra entero
+    save(d, "pr-servicio-cocteleria.jpg", 1440, 1800)
+
 print("total", round(time.time() - t_start), "s")

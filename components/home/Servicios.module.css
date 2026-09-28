@@ -44,13 +44,6 @@
   background: var(--superficie);
 }
 
-.bloqueNumero {
-  font-size: var(--t-mini);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--texto-3);
-}
-
 .bloqueNombre {
   font-family: var(--fuente-titulos);
   font-size: var(--t-3);
@@ -98,26 +91,40 @@
   }
 
   .escenario {
+    --columnas: minmax(0, 1fr) minmax(320px, 0.92fr) minmax(0, 1fr);
+    --hueco: clamp(24px, 3.2vw, 56px);
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr) minmax(0, 1fr);
-    column-gap: clamp(24px, 3.2vw, 56px);
+    grid-template-columns: var(--columnas);
+    column-gap: var(--hueco);
     padding-inline: var(--gutter);
   }
 
+  /* El título ocupa la columna del medio; las filas corren por detrás con ese hueco libre. */
   .centro {
+    position: relative;
+    z-index: 1;
     grid-column: 2;
     grid-row: 1;
+    pointer-events: none;
   }
 
-  .izquierda {
-    grid-column: 1;
-    grid-row: 1;
+  .centro :global(a) {
+    pointer-events: auto;
   }
 
-  .derecha {
-    grid-column: 3;
+  .filas {
+    grid-column: 1 / -1;
     grid-row: 1;
-    padding-top: 58vh;
+    display: grid;
+    row-gap: clamp(120px, 22vh, 240px);
+    padding-block: 24vh 16vh;
+  }
+
+  .fila {
+    display: grid;
+    grid-template-columns: var(--columnas);
+    column-gap: var(--hueco);
+    align-items: start;
   }
 
   .fijo {
@@ -153,13 +160,6 @@
     min-width: min(100%, 300px);
   }
 
-  .activoNumero {
-    font-size: var(--t-mini);
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    color: var(--texto-3);
-  }
-
   .activoNombre {
     font-family: var(--fuente-titulos);
     font-size: clamp(1.9rem, 1.2rem + 1.5vw, 2.9rem);
@@ -176,27 +176,23 @@
     color: var(--texto-2);
   }
 
-  .columna {
-    display: grid;
-    align-content: start;
-    gap: clamp(90px, 16vh, 190px);
-    padding-block: 22vh 42vh;
-  }
-
-  .tesela {
-    width: 100%;
+  /* Dos fotos del mismo tamaño, una a cada lado del título; la fila invertida las da vuelta. */
+  .principal {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .detalle {
-    width: 62%;
+    grid-column: 3;
+    grid-row: 1;
   }
 
-  .izquierda .detalle {
-    justify-self: end;
+  .filaInvertida .principal {
+    grid-column: 3;
   }
 
-  .derecha .detalle {
-    justify-self: start;
+  .filaInvertida .detalle {
+    grid-column: 1;
   }
 
   .teselaLink {
@@ -233,13 +229,6 @@
     align-items: baseline;
     gap: 0.9rem;
     margin-top: 1rem;
-  }
-
-  .pieNumero {
-    font-size: var(--t-mini);
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--texto-3);
   }
 
   .pieNombre {

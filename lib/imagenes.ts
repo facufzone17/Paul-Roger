@@ -21,6 +21,7 @@ import mosaicoBrasas from '@/public/img/pr-mosaico-brasas.webp'
 import mosaicoCocteleria from '@/public/img/pr-mosaico-cocteleria.webp'
 import mosaicoSushi from '@/public/img/pr-mosaico-sushi.webp'
 import mosaicoVinos from '@/public/img/pr-mosaico-vinos.webp'
+import servicioCocteleria from '@/public/img/pr-servicio-cocteleria.webp'
 
 export interface Foto {
   src: StaticImageData
@@ -48,6 +49,7 @@ export const FOTOS = {
   complementoChocolates: { src: complementoChocolates, alt: 'Cajas de bombones belgas con el logo de Paul Roger' },
   eventosFachada: { src: eventosFachada, alt: 'La fachada de Paul Roger de noche, con el neón rojo encendido y autos clásicos en la puerta' },
   contactoFachada: { src: contactoFachada, alt: 'El neón de Paul Roger sobre la entrada del local, de noche' },
+  servicioCocteleria: { src: servicioCocteleria, alt: 'Collage de la barra: un Black Label en su soporte, un trago con rodaja de naranja y el botellero iluminado' },
   cartaSushi: { src: cartaSushi, alt: 'Sashimi de atún, salmón y pesca blanca sobre una fuente negra' },
   fondoReservar: { src: fondoReservar, alt: 'Servilleta con el logo de Paul Roger y cubiertos sobre la mesa' },
   cardBifeChorizo: { src: cardBifeChorizo, alt: 'Bife de chorizo con salsa criolla, visto desde arriba' },
