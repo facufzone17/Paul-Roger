@@ -17,17 +17,21 @@ export function Eventos() {
       <div className={s.marco}>
         <article className={s.banner}>
           <Foto foto={FOTOS.eventosFachada} sizes="(min-width: 1400px) 1360px, 100vw" capa="fuerte" className={s.bannerFoto} posicion="60% 50%" />
+          <p className={`volanta ${s.bannerVolanta}`} data-reveal>
+            Eventos privados
+          </p>
           <div className={s.bannerTexto} data-reveal>
-            <p className="volanta">Eventos</p>
-            <h2 id="eventos-titulo" className="titulo-2">
-              Tu celebración, pensada de principio a fin
-            </h2>
-            <ul role="list" className={s.tipos}>
-              <li>Cumpleaños</li>
-              <li>Cenas de empresa</li>
-              <li>La casa entera, solo para ustedes</li>
-            </ul>
-            <Link href="/eventos" className="btn">
+            <div className={s.bannerContenido}>
+              <h2 id="eventos-titulo" className="titulo-2">
+                Tu celebración, pensada de principio a fin
+              </h2>
+              <ul role="list" className={s.tipos}>
+                <li>Cumpleaños</li>
+                <li>Cenas de empresa</li>
+                <li>La casa entera, solo para ustedes</li>
+              </ul>
+            </div>
+            <Link href="/eventos" className={`btn ${s.bannerBoton}`}>
               Conocé los eventos
               <Glifo tipo="flecha" />
             </Link>
