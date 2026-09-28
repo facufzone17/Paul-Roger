@@ -163,7 +163,6 @@ export function Servicios() {
       <div ref={raiz} className={s.escenario}>
         <div className={s.centro}>
           <div className={s.fijo}>
-            <p className="volanta">Servicios</p>
             <h2 id="servicios-titulo" className={s.titulo}>
               Conocé nuestros servicios
             </h2>
@@ -200,7 +199,6 @@ export function Servicios() {
 
       {/* Celular y reduced-motion: bloques apilados, sin pin */}
       <div className={`contenedor ${s.apilado}`}>
-        <p className="volanta">Servicios</p>
         <h2 className={s.tituloApilado}>Conocé nuestros servicios</h2>
         <ul role="list" className={s.lista}>
           {SERVICIOS.map((sv) => (
