@@ -1,5 +1,5 @@
 """
-Importa las fotos finales retocadas (../img/final/*.webp) al sitio (public/img/).
+Importa las fotos finales retocadas (img/final/*.webp) al sitio (public/img/).
 
 Las WebP se copian tal cual, sin recomprimir ni retocar: lo que está en
 img/final/ es lo que se ve en el sitio. Next.js genera AVIF/WebP y los tamaños
@@ -10,7 +10,7 @@ También genera dos derivados de las finales:
   app/opengraph-image.jpg                imagen para compartir en redes (1200 × 630)
 
 Requiere: pip install pillow pymupdf
-Uso, desde la carpeta web/:  python scripts/importar_fotos.py
+Uso, desde la raíz del repo:  python scripts/importar_fotos.py
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ import pymupdf
 from PIL import Image, ImageFilter
 
 WEB = Path(__file__).resolve().parents[1]
-FINAL = WEB.parent / "img" / "final"
+FINAL = WEB / "img" / "final"
 OUT = WEB / "public" / "img"
 VECTORES = Path(__file__).with_name("marca-vectores.json")
 
@@ -51,9 +51,13 @@ def mascara_logo(parte: str, ancho: int) -> Image.Image:
 def contacto_fachada() -> None:
     """Recorte vertical 4:5 del neón de la entrada, para el bloque de Contacto."""
     im = Image.open(OUT / "pr-eventos-fachada.webp").convert("RGB")
-    recorte = im.crop((1370, 0, 2522, 1440))  # 1152 × 1440, centrado en el neón
+    w, h = im.size
+    # Fracciones tomadas del recorte original (1370, 0, 2522, 1440) sobre una fachada de 2560x1440,
+    # centrado en el neón: se escalan al tamaño real por si la fachada cambia de resolución.
+    caja = (round(w * 1370 / 2560), 0, round(w * 2522 / 2560), h)
+    recorte = im.crop(caja)
     recorte.save(OUT / "pr-contacto-fachada.webp", "WEBP", quality=90, method=6)
-    print("  pr-contacto-fachada.webp (derivado)   1152x1440")
+    print(f"  pr-contacto-fachada.webp (derivado)   {recorte.width}x{recorte.height}")
 
 
 def opengraph() -> None:
