@@ -184,11 +184,11 @@
 }
 
 .trevoo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  flex-basis: 100%;
-  justify-content: flex-end;
-  opacity: 0.7;
+  gap: 0.5rem;
+  margin-left: auto;
+  opacity: 0.55;
   transition: opacity 0.2s ease;
 }
 
@@ -197,9 +197,14 @@
   opacity: 1;
 }
 
+.trevoo span[aria-hidden] {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
 .trevoo img {
   display: block;
-  height: 14px;
-  width: 96px;
+  height: 9px;
+  width: auto;
   max-width: none;
 }
