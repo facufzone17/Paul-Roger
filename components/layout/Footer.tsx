@@ -98,7 +98,7 @@ export function Footer() {
         <a href="https://trevoo.com.ar" target="_blank" rel="noopener noreferrer" className={s.trevoo}>
           <span aria-hidden="true">by</span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/trevoo.svg" alt="Sitio desarrollado por Trevoo" width={47} height={9} />
+          <img src="/brand/trevoo.svg" alt="Sitio desarrollado por Trevoo" width={81} height={12} />
           <span className="visually-hidden"> (se abre en otra pestaña)</span>
         </a>
       </div>
