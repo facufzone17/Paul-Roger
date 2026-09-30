@@ -95,7 +95,12 @@ export function Footer() {
         <p>
           {SITIO.nombre} — {SITIO.claim} · {SITIO.url.replace('https://', '')}
         </p>
-        <p>Maqueta navegable · Etapa 1 · Títulos en Cormorant Garamond, provisoria hasta confirmar IvyMode</p>
+        <a href="https://trevoo.com.ar" target="_blank" rel="noopener noreferrer" className={s.trevoo}>
+          <span aria-hidden="true">by</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/trevoo.svg" alt="Sitio desarrollado por Trevoo" width={81} height={12} />
+          <span className="visually-hidden"> (se abre en otra pestaña)</span>
+        </a>
       </div>
     </footer>
   )

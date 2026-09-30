@@ -182,3 +182,31 @@
   font-size: 0.8125rem;
   color: var(--texto-3);
 }
+
+.trevoo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.trevoo:hover,
+.trevoo:focus-visible {
+  opacity: 1;
+}
+
+.trevoo span[aria-hidden] {
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--pr-rojo);
+}
+
+.trevoo img {
+  display: block;
+  height: 12px;
+  width: auto;
+  max-width: none;
+}
